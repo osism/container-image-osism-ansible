@@ -1,0 +1,27 @@
+---
+##########################
+# debops
+
+# apt
+
+apt__enabled: no
+
+# grub
+
+grub_hidden_timeout: False
+
+# timezone
+
+timezone_zone: UTC
+
+##########################
+# osism.network-interfaces
+
+network_allow_service_restart: no
+network_restart_method: nothing
+
+##########################
+# playbooks
+
+osism_serial: []
+osism_serial_default: 30%
