@@ -149,13 +149,14 @@ RUN apt-get clean \
       python3-dev \
     && apt-get autoremove -y \
     && rm -rf \
+      /release \
+      /requirements.txt \
+      /root/.cache \
+      /src \
       /tmp/* \
-      /var/tmp/*  \
       /usr/share/doc/* \
       /usr/share/man/* \
-      /root/.cache \
-      /release \
-      /src
+      /var/tmp/*
 
 VOLUME ["/ansible/secrets", "/ansible/logs", "/ansible/cache", "/share", "/archive"]
 
