@@ -142,6 +142,7 @@ RUN chown -R dragon: /ansible /share /archive
 
 RUN apt-get clean \
     && apt-get remove -y  \
+      git \
       libffi-dev \
       libssl-dev \
       libyaml-dev \
