@@ -8,8 +8,6 @@ before_install:
 env:
   global:
     - REPOSITORY=osism/osism-ansible
-  matrix:
-    - VERSION=latest
 
 before_script:
   - bash scripts/lint.sh
@@ -18,7 +16,7 @@ script:
   - bash scripts/build.sh
 
 after_success:
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then bash scripts/push.sh; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a \( "$TRAVIS_BRANCH" = "master" -o -n "$TRAVIS_TAG" \) ]; then bash scripts/push.sh; fi'
 
 notifications:
   irc:
