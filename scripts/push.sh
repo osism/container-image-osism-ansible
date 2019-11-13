@@ -11,7 +11,7 @@ set -x
 VERSION=${VERSION:-latest}
 
 if [[ -n $TRAVIS_TAG ]]; then
-    VERSION=$TRAVIS_TAG
+    VERSION=${TRAVIS_TAG:1}
 fi
 
 docker push "$REPOSITORY:$VERSION"

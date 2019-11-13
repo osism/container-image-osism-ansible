@@ -14,7 +14,7 @@ HASH_REPOSITORY=$(git rev-parse --short HEAD)
 VERSION=${VERSION:-latest}
 
 if [[ -n $TRAVIS_TAG ]]; then
-    VERSION=$TRAVIS_TAG
+    VERSION=${TRAVIS_TAG:1}
 fi
 
 docker build \
