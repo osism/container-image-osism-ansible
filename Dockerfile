@@ -47,7 +47,7 @@ RUN apt-get update \
       qemu-utils \
       rsync \
       sshpass \
-      vim \
+      vim-tiny \
     && rm -rf /var/lib/apt/lists/*
 
 # add user
