@@ -151,7 +151,6 @@ RUN apt-get clean \
     && apt-get autoremove -y \
     && rm -rf \
       /release \
-      /requirements.txt \
       /root/.cache \
       /src \
       /tmp/* \
