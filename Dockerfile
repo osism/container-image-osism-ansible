@@ -101,15 +101,15 @@ RUN mkdir -p \
 
 RUN ansible-galaxy install -v -f -r /ansible/galaxy/requirements.yml -p /ansible/galaxy
 RUN lib=$(python3 -c "import site; print(site.getsitepackages()[0])") \
-    && cp -r $lib/debops/ansible/roles/debops.ansible_plugins /ansible/galaxy \
-    && cp -r $lib/debops/ansible/roles/debops.environment /ansible/galaxy \
-    && cp -r $lib/debops/ansible/roles/debops.grub /ansible/galaxy \
-    && cp -r $lib/debops/ansible/roles/debops.kmod /ansible/galaxy \
-    && cp -r $lib/debops/ansible/roles/debops.locales /ansible/galaxy \
-    && cp -r $lib/debops/ansible/roles/debops.python /ansible/galaxy \
-    && cp -r $lib/debops/ansible/roles/debops.rsyslog /ansible/galaxy \
-    && cp -r $lib/debops/ansible/roles/debops.secret /ansible/galaxy \
-    && cp -r $lib/debops/ansible/roles/debops.sysctl /ansible/galaxy
+    && cp -r $lib/debops/ansible/roles/ansible_plugins /ansible/galaxy/debops.ansible_plugins \
+    && cp -r $lib/debops/ansible/roles/environment /ansible/galaxy/debops.environment \
+    && cp -r $lib/debops/ansible/roles/grub /ansible/galaxy/debops.grub \
+    && cp -r $lib/debops/ansible/roles/kmod /ansible/galaxy/debops.kmod \
+    && cp -r $lib/debops/ansible/roles/locales /ansible/galaxy/debops.locales \
+    && cp -r $lib/debops/ansible/roles/python /ansible/galaxy/debops.python \
+    && cp -r $lib/debops/ansible/roles/rsyslog /ansible/galaxy/debops.rsyslog \
+    && cp -r $lib/debops/ansible/roles/secret /ansible/galaxy/debops.secret \
+    && cp -r $lib/debops/ansible/roles/sysctl /ansible/galaxy/debops.sysctl
 
 # install required ansible plugins
 
