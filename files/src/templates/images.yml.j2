@@ -57,13 +57,13 @@ registry_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/registry:{{ '{{' }}
 ceph_ansible_tag: "{{ '{{' }} ceph_version {{ '}}' }}-{{ '{{' }} manager_version {{ '}}' }}"
 ceph_ansible_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/ceph-ansible:{{ '{{' }} ceph_ansible_tag {{ '}}' }}"
 
-cephclient_tag: "{{ '{{' }} ceph_version {{ '}}' }}-{{ '{{' }} repository_version {{ '}}' }}"
+cephclient_tag: "{{ '{{' }} ceph_version {{ '}}' }}"
 cephclient_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/cephclient:{{ '{{' }} cephclient_tag {{ '}}' }}"
 
 kolla_ansible_tag: "{{ '{{' }} openstack_version {{ '}}' }}-{{ '{{' }} manager_version {{ '}}' }}"
 kolla_ansible_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/kolla-ansible:{{ '{{' }} kolla_ansible_tag {{ '}}' }}"
 
-openstackclient_tag: "{{ '{{' }} openstack_version {{ '}}' }}-{{ '{{' }} repository_version {{ '}}' }}"
+openstackclient_tag: "{{ '{{' }} openstack_version {{ '}}' }}"
 openstackclient_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/openstackclient:{{ '{{' }} openstackclient_tag {{ '}}' }}"
 
 osism_ansible_tag: "{{ '{{' }} manager_version {{ '}}' }}"
