@@ -4,6 +4,7 @@ set -x
 # Available environment variables
 #
 # BUILD_OPTS
+# DOCKER_REGISTRY
 # REPOSITORY
 # VERSION
 
@@ -11,11 +12,16 @@ set -x
 
 BUILD_OPTS=${BUILD_OPTS:-}
 CREATED=$(date --rfc-3339=ns)
+DOCKER_REGISTRY=${DOCKER_REGISTRY:-quay.io}
 REVISION=$(git rev-parse --short HEAD)
 VERSION=${VERSION:-latest}
 
 if [[ -n $TRAVIS_TAG ]]; then
     VERSION=${TRAVIS_TAG:1}
+fi
+
+if [[ -n $DOCKER_REGISTRY ]]; then
+    REPOSITORY="$DOCKER_REGISTRY/$REPOSITORY"
 fi
 
 docker build \
