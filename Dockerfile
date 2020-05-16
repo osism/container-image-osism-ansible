@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ARG VERSION
 ARG MITOGEN_VERSION=0.2.9
@@ -33,6 +33,7 @@ RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y  \
+      build-essential \
       dumb-init \
       git \
       gnupg-agent \
@@ -144,6 +145,7 @@ RUN chown -R dragon: /ansible /share /archive
 
 RUN apt-get clean \
     && apt-get remove -y  \
+      build-essential \
       git \
       libffi-dev \
       libssl-dev \
