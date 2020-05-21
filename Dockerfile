@@ -117,6 +117,12 @@ RUN lib=$(python3 -c "import site; print(site.getsitepackages()[0])") \
 
 ADD https://github.com/dw/mitogen/archive/v$MITOGEN_VERSION.tar.gz /mitogen.tar.gz
 RUN tar xzf /mitogen.tar.gz --strip-components=1 -C /ansible/plugins/mitogen \
+    && rm -rf \
+        /ansible/plugins/mitogen/tests \
+        /ansible/plugins/mitogen/docs \
+        /ansible/plugins/mitogen/.ci \
+        /ansible/plugins/mitogen/.lgtm.yml \
+        /ansible/plugins/mitogen/.travis.yml \
     && rm /mitogen.tar.gz
 
 # prepare project repository
