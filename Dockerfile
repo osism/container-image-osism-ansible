@@ -99,19 +99,10 @@ RUN mkdir -p \
 
 # install required ansible roles
 
-RUN ansible-galaxy install -v -f -r /ansible/galaxy/requirements.yml -p /ansible/galaxy
-RUN lib=$(python3 -c "import site; print(site.getsitepackages()[0])") \
-    && cp -r $lib/debops/ansible/roles/ansible_plugins /ansible/galaxy \
-    && ln -s /ansible/galaxy/ansible_plugins /ansible/galaxy/debops.ansible_plugins \
-    && cp -r $lib/debops/ansible/roles/environment /ansible/galaxy/debops.environment \
-    && cp -r $lib/debops/ansible/roles/grub /ansible/galaxy/debops.grub \
-    && cp -r $lib/debops/ansible/roles/kmod /ansible/galaxy/debops.kmod \
-    && cp -r $lib/debops/ansible/roles/locales /ansible/galaxy/debops.locales \
-    && cp -r $lib/debops/ansible/roles/python /ansible/galaxy/debops.python \
-    && cp -r $lib/debops/ansible/roles/rsyslog /ansible/galaxy/debops.rsyslog \
-    && cp -r $lib/debops/ansible/roles/secret /ansible/galaxy \
-    && ln -s /ansible/galaxy/secret /ansible/galaxy/debops.secret \
-    && cp -r $lib/debops/ansible/roles/sysctl /ansible/galaxy/debops.sysctl
+RUN ansible-galaxy role install -v -f -r /ansible/galaxy/requirements.yml -p /usr/share/ansible/roles \
+    && ln -s /usr/share/ansible/roles /ansible/galaxy \
+    && ansible-galaxy collection install -v -f -r /ansible/galaxy/requirements.yml -p /usr/share/ansible/collections \
+    && ln -s /usr/share/ansible/collections /ansible/collections
 
 # install required ansible plugins
 
