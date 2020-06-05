@@ -62,12 +62,12 @@ RUN groupadd -g $GROUP_ID dragon \
 WORKDIR /src
 RUN git clone https://github.com/osism/release /release \
     && pip3 install --no-cache-dir -r requirements.txt \
-    && mkdir -p /ansible/galaxy /ansible/group_vars/all \
+    && mkdir -p /ansible/group_vars/all \
     && python3 render-python-requirements.py \
     && python3 render-versions.py \
     && python3 render-ansible-requirements.py \
     && ROLES_FILENAME=/release/etc/roles-manager.yml \
-       REQUIREMENTS_FILENAME=/ansible/galaxy/requirements-manager.yml \
+       REQUIREMENTS_FILENAME=/ansible/requirements-manager.yml \
        python3 render-ansible-requirements.py \
     && python3 render-docker-images.py
 
@@ -99,9 +99,9 @@ RUN mkdir -p \
 
 # install required ansible roles
 
-RUN ansible-galaxy role install -v -f -r /ansible/galaxy/requirements.yml -p /usr/share/ansible/roles \
+RUN ansible-galaxy role install -v -f -r /ansible/requirements.yml -p /usr/share/ansible/roles \
     && ln -s /usr/share/ansible/roles /ansible/galaxy \
-    && ansible-galaxy collection install -v -f -r /ansible/galaxy/requirements.yml -p /usr/share/ansible/collections \
+    && ansible-galaxy collection install -v -f -r /ansible/requirements.yml -p /usr/share/ansible/collections \
     && ln -s /usr/share/ansible/collections /ansible/collections
 
 # install required ansible plugins
