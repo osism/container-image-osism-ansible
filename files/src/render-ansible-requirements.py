@@ -7,7 +7,7 @@ import yaml
 
 VERSION = os.environ.get("VERSION", "latest")
 ROLES_FILENAME = os.environ.get("ROLES_FILENAME", "/release/etc/roles.yml")
-REQUIREMENTS_FILENAME = os.environ.get("REQUIREMENTS_FILENAME", "/ansible/galaxy/requirements.yml")
+REQUIREMENTS_FILENAME = os.environ.get("REQUIREMENTS_FILENAME", "/ansible/requirements.yml")
 
 # load versions files from release repository
 
