@@ -44,7 +44,7 @@ utilities_base:
   - whois
 
 ##########################
-# osism.network-interfaces
+# osism.network
 
 network_allow_service_restart: no
 network_restart_method: nothing
