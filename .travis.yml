@@ -8,6 +8,8 @@ before_install:
 env:
   global:
     - REPOSITORY=osism/osism-ansible
+  matrix:
+    - VERSION=latest
 
 before_script:
   - bash scripts/lint.sh
@@ -21,16 +23,3 @@ deploy:
     skip_cleanup: true
     on:
       branch: master
-  - provider: script
-    script: bash scripts/push.sh
-    skip_cleanup: true
-    on:
-      tags: true
-
-notifications:
-  irc:
-    channels:
-      - "irc.freenode.org#osism"
-    template:
-      - "%{result} %{repository_slug}: %{commit_subject} %{build_url}"
-    skip_join: true
