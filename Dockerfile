@@ -24,6 +24,7 @@ COPY files/defaults.yml /ansible/group_vars/all/defaults.yml
 COPY files/images.yml /ansible/group_vars/all/images.yml
 
 COPY files/src /src
+COPY patches /patches
 
 # show motd
 
@@ -124,6 +125,16 @@ RUN git clone https://github.com/osism/osism-ansible /repository \
 
 # project specific instructions
 
+RUN for role in $(ls -1 /ansible/galaxy); do \
+    if [ -e /patches/$role ]; then \
+        for patchfile in $(find /patches/$role -name "*.patch"); do \
+            echo $patchfile; \
+            ( cd /ansible/galaxy/$role && patch --forward --batch -p1 --dry-run ) < $patchfile || exit 1; \
+            ( cd /ansible/galaxy/$role && patch --forward --batch -p1 ) < $patchfile; \
+        done; \
+    fi; \
+    done
+
 RUN cp /repository/playbooks/* /ansible \
     && cp /repository/library/* /ansible/library \
     && cp /repository/tasks/* /ansible/tasks
@@ -153,6 +164,7 @@ RUN apt-get clean \
       /release \
       /root/.cache \
       /src \
+      /patches \
       /tmp/* \
       /usr/share/doc/* \
       /usr/share/man/* \
