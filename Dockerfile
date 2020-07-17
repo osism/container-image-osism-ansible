@@ -143,6 +143,9 @@ RUN git clone https://github.com/osism/tests.git /tests \
     && if [ $VERSION != "latest" ]; then  ( cd /tests && git checkout tags/v$VERSION -b v$VERSION ); fi \
     && pip3 install --no-cache-dir -r /tests/ansible/requirements.txt
 
+RUN git clone https://github.com/osism/validations.git /validations \
+    && if [ $VERSION != "latest" ]; then  ( cd /validations && git checkout tags/v$VERSION -b v$VERSION ); fi
+
 RUN python3 -m ara.setup.env > /ansible/ara.env
 
 # set correct permssions
