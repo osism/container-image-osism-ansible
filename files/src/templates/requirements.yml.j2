@@ -9,10 +9,12 @@ roles:
 {% endfor %}
 
 collections:
+  - name: awx.awx
+    source: https://galaxy.ansible.com
+  - name: community.zabbix
+    source: https://galaxy.ansible.com
   - name: debops.debops
     version: 2.0.3
     source: https://galaxy.ansible.com
   - name: openstack.cloud
-    source: https://galaxy.ansible.com
-  - name: community.zabbix
     source: https://galaxy.ansible.com
