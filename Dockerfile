@@ -148,6 +148,9 @@ RUN git clone https://github.com/osism/validations.git /opt/validations \
 
 RUN git clone https://github.com/netbox-community/devicetype-library /opt/netbox-devicetype-library
 
+# FIXME: Transfer to a stand-alone container
+RUN pip3 install --no-cache-dir git+git://github.com/grnet/maas2netbox.git@master
+
 RUN python3 -m ara.setup.env > /ansible/ara.env
 
 # set correct permssions
