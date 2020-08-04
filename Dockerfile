@@ -20,8 +20,6 @@ COPY files/playbooks/* /ansible/
 COPY files/scripts/* /
 
 COPY files/ansible.cfg /etc/ansible/ansible.cfg
-COPY files/defaults.yml /ansible/group_vars/all/defaults.yml
-COPY files/images.yml /ansible/group_vars/all/images.yml
 
 COPY files/src /src
 COPY patches /patches
@@ -58,11 +56,18 @@ RUN groupadd -g $GROUP_ID dragon \
     && groupadd -g $GROUP_ID_DOCKER docker \
     && useradd -g dragon -G docker -u $USER_ID -m -d /ansible dragon
 
+# prepare project repository
+
+RUN git clone https://github.com/osism/osism-ansible /repository \
+    && ( cd /repository && git fetch --all --force ) \
+    && if [ $VERSION != "latest" ]; then  ( cd /repository && git checkout tags/v$VERSION -b v$VERSION ); fi
+
 # run preparations
 
 WORKDIR /src
 RUN git clone https://github.com/osism/release /release \
     && pip3 install --no-cache-dir -r requirements.txt \
+    && cp -r /repository/group_vars /ansible/group_vars \
     && mkdir -p /ansible/group_vars/all \
     && python3 render-python-requirements.py \
     && python3 render-versions.py \
@@ -116,12 +121,6 @@ RUN tar xzf /mitogen.tar.gz --strip-components=1 -C /ansible/plugins/mitogen \
         /ansible/plugins/mitogen/.lgtm.yml \
         /ansible/plugins/mitogen/.travis.yml \
     && rm /mitogen.tar.gz
-
-# prepare project repository
-
-RUN git clone https://github.com/osism/osism-ansible /repository \
-    && ( cd /repository && git fetch --all --force ) \
-    && if [ $VERSION != "latest" ]; then  ( cd /repository && git checkout tags/v$VERSION -b v$VERSION ); fi
 
 # project specific instructions
 
