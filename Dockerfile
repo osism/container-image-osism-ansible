@@ -146,6 +146,8 @@ RUN git clone https://github.com/osism/tests.git /tests \
 RUN git clone https://github.com/osism/validations.git /validations \
     && if [ $VERSION != "latest" ]; then  ( cd /validations && git checkout tags/v$VERSION -b v$VERSION ); fi
 
+RUN git clone https://github.com/netbox-community/devicetype-library /netbox-devicetype-library
+
 RUN python3 -m ara.setup.env > /ansible/ara.env
 
 # set correct permssions
