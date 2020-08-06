@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source /secrets.sh
+
 ENVIRONMENT=monitoring
 
 if [[ $# -lt 1 ]]; then
