@@ -56,7 +56,6 @@ RUN apt-get update \
       python3-pip \
       python3-setuptools \
       python3-wheel \
-      qemu-utils \
       rsync \
       sshpass \
       vim-tiny \
