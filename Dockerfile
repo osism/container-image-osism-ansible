@@ -170,6 +170,7 @@ RUN chown -R dragon: /ansible /share /archive
 RUN apt-get clean \
     && apt-get remove -y  \
       build-essential \
+      gcc-9-base \
       git \
       libffi-dev \
       libssl-dev \
