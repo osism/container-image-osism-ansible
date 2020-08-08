@@ -126,7 +126,7 @@ RUN ansible-galaxy role install -v -f -r /ansible/requirements.yml -p /usr/share
 RUN git clone https://github.com/osism/ansible-collection-services.git /tmp/ansible-collection-services \
     && ( cd /tmp/ansible-collection-services; \
          ansible-galaxy collection build; \
-         ansible-galaxy collection install osism-services-*.tar.gz; ) \
+         ansible-galaxy collection install -v -f -p /usr/share/ansible/collections osism-services-*.tar.gz; ) \
     && rm -rf /tmp/ansible-collection-services
 
 # install required ansible plugins
