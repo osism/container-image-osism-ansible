@@ -114,12 +114,20 @@ RUN mkdir -p \
         /share \
         /archive
 
-# install required ansible roles
+# install required ansible collections & roles
 
 RUN ansible-galaxy role install -v -f -r /ansible/requirements.yml -p /usr/share/ansible/roles \
     && ln -s /usr/share/ansible/roles /ansible/galaxy \
     && ansible-galaxy collection install -v -f -r /ansible/requirements.yml -p /usr/share/ansible/collections \
     && ln -s /usr/share/ansible/collections /ansible/collections
+
+# NOTE: Installation via ansible-galaxy from git only possible from version 2.10
+
+RUN git clone https://github.com/osism/ansible-collection-services.git /tmp/ansible-collection-services \
+    && ( cd /tmp/ansible-collection-services; \
+         ansible-galaxy collection build; \
+         ansible-galaxy collection install osism-services-*.tar.gz; ) \
+    && rm -rf /tmp/ansible-collection-services
 
 # install required ansible plugins
 
