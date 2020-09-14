@@ -36,6 +36,7 @@ rsync -a /opt/configuration/inventory/ /ansible/inventory/
 cd $ENVIRONMENTS_DIRECTORY/$environment
 
 ansible \
+  --playbook-dir $ENVIRONMENTS_DIRECTORY/$environment \
   --vault-password-file $VAULT \
   -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
   -e @$ENVIRONMENTS_DIRECTORY/secrets.yml \
