@@ -25,6 +25,7 @@ if [[ -e $ENVIRONMENTS_DIRECTORY/$environment/ansible.cfg ]]; then
 fi
 
 export ANSIBLE_INVENTORY=$ANSIBLE_DIRECTORY/inventory
+rsync -a /ansible/group_vars/ /ansible/inventory/group_vars/
 rsync -a /opt/configuration/inventory/ /ansible/inventory/
 
 cd $ENVIRONMENTS_DIRECTORY/$environment
