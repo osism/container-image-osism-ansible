@@ -16,10 +16,6 @@ DOCKER_REGISTRY=${DOCKER_REGISTRY:-quay.io}
 REVISION=$(git rev-parse --short HEAD)
 VERSION=${VERSION:-latest}
 
-if [[ -n $TRAVIS_TAG ]]; then
-    VERSION=${TRAVIS_TAG:1}
-fi
-
 if [[ -n $DOCKER_REGISTRY ]]; then
     REPOSITORY="$DOCKER_REGISTRY/$REPOSITORY"
 fi
@@ -36,5 +32,4 @@ docker build \
     --label "org.opencontainers.image.url=https://www.osism.de" \
     --label "org.opencontainers.image.vendor=Betacloud Solutions GmbH" \
     --label "org.opencontainers.image.version=$VERSION" \
-    --squash \
     $BUILD_OPTS .

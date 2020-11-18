@@ -12,10 +12,6 @@ set -x
 DOCKER_REGISTRY=${DOCKER_REGISTRY:-quay.io}
 VERSION=${VERSION:-latest}
 
-if [[ -n $TRAVIS_TAG ]]; then
-    VERSION=${TRAVIS_TAG:1}
-fi
-
 if [[ -n $DOCKER_REGISTRY ]]; then
     REPOSITORY="$DOCKER_REGISTRY/$REPOSITORY"
 fi
