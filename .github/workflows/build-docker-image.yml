@@ -1,0 +1,25 @@
+---
+name: Build docker image
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/build-docker-image.yml
+      - Dockerfile
+      - files/**
+      - patches/**
+
+jobs:
+
+  build-docker-image:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+      - run: scripts/build.sh
+        env:
+          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+          REPOSITORY: osism-ansible
