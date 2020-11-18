@@ -31,4 +31,4 @@ jobs:
           scripts/push.sh
         env:
           DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-          REPOSITORY: osism-ansible
+          REPOSITORY: osism/osism-ansible
