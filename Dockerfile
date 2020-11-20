@@ -106,7 +106,7 @@ RUN mkdir -p \
         /ansible \
         /ansible/action_plugins
 
-# exportes as volumes
+# exports as volumes
 RUN mkdir -p \
         /ansible/cache \
         /ansible/logs \
