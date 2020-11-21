@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC1091
 source /secrets.sh
 
 ENVIRONMENT=test
@@ -12,6 +13,7 @@ CONFIGURATION_DIRECTORY=/opt/configuration
 ENVIRONMENTS_DIRECTORY=$CONFIGURATION_DIRECTORY/environments
 
 if [[ -e /ansible/ara.env ]]; then
+    # shellcheck disable=SC1091
     source /ansible/ara.env
 fi
 

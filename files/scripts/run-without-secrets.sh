@@ -3,7 +3,7 @@
 ENVIRONMENT=run
 
 if [[ $# -lt 2 ]]; then
-    echo usage: osism-$ENVIRONMENT ENVIRONMENT SERVICE [...]
+    echo "usage: osism-$ENVIRONMENT ENVIRONMENT SERVICE [...]"
     exit 1
 fi
 
@@ -18,6 +18,7 @@ CONFIGURATION_DIRECTORY=/opt/configuration
 ENVIRONMENTS_DIRECTORY=$CONFIGURATION_DIRECTORY/environments
 
 if [[ -e /ansible/ara.env ]]; then
+    # shellcheck disable=SC1091
     source /ansible/ara.env
 fi
 
@@ -26,15 +27,15 @@ if [[ ! -e /run/secrets/NETBOX_TOKEN ]]; then
 fi
 
 export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/ansible.cfg
-if [[ -e $ENVIRONMENTS_DIRECTORY/$environment/ansible.cfg ]]; then
-    export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/$environment/ansible.cfg
+if [[ -e $ENVIRONMENTS_DIRECTORY/"$environment"/ansible.cfg ]]; then
+    export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/"$environment"/ansible.cfg
 fi
 
 export ANSIBLE_INVENTORY=$ANSIBLE_DIRECTORY/inventory
 rsync -a /ansible/group_vars/ /ansible/inventory/group_vars/
 rsync -a /opt/configuration/inventory/ /ansible/inventory/
 
-cd $ENVIRONMENTS_DIRECTORY/$environment
+cd $ENVIRONMENTS_DIRECTORY/"$environment"
 
 if [[ -e playbook-$service.yml ]]; then
 
@@ -43,16 +44,16 @@ if [[ -e playbook-$service.yml ]]; then
       -e @images.yml \
       -e @configuration.yml \
       "$@" \
-      playbook-$service.yml
+      playbook-"$service".yml
 
-elif [[ -e $ANSIBLE_DIRECTORY/$environment-$service.yml ]]; then
+elif [[ -e $ANSIBLE_DIRECTORY/"$environment"-"$service".yml ]]; then
 
     ansible-playbook \
       -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
       -e @images.yml \
       -e @configuration.yml \
       "$@" \
-      $ANSIBLE_DIRECTORY/$environment-$service.yml
+      $ANSIBLE_DIRECTORY/"$environment"-"$service".yml
 
 else
 
