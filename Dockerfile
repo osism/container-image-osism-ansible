@@ -39,10 +39,11 @@ ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/60-gen
 
 # show motd
 
-RUN echo '[ ! -z "$TERM" -a -r /etc/motd ] && cat /etc/motd' >> /etc/bash.bashrc
+RUN echo "[ ! -z \"\$TERM\" -a -r /etc/motd ] && cat /etc/motd" >> /etc/bash.bashrc
 
 # install required packages
 
+# hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install --no-install-recommends -y  \
       build-essential \
@@ -71,6 +72,7 @@ RUN groupadd -g $GROUP_ID dragon \
 
 # prepare project repository
 
+# hadolint ignore=DL3003
 RUN git clone https://github.com/osism/osism-ansible /repository \
     && ( cd /repository && git fetch --all --force ) \
     && if [ $VERSION != "latest" ]; then  ( cd /repository && git checkout tags/v$VERSION -b v$VERSION ); fi
@@ -137,12 +139,13 @@ RUN tar xzf /mitogen.tar.gz --strip-components=1 -C /ansible/plugins/mitogen \
 
 # project specific instructions
 
-RUN for role in $(ls -1 /ansible/galaxy); do \
-    if [ -e /patches/$role ]; then \
-        for patchfile in $(find /patches/$role -name "*.patch"); do \
-            echo $patchfile; \
-            ( cd /ansible/galaxy/$role && patch --forward --batch -p1 --dry-run ) < $patchfile || exit 1; \
-            ( cd /ansible/galaxy/$role && patch --forward --batch -p1 ) < $patchfile; \
+# hadolint ignore=DL3003
+RUN for role in /ansible/galaxy/*; do \
+    if [ -e /patches/"$role" ]; then \
+        for patchfile in /patches/"$role"/*.patch; do \
+            echo "$patchfile"; \
+            ( cd /ansible/galaxy/"$role" && patch --forward --batch -p1 --dry-run ) < "$patchfile" || exit 1; \
+            ( cd /ansible/galaxy/"$role" && patch --forward --batch -p1 ) < "$patchfile"; \
         done; \
     fi; \
     done
@@ -151,10 +154,12 @@ RUN cp /repository/playbooks/* /ansible \
     && cp /repository/library/* /ansible/library \
     && cp /repository/tasks/* /ansible/tasks
 
+# hadolint ignore=DL3003
 RUN git clone https://github.com/osism/tests.git /opt/tests \
     && if [ $VERSION != "latest" ]; then  ( cd /opt/tests && git checkout tags/v$VERSION -b v$VERSION ); fi \
     && pip3 install --no-cache-dir -r /opt/tests/ansible/requirements.txt
 
+# hadolint ignore=DL3003
 RUN git clone https://github.com/osism/validations.git /opt/validations \
     && if [ $VERSION != "latest" ]; then  ( cd /opt/validations && git checkout tags/v$VERSION -b v$VERSION ); fi
 
