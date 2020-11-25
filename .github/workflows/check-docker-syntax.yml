@@ -5,14 +5,14 @@ on:
   push:
     paths:
       - Dockerfile
-      - .github/workflows/syntax-docker.yml
+      - .github/workflows/check-docker-syntax.yml
   pull_request:
     paths:
       - Dockerfile
-      - .github/workflows/syntax-docker.yml
+      - .github/workflows/check-docker-syntax.yml
 
 jobs:
-  hadolint:
+  check-docker-syntax:
 
     runs-on: ubuntu-latest
 

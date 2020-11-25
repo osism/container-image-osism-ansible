@@ -4,15 +4,17 @@ name: Check yaml syntax
 on:
   push:
     paths:
-      - '**.yml'
       - '**.yaml'
+      - '**.yml'
+      - .github/workflows/check-yaml-syntax.yml
   pull_request:
     paths:
-      - '**.yml'
       - '**.yaml'
+      - '**.yml'
+      - .github/workflows/check-yaml-syntax.yml
 
 jobs:
-  yamllint:
+  check-yaml-syntax:
 
     runs-on: ubuntu-latest
 
