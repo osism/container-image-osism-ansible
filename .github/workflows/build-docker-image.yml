@@ -1,7 +1,13 @@
 ---
 name: Build docker image
 
-on:
+on:  # yamllint disable-line rule:truthy
+  push:
+    paths:
+      - .github/workflows/build-docker-image.yml
+      - Dockerfile
+      - files/**
+      - patches/**
   pull_request:
     paths:
       - .github/workflows/build-docker-image.yml
