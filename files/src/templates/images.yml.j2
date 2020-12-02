@@ -51,35 +51,3 @@ mariadb_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/mariadb:{{ '{{' }} m
 
 redis_tag: "{{ '{{' }} repository_version {{ '}}' }}"
 redis_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/redis:{{ '{{' }} redis_tag {{ '}}' }}"
-
-# DEPRECATED IMAGES
-
-prometheus_exporter_blackbox_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_exporter_blackbox_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/blackbox-exporter:{{ '{{' }} prometheus_exporter_blackbox_tag {{ '}}' }}"
-
-prometheus_exporter_cadvisor_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_exporter_cadvisor_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/cadvisor:{{ '{{' }} prometheus_exporter_cadvisor_tag {{ '}}' }}"
-
-prometheus_exporter_ceph_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_exporter_ceph_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/ceph_exporter:{{ '{{' }} prometheus_exporter_ceph_tag {{ '}}' }}"
-
-prometheus_exporter_haproxy_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_exporter_haproxy_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/haproxy-exporter:{{ '{{' }} prometheus_exporter_haproxy_tag {{ '}}' }}"
-
-prometheus_exporter_nginx_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_exporter_nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/nginx:{{ '{{' }} prometheus_exporter_nginx_tag {{ '}}' }}"
-
-prometheus_exporter_mariadb_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_exporter_mariadb_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/mysqld-exporter:{{ '{{' }} prometheus_exporter_mariadb_tag {{ '}}' }}"
-
-prometheus_exporter_memcached_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_exporter_memcached_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/memcached-exporter:{{ '{{' }} prometheus_exporter_memcached_tag {{ '}}' }}"
-
-prometheus_nginx_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/nginx:{{ '{{' }} prometheus_nginx_tag {{ '}}' }}"
-
-prometheus_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/prometheus:{{ '{{' }} prometheus_tag {{ '}}' }}"
-
-prometheus_alertmanager_tag: "{{ '{{' }} repository_version {{ '}}' }}"
-prometheus_alertmanager_image: "{{ '{{' }} docker_registry {{ '}}' }}/osism/alertmanager:{{ '{{' }} prometheus_alertmanager_tag {{ '}}' }}"
