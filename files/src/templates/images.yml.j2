@@ -43,7 +43,7 @@ openstackclient_tag: "{{ '{{' }} openstack_version {{ '}}' }}"
 openstackclient_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['openstackclient'] }}:{{ '{{' }} openstackclient_tag {{ '}}' }}"
 
 awx_tag: "{{ '{{' }} ceph_version {{ '}}' }}-{{ '{{' }} openstack_version {{ '}}' }}"
-awx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['awx'] }}:{{ '{{' }} awx_tag {{ '}}' }}"
+awx_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['awx'] }}:{{ '{{' }} awx_tag {{ '}}' }}"
 
 ceph_ansible_tag: "{{ '{{' }} ceph_version {{ '}}' }}"
 ceph_ansible_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['ceph_ansible'] }}:{{ '{{' }} ceph_ansible_tag {{ '}}' }}"
