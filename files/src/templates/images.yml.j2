@@ -51,5 +51,5 @@ ceph_ansible_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['ce
 kolla_ansible_tag: "{{ '{{' }} openstack_version {{ '}}' }}"
 kolla_ansible_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['kolla_ansible'] }}:{{ '{{' }} kolla_ansible_tag {{ '}}' }}"
 
-osism_ansible_tag: "{{ '{{' }} versions['manager_version'] {{ '}}' }}"
+osism_ansible_tag: "{{ '{{' }} manager_version {{ '}}' }}"
 osism_ansible_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images[ 'osism_ansible'] }}:{{ '{{' }} osism_ansible_tag {{ '}}' }}"
