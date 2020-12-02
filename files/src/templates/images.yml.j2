@@ -26,7 +26,7 @@ phpmyadmin_tag: "{{ versions['phpmyadmin'] }}"
 phpmyadmin_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['phpmyadmin'] }}:{{ '{{' }} phpmyadmin_tag {{ '}}' }}"
 
 postgres_tag: "{{ versions['postgres'] }}"
-postgres_image: "{{ '{{' }} docker_postgres {{ '}}' }}/{{ images['postgres'] }}:{{ '{{' }} postgres_tag {{ '}}' }}"
+postgres_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['postgres'] }}:{{ '{{' }} postgres_tag {{ '}}' }}"
 
 redis_tag: "{{ versions['redis'] }}"
 redis_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['redis'] }}:{{ '{{' }} redis_tag {{ '}}' }}"
