@@ -13,9 +13,6 @@ ara_server_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['ara_server']
 installer_tag: "{{ versions['installer'] }}"
 installer_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['installer'] }}:{{ '{{' }} installer_tag {{ '}}' }}"
 
-manager_tag: "{{ versions['manager'] }}"
-manager_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['manager'] }}:{{ '{{' }} manager_tag {{ '}}' }}"
-
 mariadb_tag: "{{ versions['mariadb'] }}"
 mariadb_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['mariadb'] }}:{{ '{{' }} mariadb_tag {{ '}}' }}"
 
@@ -44,6 +41,9 @@ cephclient_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['cephclient']
 
 openstackclient_tag: "{{ '{{' }} openstack_version {{ '}}' }}"
 openstackclient_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['openstackclient'] }}:{{ '{{' }} openstackclient_tag {{ '}}' }}"
+
+awx_tag: "{{ '{{' }} ceph_version {{ '}}' }}-{{ '{{' }} openstack_version {{ '}}' }}"
+awx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['awx'] }}:{{ '{{' }} awx_tag {{ '}}' }}"
 
 ceph_ansible_tag: "{{ '{{' }} ceph_version {{ '}}' }}"
 ceph_ansible_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['ceph_ansible'] }}:{{ '{{' }} ceph_ansible_tag {{ '}}' }}"
