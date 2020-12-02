@@ -13,7 +13,7 @@ with open("/release/%s/base.yml" % VERSION, "rb") as fp:
     versions = yaml.load(fp, Loader=yaml.FullLoader)
 
 with open("/release/etc/images.yml", "rb") as fp:
-    docker_image_names = yaml.load(fp, Loader=yaml.FullLoader)
+    images = yaml.load(fp, Loader=yaml.FullLoader)
 
 # prepare jinja2 environment
 
@@ -24,8 +24,8 @@ environment = jinja2.Environment(loader=loader)
 
 template = environment.get_template("images.yml.j2")
 result = template.render({
-  'manager_version': versions['manager_version'],
-  'repository_version': versions['repository_version']
+  'images': images,
+  'versions': versions
 })
 with open("/ansible/group_vars/all/images.yml", "w+") as fp:
     fp.write(result)
