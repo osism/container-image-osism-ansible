@@ -21,6 +21,7 @@ if [[ -n $DOCKER_REGISTRY ]]; then
 fi
 
 docker buildx build \
+    --load \
     --build-arg "VERSION=$VERSION" \
     --tag "$REPOSITORY:$VERSION" \
     --label "org.opencontainers.image.created=$CREATED" \
