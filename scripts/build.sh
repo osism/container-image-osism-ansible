@@ -20,7 +20,7 @@ if [[ -n $DOCKER_REGISTRY ]]; then
     REPOSITORY="$DOCKER_REGISTRY/$REPOSITORY"
 fi
 
-docker build \
+docker buildx build \
     --build-arg "VERSION=$VERSION" \
     --tag "$REPOSITORY:$VERSION" \
     --label "org.opencontainers.image.created=$CREATED" \
@@ -32,4 +32,5 @@ docker build \
     --label "org.opencontainers.image.url=https://www.osism.de" \
     --label "org.opencontainers.image.vendor=Betacloud Solutions GmbH" \
     --label "org.opencontainers.image.version=$VERSION" \
+    --squash \
     $BUILD_OPTS .
