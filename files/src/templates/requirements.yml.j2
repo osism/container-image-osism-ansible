@@ -9,20 +9,30 @@ roles:
 {% endfor %}
 
 collections:
+  - name: ansible.netcommon
+    source: https://galaxy.ansible.com
+
   - name: awx.awx
     source: https://galaxy.ansible.com
+
+  - name: community.general
+    source: https://galaxy.ansible.com
+
   - name: community.zabbix
     source: https://galaxy.ansible.com
+
   - name: debops.debops
     version: 2.0.3
     source: https://galaxy.ansible.com
+
   - name: netbox.netbox
     source: https://galaxy.ansible.com
+
   - name: openstack.cloud
     source: https://galaxy.ansible.com
-  - name: ansible.netcommon
-    source: https://galaxy.ansible.com
+
   - name: https://github.com/osism/ansible-collection-commons.git
     type: git
+
   - name: https://github.com/osism/ansible-collection-services.git
     type: git
