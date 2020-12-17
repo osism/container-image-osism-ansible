@@ -4,14 +4,8 @@
 adminer_tag: "{{ versions['adminer'] }}"
 adminer_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['adminer'] }}:{{ '{{' }} adminer_tag {{ '}}' }}"
 
-aptly_tag: "{{ versions['aptly'] }}"
-aptly_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['aptly'] }}:{{ '{{' }} aptly_tag {{ '}}' }}"
-
 ara_server_tag: "{{ versions['ara_server'] }}"
 ara_server_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['ara_server'] }}:{{ '{{' }} ara_server_tag {{ '}}' }}"
-
-installer_tag: "{{ versions['installer'] }}"
-installer_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['installer'] }}:{{ '{{' }} installer_tag {{ '}}' }}"
 
 mariadb_tag: "{{ versions['mariadb'] }}"
 mariadb_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['mariadb'] }}:{{ '{{' }} mariadb_tag {{ '}}' }}"
