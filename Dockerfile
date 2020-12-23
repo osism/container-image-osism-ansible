@@ -72,7 +72,7 @@ RUN groupadd -g $GROUP_ID dragon \
 # prepare project repository
 
 # hadolint ignore=DL3003
-RUN git clone https://github.com/osism/osism-ansible /repository \
+RUN git clone https://github.com/osism/ansible-playbooks /repository \
     && ( cd /repository && git fetch --all --force ) \
     && if [ $VERSION != "latest" ]; then  ( cd /repository && git checkout tags/v$VERSION -b v$VERSION ); fi
 
