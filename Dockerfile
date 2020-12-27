@@ -82,6 +82,7 @@ WORKDIR /src
 RUN git clone https://github.com/osism/release /release \
     && pip3 install --no-cache-dir -r requirements.txt \
     && cp -r /repository/group_vars /ansible/group_vars \
+    && cp -r /repository/workflows /ansible/workflows \
     && mkdir -p /ansible/group_vars/all \
     && python3 render-python-requirements.py \
     && python3 render-versions.py \
