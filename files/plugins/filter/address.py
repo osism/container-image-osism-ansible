@@ -156,3 +156,40 @@ def kolla_address(context, network_name, hostname=None):
                                   hostname=hostname))
 
     return address
+
+
+def put_address_in_context(address, context):
+    """puts address in context
+
+    :param address: the address to contextify
+    :param context: describes context in which the address appears,
+                    either 'url' or 'memcache',
+                    affects only IPv6 addresses format
+    :returns: string with address in proper context
+    """
+
+    if context not in ['url', 'memcache']:
+        raise FilterError("Unknown context '{context}'"
+                          .format(context=context))
+
+    if ':' not in address:
+        return address
+
+    # must be IPv6 raw address
+
+    if context == 'url':
+        return '[{address}]'.format(address=address)
+    elif context == 'memcache':
+        return 'inet6:[{address}]'.format(address=address)
+
+    return address
+
+
+class FilterModule(object):
+    """IP address filters"""
+
+    def filters(self):
+        return {
+            'kolla_address': kolla_address,
+            'put_address_in_context': put_address_in_context,
+        }

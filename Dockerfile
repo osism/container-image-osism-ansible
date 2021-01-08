@@ -13,9 +13,9 @@ USER root
 
 COPY files/inventory /ansible/inventory
 COPY files/library /ansible/library
-COPY files/plugins /ansible/plugins
 COPY files/roles /ansible/roles
 COPY files/tasks /ansible/tasks
+COPY files/plugins /usr/share/ansible/plugins
 
 COPY files/playbooks/* /ansible/
 COPY files/scripts/* /
@@ -124,6 +124,8 @@ RUN ansible-galaxy role install -v -f -r /ansible/requirements.yml -p /usr/share
     && ln -s /usr/share/ansible/roles /ansible/galaxy \
     && ansible-galaxy collection install -v -f -r /ansible/requirements.yml -p /usr/share/ansible/collections \
     && ln -s /usr/share/ansible/collections /ansible/collections
+
+RUN ln -s /usr/share/ansible/plugins /ansible/plugins
 
 # project specific instructions
 
