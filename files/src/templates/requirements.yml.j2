@@ -21,8 +21,15 @@ collections:
   - name: community.network
     source: https://galaxy.ansible.com
 
-  - name: community.zabbix
-    source: https://galaxy.ansible.com
+  # NOTE: Use Git for community.zabbix for now until a release > 1.1.0 happens
+  #       Necessary because with Zabbix 5.2 templateScreens is no longer usable
+  #       and this detection is done only in > 1.1.0
+
+  # - name: community.zabbix
+  #   source: https://galaxy.ansible.com
+
+  - name: https://github.com/ansible-collections/community.zabbix.git
+    type: git
 
   - name: debops.debops
     version: 2.0.3
