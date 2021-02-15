@@ -60,6 +60,7 @@ RUN apt-get update \
       rsync \
       sshpass \
       vim-tiny \
+    && python3 -m pip install --upgrade pip \
     && update-alternatives --install /usr/bin/python python /usr/bin/python3 1 \
     && rm -rf /var/lib/apt/lists/*
 
