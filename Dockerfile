@@ -150,10 +150,6 @@ RUN git clone https://github.com/osism/tests.git /opt/tests \
     && if [ $VERSION != "latest" ]; then  ( cd /opt/tests && git checkout tags/v$VERSION -b v$VERSION ); fi \
     && pip3 install --no-cache-dir -r /opt/tests/ansible/requirements.txt
 
-# hadolint ignore=DL3003
-RUN git clone https://github.com/osism/validations.git /opt/validations \
-    && if [ $VERSION != "latest" ]; then  ( cd /opt/validations && git checkout tags/v$VERSION -b v$VERSION ); fi
-
 RUN git clone https://github.com/netbox-community/devicetype-library /opt/netbox-devicetype-library
 
 RUN python3 -m ara.setup.env > /ansible/ara.env
