@@ -27,14 +27,14 @@ COPY patches /patches
 
 # add inventory files
 
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-ceph /ansible/inventory/50-ceph
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-infrastruture /ansible/inventory/50-infrastruture
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-kolla /ansible/inventory/50-kolla
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-monitoring /ansible/inventory/50-monitoring
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-openstack /ansible/inventory/50-openstack
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/51-ceph /ansible/inventory/51-ceph
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/51-kolla /ansible/inventory/51-kolla
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/60-generic /ansible/inventory/60-generic
+ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-ceph /ansible/inventory.generics/50-ceph
+ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-infrastruture /ansible/inventory.generics/50-infrastruture
+ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-kolla /ansible/inventory.generics/50-kolla
+ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-monitoring /ansible/inventory.generics/50-monitoring
+ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-openstack /ansible/inventory.generics/50-openstack
+ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/51-ceph /ansible/inventory.generics/51-ceph
+ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/51-kolla /ansible/inventory.generics/51-kolla
+ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/60-generic /ansible/inventory.generics/60-generic
 
 # show motd
 
