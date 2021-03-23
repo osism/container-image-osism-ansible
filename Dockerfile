@@ -173,7 +173,6 @@ RUN apt-get clean \
     && rm -rf \
       /release \
       /root/.cache \
-      /src \
       /patches \
       /tmp/* \
       /usr/share/doc/* \
