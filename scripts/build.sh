@@ -13,7 +13,7 @@ set -x
 BUILD_OPTS=${BUILD_OPTS:-}
 CREATED=$(date --rfc-3339=ns)
 DOCKER_REGISTRY=${DOCKER_REGISTRY:-quay.io}
-REVISION=$(git rev-parse --short HEAD)
+REVISION=$(git rev-parse HEAD)
 VERSION=${VERSION:-latest}
 
 if [[ -n $DOCKER_REGISTRY ]]; then
@@ -23,7 +23,7 @@ fi
 docker buildx build \
     --load \
     --build-arg "VERSION=$VERSION" \
-    --tag "$REPOSITORY:$VERSION" \
+    --tag "$REPOSITORY:$REVISION" \
     --label "org.opencontainers.image.created=$CREATED" \
     --label "org.opencontainers.image.documentation=https://docs.osism.de" \
     --label "org.opencontainers.image.licenses=ASL 2.0" \
