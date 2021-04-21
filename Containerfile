@@ -145,11 +145,6 @@ RUN cp /repository/playbooks/* /ansible \
     && cp /repository/library/* /ansible/library \
     && cp /repository/tasks/* /ansible/tasks
 
-# hadolint ignore=DL3003
-RUN git clone https://github.com/osism/tests.git /opt/tests \
-    && if [ $VERSION != "latest" ]; then  ( cd /opt/tests && git checkout tags/v$VERSION -b v$VERSION ); fi \
-    && pip3 install --no-cache-dir -r /opt/tests/ansible/requirements.txt
-
 RUN git clone https://github.com/netbox-community/devicetype-library /opt/netbox-devicetype-library
 
 RUN python3 -m ara.setup.env > /ansible/ara.env
