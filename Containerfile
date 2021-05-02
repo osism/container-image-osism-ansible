@@ -29,6 +29,7 @@ COPY files/playbooks/* /ansible/
 COPY files/scripts/* /
 
 COPY files/ansible.cfg /etc/ansible/ansible.cfg
+COPY files/dragon_sudoers /etc/sudoers.d/dragon_sudoers
 
 COPY files/src /src
 COPY patches /patches
@@ -67,6 +68,7 @@ RUN apt-get update \
       python3-wheel \
       rsync \
       sshpass \
+      sudo \
       vim-tiny \
     && python3 -m pip install --upgrade pip \
     && update-alternatives --install /usr/bin/python python /usr/bin/python3 1 \
