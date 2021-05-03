@@ -87,14 +87,20 @@ RUN git clone https://github.com/osism/ansible-playbooks /repository \
     && ( cd /repository && git fetch --all --force ) \
     && if [ $VERSION != "latest" ]; then  ( cd /repository && git checkout tags/v$VERSION -b v$VERSION ); fi
 
+# hadolint ignore=DL3003
+RUN git clone https://github.com/osism/ansible-defaults /defaults \
+    && ( cd /defaults && git fetch --all --force ) \
+    && if [ $VERSION != "latest" ]; then  ( cd /defaults && git checkout tags/v$VERSION -b v$VERSION ); fi
+
 # run preparations
 
 WORKDIR /src
 RUN git clone https://github.com/osism/release /release \
     && pip3 install --no-cache-dir -r requirements.txt \
-    && cp -r /repository/group_vars /ansible/group_vars \
+    && mkdir -p /ansible/group_vars \
+    && cp -r /defaults/* /ansible/group_vars/ \
+    && rm -f /ansible/group_vars/LICENSE /ansible/group_vars/README.md \
     && cp -r /repository/workflows /ansible/workflows \
-    && mkdir -p /ansible/group_vars/all \
     && python3 render-python-requirements.py \
     && python3 render-versions.py \
     && python3 render-ansible-requirements.py \
