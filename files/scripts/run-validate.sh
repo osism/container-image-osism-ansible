@@ -50,4 +50,4 @@ ansible-playbook \
   -e @images.yml \
   -e @configuration.yml \
   "$@" \
-  $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml
+  $ANSIBLE_DIRECTORY/validate-$service.yml
