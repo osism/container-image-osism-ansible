@@ -146,12 +146,12 @@ RUN ln -s /usr/share/ansible/plugins /ansible/plugins
 # project specific instructions
 
 # hadolint ignore=DL3003
-RUN for role in /ansible/galaxy/*; do \
-    if [ -e /patches/"$role" ]; then \
-        for patchfile in /patches/"$role"/*.patch; do \
+RUN for role in /usr/share/ansible/roles/*; do \
+    if [ -e /patches/"$(basename "$role")" ]; then \
+        for patchfile in /patches/"$(basename "$role")"/*.patch; do \
             echo "$patchfile"; \
-            ( cd /ansible/galaxy/"$role" && patch --forward --batch -p1 --dry-run ) < "$patchfile" || exit 1; \
-            ( cd /ansible/galaxy/"$role" && patch --forward --batch -p1 ) < "$patchfile"; \
+            ( cd /usr/share/ansible/roles/"$(basename "$role")" && patch --forward --batch -p1 --dry-run ) < "$patchfile" || exit 1; \
+            ( cd /usr/share/ansible/roles/"$(basename "$role")" && patch --forward --batch -p1 ) < "$patchfile"; \
         done; \
     fi; \
     done
