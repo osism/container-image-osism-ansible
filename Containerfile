@@ -57,6 +57,7 @@ RUN apt-get update \
       dumb-init \
       git \
       gnupg-agent \
+      iputils-ping \
       libffi-dev \
       libssl-dev \
       libyaml-dev \
