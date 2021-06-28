@@ -31,6 +31,6 @@ docker buildx build \
     --label "org.opencontainers.image.source=https://github.com/osism/container-image-osism-ansible" \
     --label "org.opencontainers.image.title=osism-ansible" \
     --label "org.opencontainers.image.url=https://www.osism.de" \
-    --label "org.opencontainers.image.vendor=Betacloud Solutions GmbH" \
+    --label "org.opencontainers.image.vendor=OSISM GmbH" \
     --label "org.opencontainers.image.version=$VERSION" \
     $BUILD_OPTS .
