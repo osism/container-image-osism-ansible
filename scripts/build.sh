@@ -23,7 +23,7 @@ fi
 docker buildx build \
     --load \
     --build-arg "VERSION=$VERSION" \
-    --tag "$REPOSITORY:$REVISION" \
+    --tag "$(git rev-parse --short HEAD)" \
     --label "org.opencontainers.image.created=$CREATED" \
     --label "org.opencontainers.image.documentation=https://docs.osism.tech" \
     --label "org.opencontainers.image.licenses=ASL 2.0" \
