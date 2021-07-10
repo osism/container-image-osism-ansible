@@ -25,12 +25,12 @@ docker buildx build \
     --build-arg "VERSION=$VERSION" \
     --tag "$REPOSITORY:$REVISION" \
     --label "org.opencontainers.image.created=$CREATED" \
-    --label "org.opencontainers.image.documentation=https://docs.osism.de" \
+    --label "org.opencontainers.image.documentation=https://docs.osism.tech" \
     --label "org.opencontainers.image.licenses=ASL 2.0" \
     --label "org.opencontainers.image.revision=$REVISION" \
     --label "org.opencontainers.image.source=https://github.com/osism/container-image-osism-ansible" \
     --label "org.opencontainers.image.title=osism-ansible" \
-    --label "org.opencontainers.image.url=https://www.osism.de" \
+    --label "org.opencontainers.image.url=https://www.osism.tech" \
     --label "org.opencontainers.image.vendor=OSISM GmbH" \
     --label "org.opencontainers.image.version=$VERSION" \
     $BUILD_OPTS .

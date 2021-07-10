@@ -1,6 +1,6 @@
 ARG UBUNTU_VERSION=20.04
 
-ARG RELEASE_RECEPTOR=0.9.7
+ARG RELEASE_RECEPTOR=1.0.0
 FROM quay.io/project-receptor/receptor:${RELEASE_RECEPTOR} as receptor
 
 FROM ubuntu:${UBUNTU_VERSION}
@@ -33,19 +33,7 @@ COPY files/ansible.cfg /etc/ansible/ansible.cfg
 COPY files/src /src
 COPY patches /patches
 
-# add inventory files
-
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-ceph /ansible/inventory.generics/50-ceph
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-infrastruture /ansible/inventory.generics/50-infrastruture
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-kolla /ansible/inventory.generics/50-kolla
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-monitoring /ansible/inventory.generics/50-monitoring
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/50-openstack /ansible/inventory.generics/50-openstack
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/51-ceph /ansible/inventory.generics/51-ceph
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/51-kolla /ansible/inventory.generics/51-kolla
-ADD https://raw.githubusercontent.com/osism/cfg-generics/master/inventory/60-generic /ansible/inventory.generics/60-generic
-
 # show motd
-
 RUN echo "[ ! -z \"\$TERM\" -a -r /etc/motd ] && cat /etc/motd" >> /etc/bash.bashrc
 
 # install required packages
@@ -58,6 +46,7 @@ RUN apt-get update \
       git \
       gnupg-agent \
       iputils-ping \
+      jq \
       libffi-dev \
       libssl-dev \
       libyaml-dev \
@@ -69,37 +58,49 @@ RUN apt-get update \
       rsync \
       sshpass \
       vim-tiny \
-    && python3 -m pip install --upgrade pip \
+    && python3 -m pip install --no-cache-dir --upgrade pip==21.1.3 \
+    && pip3 install --no-cache-dir -r /src/requirements.txt \
     && update-alternatives --install /usr/bin/python python /usr/bin/python3 1 \
     && rm -rf /var/lib/apt/lists/*
 
 # add user
-
 RUN groupadd -g $GROUP_ID dragon \
     && groupadd -g $GROUP_ID_DOCKER docker \
     && useradd -l -g dragon -G docker -u $USER_ID -m -d /ansible dragon
 
+# prepare release repository
+RUN git clone https://github.com/osism/release /release
+
 # prepare project repository
 
 # hadolint ignore=DL3003
-RUN git clone https://github.com/osism/ansible-playbooks /repository \
-    && ( cd /repository && git fetch --all --force ) \
-    && if [ $VERSION != "latest" ]; then  ( cd /repository && git checkout tags/v$VERSION -b v$VERSION ); fi
+RUN git clone https://github.com/osism/ansible-playbooks /playbooks \
+    && ( cd /playbooks || exit; git fetch --all --force; git checkout "$(yq -M -r .playbooks_version "/release/$VERSION/base.yml")" )
 
 # hadolint ignore=DL3003
 RUN git clone https://github.com/osism/ansible-defaults /defaults \
-    && ( cd /defaults && git fetch --all --force ) \
-    && if [ $VERSION != "latest" ]; then  ( cd /defaults && git checkout tags/v$VERSION -b v$VERSION ); fi
+    && ( cd /defaults || exit; git fetch --all --force; git checkout "$(yq -M -r .defaults_version "/release/$VERSION/base.yml")" )
+
+# hadolint ignore=DL3003
+RUN git clone https://github.com/osism/cfg-generics /generics  \
+    && ( cd /generics || exit; git fetch --all --force; git checkout "$(yq -M -r .generics_version "/release/$VERSION/base.yml")" )
+
+# add inventory files
+RUN mkdir -p /ansible/inventory.generics \
+    && cp /generics/inventory/50-ceph /ansible/inventory.generics/50-ceph \
+    && cp /generics/inventory/50-infrastruture /ansible/inventory.generics/50-infrastruture \
+    && cp /generics/inventory/50-kolla /ansible/inventory.generics/50-kolla \
+    && cp /generics/inventory/50-monitoring /ansible/inventory.generics/50-monitoring \
+    && cp /generics/inventory/50-openstack /ansible/inventory.generics/50-openstack \
+    && cp /generics/inventory/51-ceph /ansible/inventory.generics/51-ceph \
+    && cp /generics/inventory/51-kolla /ansible/inventory.generics/51-kolla \
+    && cp /generics/inventory/60-generic /ansible/inventory.generics/60-generic
 
 # run preparations
-
 WORKDIR /src
-RUN git clone https://github.com/osism/release /release \
-    && pip3 install --no-cache-dir -r requirements.txt \
-    && mkdir -p /ansible/group_vars \
+RUN mkdir -p /ansible/group_vars \
     && cp -r /defaults/* /ansible/group_vars/ \
     && rm -f /ansible/group_vars/LICENSE /ansible/group_vars/README.md \
-    && cp -r /repository/workflows /ansible/workflows \
     && python3 render-python-requirements.py \
     && python3 render-versions.py \
     && python3 render-ansible-requirements.py \
@@ -111,11 +112,9 @@ RUN git clone https://github.com/osism/release /release \
 WORKDIR /
 
 # install required python packages
-
 RUN pip3 install --no-cache-dir -r /requirements.txt
 
 # set ansible version in the motd
-
 RUN ansible_version=$(python3 -c 'import ansible; print(ansible.release.__version__)') \
     && sed -i -e "s/ANSIBLE_VERSION/$ansible_version/" /etc/motd
 
@@ -136,13 +135,11 @@ RUN mkdir -p \
         /interface
 
 # install required ansible collections & roles
-
 RUN ansible-galaxy role install -v -f -r /ansible/requirements.yml -p /usr/share/ansible/roles \
     && ln -s /usr/share/ansible/roles /ansible/galaxy \
     && ansible-galaxy collection install -v -f -r /ansible/requirements.yml -p /usr/share/ansible/collections \
-    && ln -s /usr/share/ansible/collections /ansible/collections
-
-RUN ln -s /usr/share/ansible/plugins /ansible/plugins
+    && ln -s /usr/share/ansible/collections /ansible/collections \
+    && ln -s /usr/share/ansible/plugins /ansible/plugins
 
 # project specific instructions
 
@@ -157,20 +154,21 @@ RUN for role in /usr/share/ansible/roles/*; do \
     fi; \
     done
 
-RUN cp /repository/playbooks/* /ansible \
-    && cp /repository/library/* /ansible/library \
-    && cp /repository/tasks/* /ansible/tasks
+# hadolint ignore=DL3059
+RUN cp /playbooks/playbooks/* /ansible \
+    && cp /playbooks/library/* /ansible/library \
+    && cp /playbooks/tasks/* /ansible/tasks
 
+# hadolint ignore=DL3059
 RUN git clone https://github.com/netbox-community/devicetype-library /opt/netbox-devicetype-library
 
+# copy ara configuration
 RUN python3 -m ara.setup.env > /ansible/ara.env
 
 # set correct permssions
-
 RUN chown -R dragon: /ansible /share /archive /interface
 
 # cleanup
-
 RUN apt-get clean \
     && apt-get remove -y  \
       build-essential \
@@ -196,9 +194,3 @@ USER dragon
 WORKDIR /ansible
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-LABEL "org.opencontainers.image.documentation"="https://docs.osism.de" \
-      "org.opencontainers.image.licenses"="ASL 2.0" \
-      "org.opencontainers.image.source"="https://github.com/osism/container-image-osism-ansible" \
-      "org.opencontainers.image.url"="https://www.osism.de" \
-      "org.opencontainers.image.vendor"="OSISM GmbH"
