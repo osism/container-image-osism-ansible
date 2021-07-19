@@ -34,6 +34,9 @@ redis_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['redis'] }}:{{ '{{
 registry_tag: "{{ versions['registry'] }}"
 registry_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['registry'] }}:{{ '{{' }} registry_tag {{ '}}' }}"
 
+keycloak_tag: "{{ versions['keycloak'] }}"
+keycloak_image: "{{ '{{' }} docker_registry_keycloak {{ '}}' }}/{{ images['keycloak'] }}:{{ '{{' }} keycloak_tag {{ '}}' }}"
+
 # image tag depends on CEPH_VERSION or OPENSTACK_VERSION
 
 cephclient_tag: "{{ '{{' }} cephclient_version|default(ceph_version) {{ '}}' }}"
