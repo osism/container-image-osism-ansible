@@ -6,6 +6,14 @@ ENVIRONMENT=generic
 
 if [[ $# -lt 1 ]]; then
     echo usage: osism-$ENVIRONMENT SERVICE [...]
+    echo -e "\t the following SERVICEs are available:"
+    echo -e "\t some maybe beta"
+    echo -e "\t executing SERVICEs on your own **RISK**"
+    echo -e "\t please contact the official dokumentation via"
+    echo -e "\t docs.osism.io/overview/cli-reference.html"
+    echo ""
+    SERVICES=`ls /ansible/state-* | awk -F"state-" '{ print $2 }' | awk -F"." '{ print $1 }' | column`
+    echo "$SERVICES"
     exit 1
 fi
 
