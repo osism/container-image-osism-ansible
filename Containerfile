@@ -161,6 +161,7 @@ RUN cp /playbooks/playbooks/* /ansible \
 
 # hadolint ignore=DL3059
 RUN git clone https://github.com/netbox-community/devicetype-library /opt/netbox-devicetype-library
+COPY files/src/import-netbox-devicetype-library.py /opt/netbox-devicetype-library/import-netbox-devicetype-library.py
 
 # copy ara configuration
 RUN python3 -m ara.setup.env > /ansible/ara.env
