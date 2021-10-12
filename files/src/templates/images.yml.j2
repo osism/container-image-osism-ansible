@@ -11,7 +11,7 @@ awxclient_tag: "{{ versions['awxclient'] }}"
 awxclient_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['awxclient'] }}:{{ '{{' }} awxclient_tag {{ '}}' }}"
 
 homer_tag: "{{ versions['homer'] }}"
-homer_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['homer'] }}:{{ '{{' }} homer_tag {{ '}}' }}"
+homer_image: "{{ '{{' }} docker_registry_homer {{ '}}' }}/{{ images['homer'] }}:{{ '{{' }} homer_tag {{ '}}' }}"
 
 mariadb_tag: "{{ versions['mariadb'] }}"
 mariadb_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['mariadb'] }}:{{ '{{' }} mariadb_tag {{ '}}' }}"
