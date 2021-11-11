@@ -25,9 +25,6 @@ if [[ -e /ansible/ara.env ]]; then
 fi
 
 export ANSIBLE_INVENTORY=$ANSIBLE_DIRECTORY/inventory
-if [[ ! -e /run/secrets/NETBOX_TOKEN && -w $ANSIBLE_INVENTORY ]]; then
-    rm -f /ansible/inventory/99-netbox.yml
-fi
 
 export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/ansible.cfg
 if [[ -e $ENVIRONMENTS_DIRECTORY/$environment/ansible.cfg ]]; then
