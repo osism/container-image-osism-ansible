@@ -71,7 +71,9 @@ RUN groupadd -g $GROUP_ID dragon \
 RUN git clone https://github.com/osism/release /release
 
 # prepare python-osism repository
-RUN git clone https://github.com/osism/python-osism /python-osism
+# hadolint ignore=DL3013
+RUN git clone https://github.com/osism/python-osism /python-osism \
+    && pip3 install /python-osism
 
 # prepare project repository
 
