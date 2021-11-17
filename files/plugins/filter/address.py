@@ -69,6 +69,17 @@ def kolla_address(context, network_name, hostname=None):
     if isinstance(hostvars, Undefined):
         raise FilterError("'hostvars' variable is unavailable")
 
+    # NOTE: The kolla_address filter is used in osism-ansible to read the
+    # facts from a host. If in the first step of generic-write-facts.yml
+    # when creating the template for a host the hostvars are not present in
+    # the context, the content is simply returned as it was before applying
+    # the filter.
+
+    if not hostvars and not hostname:
+        return "{{ '%s' | kolla_address(host) }}" % network_name
+    if not hostvars:
+        return "{{ '%s' | kolla_address }}" % network_name
+
     host = hostvars.get(hostname)
     if isinstance(host, Undefined):
         raise FilterError("'{hostname}' not in 'hostvars'"
@@ -102,11 +113,18 @@ def kolla_address(context, network_name, hostname=None):
     ansible_interface_name = interface_name.replace('-', '_')
     interface = host.get('ansible_' + ansible_interface_name)
     if interface is None:
-        raise FilterError("Interface '{interface_name}' "
-                          "not present "
-                          "on host '{hostname}'"
-                          .format(interface_name=interface_name,
-                                  hostname=hostname))
+
+        # NOTE: The kolla_address filter is used in osism-ansible to
+        #       read the facts from a host. If a single interface is
+        # not yet present on a host, that is fine in that case.
+
+        # raise FilterError("Interface '{interface_name}' "
+        #                   "not present "
+        #                   "on host '{hostname}'"
+        #                   .format(interface_name=interface_name,
+        #                           hostname=hostname))
+
+        return ""
 
     af_interface = interface.get(address_family)
     if af_interface is None:
