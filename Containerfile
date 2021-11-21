@@ -43,6 +43,7 @@ RUN apt-get update \
       build-essential \
       dumb-init \
       git \
+      git-lfs \
       gnupg-agent \
       iputils-ping \
       jq \
