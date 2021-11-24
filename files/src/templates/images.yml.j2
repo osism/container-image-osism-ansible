@@ -23,7 +23,7 @@ netbox_tag: "{{ versions['netbox'] }}"
 netbox_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['netbox'] }}:{{ '{{' }} netbox_tag {{ '}}' }}"
 
 nexus_tag: "{{ versions['nexus'] }}"
-nexus_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['nexus'] }}:{{ '{{' }} nexus_tag {{ '}}' }}"
+nexus_image: "{{ '{{' }} docker_registry_nexus {{ '}}' }}/{{ images['nexus'] }}:{{ '{{' }} nexus_tag {{ '}}' }}"
 
 nginx_tag: "{{ versions['nginx'] }}"
 nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['nginx'] }}:{{ '{{' }} nginx_tag {{ '}}' }}"
