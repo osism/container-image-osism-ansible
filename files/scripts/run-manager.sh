@@ -24,9 +24,6 @@ fi
 export ANSIBLE_INVENTORY=$ANSIBLE_DIRECTORY/inventory
 
 export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/ansible.cfg
-if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/ansible.cfg ]]; then
-    export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/ansible.cfg
-fi
 
 if [[ -w $ANSIBLE_INVENTORY ]]; then
     rsync -a /ansible/group_vars/ /ansible/inventory/group_vars/
