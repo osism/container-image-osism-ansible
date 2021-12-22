@@ -3,6 +3,8 @@ name: Check docker syntax
 
 "on":
   push:
+    branches:
+      - main
     paths:
       - Containerfile
       - .github/workflows/check-docker-syntax.yml
