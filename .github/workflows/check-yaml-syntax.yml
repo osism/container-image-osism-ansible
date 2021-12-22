@@ -3,6 +3,8 @@ name: Check yaml syntax
 
 "on":
   push:
+    branches:
+      - main
     paths:
       - '**.yaml'
       - '**.yml'
