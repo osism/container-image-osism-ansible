@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
-
-# based on: https://raw.githubusercontent.com/minitriga/Netbox-Device-Type-Library-Import/master/nb-dt-import.py
-
 from collections import Counter
 from datetime import datetime
-from dotenv import load_dotenv
 import yaml
 import pynetbox
 import glob
 import argparse
 import os
+import settings
 
 
 counter = Counter(added=0, updated=0, manufacturer=0)
@@ -18,11 +15,12 @@ counter = Counter(added=0, updated=0, manufacturer=0)
 def slugFormat(name):
     return name.lower().replace(' ', '_')
 
+YAML_EXTENSIONS = ['yml', 'yaml']
 
 def getFiles(vendors=None):
     files = []
     discoveredVendors = []
-    base_path = '/opt/netbox-devicetype-library/device-types/'
+    base_path = './device-types/'
     if vendors:
         for r, d, f in os.walk(base_path):
             for folder in d:
@@ -30,14 +28,16 @@ def getFiles(vendors=None):
                     if vendor.lower() == folder.lower():
                         discoveredVendors.append({'name': folder,
                                                   'slug': slugFormat(folder)})
-                        files.extend(glob.glob(base_path + folder + '/*.yaml'))
+                        for extension in YAML_EXTENSIONS:
+                            files.extend(glob.glob(base_path + folder + f'/*.{extension}'))
     else:
         for r, d, f in os.walk(base_path):
             for folder in d:
                 if folder.lower() != "Testing":
                     discoveredVendors.append({'name': folder,
                                               'slug': slugFormat(folder)})
-        files.extend(glob.glob(base_path + '[!Testing]*/*.yaml'))
+        for extension in YAML_EXTENSIONS:
+            files.extend(glob.glob(base_path + f'[!Testing]*/*.{extension}'))
     return files, discoveredVendors
 
 
@@ -358,35 +358,22 @@ def createDeviceTypes(deviceTypes, nb):
 
 def main():
 
-    load_dotenv()
-
-    NETBOX_API = os.getenv("NETBOX_API")
-    NETBOX_TOKEN = os.getenv("NETBOX_TOKEN")
-    IGNORE_SSL_ERRORS = (os.getenv("IGNORE_SSL_ERRORS", "False") == "True")
-
-    # optionnally load vendors through a space separated list as env var
-    VENDORS = os.getenv("VENDORS", "").split()
-
-    MANDATORY_ENV_VARS = ["NETBOX_API", "NETBOX_TOKEN"]
-
-    for var in MANDATORY_ENV_VARS:
-        if var not in os.environ:
-            raise EnvironmentError("Failed because {} is not set.".format(var))
-
     cwd = os.getcwd()
     startTime = datetime.now()
 
-    nbUrl = NETBOX_API
-    nbToken = NETBOX_TOKEN
+    nbUrl = settings.NETBOX_URL
+    nbToken = settings.NETBOX_TOKEN
     nb = pynetbox.api(nbUrl, token=nbToken)
 
-    if IGNORE_SSL_ERRORS:
+    if settings.IGNORE_SSL_ERRORS:
         import requests
         requests.packages.urllib3.disable_warnings()
         session = requests.Session()
         session.verify = False
         nb.http_session = session
 
+
+    VENDORS = settings.VENDORS
 
     parser = argparse.ArgumentParser(description='Import Netbox Device Types')
     parser.add_argument('--vendors', nargs='+', default=VENDORS,
