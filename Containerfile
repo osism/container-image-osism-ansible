@@ -132,8 +132,7 @@ RUN mkdir -p \
         /ansible/secrets \
         /share \
         /archive \
-        /interface \
-        /opt/netbox-import
+        /interface
 
 # install required ansible collections & roles
 RUN ansible-galaxy role install -v -f -r /ansible/requirements.yml -p /usr/share/ansible/roles \
@@ -161,9 +160,6 @@ RUN cp /playbooks/playbooks/* /ansible \
     && cp /playbooks/tasks/* /ansible/tasks \
     && mkdir -p /ansible/templates \
     && cp /playbooks/templates/* /ansible/templates
-
-COPY files/src/netbox-import/* /opt/netbox-import
-RUN git clone https://github.com/netbox-community/devicetype-library /opt/netbox-import/devicetype-library
 
 # copy ara configuration
 # hadolint ignore=DL3059
