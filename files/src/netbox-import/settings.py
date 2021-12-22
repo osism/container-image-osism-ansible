@@ -6,6 +6,8 @@ NETBOX_URL = os.getenv("NETBOX_URL")
 NETBOX_TOKEN = os.getenv("NETBOX_TOKEN")
 IGNORE_SSL_ERRORS = (os.getenv("IGNORE_SSL_ERRORS", "False") == "True")
 
+BASE_PATH = os.getenv("BASE_PATH", "/opt/netbox-import/devicetype-library/device-types/"
+
 # optionnally load vendors through a space separated list as env var
 VENDORS = os.getenv("VENDORS", "").split()
 

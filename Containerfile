@@ -124,14 +124,9 @@ RUN ansible_version=$(python3 -c 'import ansible; print(ansible.release.__versio
     && sed -i -e "s/ANSIBLE_VERSION/$ansible_version/" /etc/motd
 
 # create required directories
-
-# internal use only
 RUN mkdir -p \
         /ansible \
-        /ansible/action_plugins
-
-# exports as volumes
-RUN mkdir -p \
+        /ansible/action_plugins \
         /ansible/cache \
         /ansible/logs \
         /ansible/secrets \
@@ -166,14 +161,15 @@ RUN cp /playbooks/playbooks/* /ansible \
     && mkdir -p /ansible/templates \
     && cp /playbooks/templates/* /ansible/templates
 
-# hadolint ignore=DL3059
 COPY files/src/netbox-import /opt
 RUN git clone https://github.com/netbox-community/devicetype-library /opt/netbox-import/devicetype-library
 
 # copy ara configuration
+# hadolint ignore=DL3059
 RUN python3 -m ara.setup.env > /ansible/ara.env
 
 # set correct permssions
+# hadolint ignore=DL3059
 RUN chown -R dragon: /ansible /share /archive /interface
 
 # cleanup

@@ -20,7 +20,7 @@ YAML_EXTENSIONS = ['yml', 'yaml']
 def getFiles(vendors=None):
     files = []
     discoveredVendors = []
-    base_path = './device-types/'
+    base_path = settings.BASE_PATH
     if vendors:
         for r, d, f in os.walk(base_path):
             for folder in d:
