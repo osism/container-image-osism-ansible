@@ -12,6 +12,7 @@ shift
 
 ANSIBLE_DIRECTORY=/ansible
 CONFIGURATION_DIRECTORY=/opt/configuration
+NETBOX_TOKEN=$(< /run/secrets/NETBOX_TOKEN)
 
 if [[ -e /ansible/ara.env ]]; then
     source /ansible/ara.env
@@ -21,5 +22,7 @@ cd $CONFIGURATION_DIRECTORY/$ENVIRONMENT
 
 ansible-playbook \
   -i localhost, \
+  -e netbox_token=$NETBOX_TOKEN \
+  -e netbox_url=$NETBOX_API \
   "$@" \
   $CONFIGURATION_DIRECTORY/$ENVIRONMENT/playbook-$playbook.yml
