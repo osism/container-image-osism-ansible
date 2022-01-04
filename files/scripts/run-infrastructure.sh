@@ -53,6 +53,8 @@ else
     --vault-password-file $VAULT \
     -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
     -e @$ENVIRONMENTS_DIRECTORY/secrets.yml \
+    -e @$ENVIRONMENTS_DIRECTORY/monitoring/configuration.yml \
+    -e @$ENVIRONMENTS_DIRECTORY/monitoring/secrets.yml \
     -e @secrets.yml \
     -e @images.yml \
     -e @configuration.yml \
