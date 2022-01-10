@@ -39,7 +39,7 @@ fi
 
 cd $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT
 
-if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/playbook-service.yml ]]; then
+if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/playbook-$service.yml ]]; then
     ansible-playbook \
       --vault-password-file $VAULT \
       -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
@@ -64,6 +64,6 @@ elif [[ -e $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml ]]; then
       "$@" \
       $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml
 else
-    echo "ERROR: service $service in environment $environment not available"
+    echo "ERROR: service $service in environment $ENVIRONMENT not available"
     exit 1
 fi
