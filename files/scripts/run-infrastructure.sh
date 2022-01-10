@@ -39,25 +39,31 @@ fi
 
 cd $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT
 
-if [[ $service == "mirror-images" ]]; then
-  ansible-playbook \
-    --vault-password-file $VAULT \
-    -e @$ENVIRONMENTS_DIRECTORY/secrets.yml \
-    -e @secrets.yml \
-    -e @images.yml \
-    -e @configuration-mirror-images.yml \
-    "$@" \
-    $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml
+if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/playbook-service.yml ]]; then
+    ansible-playbook \
+      --vault-password-file $VAULT \
+      -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
+      -e @$ENVIRONMENTS_DIRECTORY/secrets.yml \
+      -e @$ENVIRONMENTS_DIRECTORY/monitoring/configuration.yml \
+      -e @$ENVIRONMENTS_DIRECTORY/monitoring/secrets.yml \
+      -e @secrets.yml \
+      -e @images.yml \
+      -e @configuration.yml \
+      "$@" \
+      playbook-$service.yml
+elif [[ -e $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml ]]; then
+    ansible-playbook \
+      --vault-password-file $VAULT \
+      -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
+      -e @$ENVIRONMENTS_DIRECTORY/secrets.yml \
+      -e @$ENVIRONMENTS_DIRECTORY/monitoring/configuration.yml \
+      -e @$ENVIRONMENTS_DIRECTORY/monitoring/secrets.yml \
+      -e @secrets.yml \
+      -e @images.yml \
+      -e @configuration.yml \
+      "$@" \
+      $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml
 else
-  ansible-playbook \
-    --vault-password-file $VAULT \
-    -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
-    -e @$ENVIRONMENTS_DIRECTORY/secrets.yml \
-    -e @$ENVIRONMENTS_DIRECTORY/monitoring/configuration.yml \
-    -e @$ENVIRONMENTS_DIRECTORY/monitoring/secrets.yml \
-    -e @secrets.yml \
-    -e @images.yml \
-    -e @configuration.yml \
-    "$@" \
-    $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml
+    echo "ERROR: service $service in environment $environment not available"
+    exit 1
 fi
