@@ -31,4 +31,4 @@ ansible-playbook \
   -e netbox_token=$NETBOX_TOKEN \
   -e netbox_url=$NETBOX_API \
   "$@" \
-  $CONFIGURATION_DIRECTORY/$ENVIRONMENT/$playbook.yml
+  $CONFIGURATION_DIRECTORY/$ENVIRONMENT/playbooks/$playbook.yml
