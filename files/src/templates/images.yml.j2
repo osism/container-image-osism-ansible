@@ -4,17 +4,29 @@
 adminer_tag: "{{ versions['adminer'] }}"
 adminer_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['adminer'] }}:{{ '{{' }} adminer_tag {{ '}}' }}"
 
+alerta_tag: "{{ versions['alerta'] }}"
+alerta_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['alerta'] }}:{{ '{{' }} alerta_tag {{ '}}' }}"
+
 ara_server_tag: "{{ versions['ara_server'] }}"
 ara_server_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['ara_server'] }}:{{ '{{' }} ara_server_tag {{ '}}' }}"
 
+awx_tag: "{{ versions['awx'] }}"
+awx_image: "{{ '{{' }} docker_registry_awx {{ '}}' }}/{{ images['awx'] }}:{{ '{{' }} awx_tag {{ '}}' }}"
+
 awxclient_tag: "{{ versions['awxclient'] }}"
-awxclient_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['awxclient'] }}:{{ '{{' }} awxclient_tag {{ '}}' }}"
+awxclient_image: "{{ '{{' }} docker_registry_awx {{ '}}' }}/{{ images['awxclient'] }}:{{ '{{' }} awxclient_tag {{ '}}' }}"
 
 boundary_tag: "{{ versions['boundary'] }}"
 boundary_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['boundary'] }}:{{ '{{' }} boundary_tag {{ '}}' }}"
 
+dnsdist_tag: "{{ versions['dnsdist'] }}"
+dnsdist_image: "{{ '{{' }} docker_registry_dnsdist {{ '}}' }}/{{ images['dnsdist'] }}:{{ '{{' }} dnsdist_tag {{ '}}' }}"
+
 homer_tag: "{{ versions['homer'] }}"
 homer_image: "{{ '{{' }} docker_registry_homer {{ '}}' }}/{{ images['homer'] }}:{{ '{{' }} homer_tag {{ '}}' }}"
+
+keycloak_tag: "{{ versions['keycloak'] }}"
+keycloak_image: "{{ '{{' }} docker_registry_keycloak {{ '}}' }}/{{ images['keycloak'] }}:{{ '{{' }} keycloak_tag {{ '}}' }}"
 
 mariadb_tag: "{{ versions['mariadb'] }}"
 mariadb_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['mariadb'] }}:{{ '{{' }} mariadb_tag {{ '}}' }}"
@@ -40,8 +52,26 @@ redis_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['redis'] }}:{{ '{{
 registry_tag: "{{ versions['registry'] }}"
 registry_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['registry'] }}:{{ '{{' }} registry_tag {{ '}}' }}"
 
-keycloak_tag: "{{ versions['keycloak'] }}"
-keycloak_image: "{{ '{{' }} docker_registry_keycloak {{ '}}' }}/{{ images['keycloak'] }}:{{ '{{' }} keycloak_tag {{ '}}' }}"
+traefik_tag: "{{ versions['traefik'] }}"
+traefik_image: "{{ '{{' }} docker_registry_traefik {{ '}}' }}/{{ images['traefik'] }}:{{ '{{' }} traefik_tag {{ '}}' }}"
+
+vault_tag: "{{ versions['vault'] }}"
+vault_image: "{{ '{{' }} docker_registry_vault {{ '}}' }}/{{ images['vault'] }}:{{ '{{' }} vault_tag {{ '}}' }}"
+
+zookeeper_tag: "{{ versions['zookeeper'] }}"
+zookeeper_image: "{{ '{{' }} docker_registry_zookeeper {{ '}}' }}/{{ images['zookeeper'] }}:{{ '{{' }} zookeeper_tag {{ '}}' }}"
+
+zuul_executor_tag: "{{ versions['zuul_executor'] }}"
+zuul_executor_image: "{{ '{{' }} docker_registry_zuul_executor {{ '}}' }}/{{ images['zuul_executor'] }}:{{ '{{' }} zuul_executor_tag {{ '}}' }}"
+
+zuul_nodepool_launcher_tag: "{{ versions['zuul_nodepool_launcher'] }}"
+zuul_nodepool_launcher_image: "{{ '{{' }} docker_registry_zuul_nodepool_launcher {{ '}}' }}/{{ images['zuul_nodepool_launcher'] }}:{{ '{{' }} zuul_nodepool_launcher_tag {{ '}}' }}"
+
+zuul_scheduler_tag: "{{ versions['zuul_scheduler'] }}"
+zuul_scheduler_image: "{{ '{{' }} docker_registry_zuul_scheduler {{ '}}' }}/{{ images['zuul_scheduler'] }}:{{ '{{' }} zuul_scheduler_tag {{ '}}' }}"
+
+zuul_web_tag: "{{ versions['zuul_web'] }}"
+zuul_web_image: "{{ '{{' }} docker_registry_zuul_web {{ '}}' }}/{{ images['zuul_web'] }}:{{ '{{' }} zuul_web_tag {{ '}}' }}"
 
 # image tag depends on CEPH_VERSION or OPENSTACK_VERSION
 
@@ -50,9 +80,6 @@ cephclient_image: "{{ '{{' }} docker_registry_cephclient {{ '}}' }}/{{ images['c
 
 openstackclient_tag: "{{ '{{' }} openstackclient_version|default(openstack_version) {{ '}}' }}"
 openstackclient_image: "{{ '{{' }} docker_registry_openstackclient {{ '}}' }}/{{ images['openstackclient'] }}:{{ '{{' }} openstackclient_tag {{ '}}' }}"
-
-awx_tag: "{{ '{{' }} awx_version|default(manager_version) {{ '}}' }}"
-awx_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['awx'] }}:{{ '{{' }} awx_tag {{ '}}' }}"
 
 ceph_ansible_tag: "{{ '{{' }} ceph_version {{ '}}' }}"
 ceph_ansible_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['ceph_ansible'] }}:{{ '{{' }} ceph_ansible_tag {{ '}}' }}"
