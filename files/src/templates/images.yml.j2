@@ -19,6 +19,9 @@ awxclient_image: "{{ '{{' }} docker_registry_awx {{ '}}' }}/{{ images['awxclient
 boundary_tag: "{{ versions['boundary'] }}"
 boundary_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['boundary'] }}:{{ '{{' }} boundary_tag {{ '}}' }}"
 
+cgit_tag: "{{ versions['cgit'] }}"
+cgit_image: "{{ '{{' }} docker_registry_cgit {{ '}}' }}/{{ images['cgit'] }}:{{ '{{' }} cgit_tag {{ '}}' }}"
+
 dnsdist_tag: "{{ versions['dnsdist'] }}"
 dnsdist_image: "{{ '{{' }} docker_registry_dnsdist {{ '}}' }}/{{ images['dnsdist'] }}:{{ '{{' }} dnsdist_tag {{ '}}' }}"
 
