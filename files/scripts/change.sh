@@ -6,4 +6,4 @@ if [[ ! -e /usr/bin/git ]]; then
 fi
 
 rm -rf /ansible/collections/ansible_collections/osism/$1
-git clone --depth 1 -b $2 https://github.com/osism/ansible-collection-services /ansible/collections/ansible_collections/osism/$1
+git clone --depth 1 -b $2 https://github.com/osism/ansible-collection-$1 /ansible/collections/ansible_collections/osism/$1
