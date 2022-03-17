@@ -6,6 +6,7 @@ FROM quay.io/project-receptor/receptor:${RELEASE_RECEPTOR} as receptor
 FROM ubuntu:${UBUNTU_VERSION}
 
 ARG VERSION=latest
+ARG IS_RELEASE=false
 
 ARG USER_ID=45000
 ARG GROUP_ID=45000

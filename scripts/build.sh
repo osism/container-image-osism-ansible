@@ -5,6 +5,7 @@ set -x
 #
 # BUILD_OPTS
 # DOCKER_REGISTRY
+# IS_RELEASE
 # REPOSITORY
 # VERSION
 
@@ -15,6 +16,7 @@ CREATED=$(date --rfc-3339=ns)
 DOCKER_REGISTRY=${DOCKER_REGISTRY:-quay.io}
 REVISION=$(git rev-parse HEAD)
 VERSION=${VERSION:-latest}
+IS_RELEASE=${IS_RELEASE:-false}
 
 if [[ -n $DOCKER_REGISTRY ]]; then
     REPOSITORY="$DOCKER_REGISTRY/$REPOSITORY"
@@ -23,6 +25,7 @@ fi
 buildah build-using-dockerfile \
     --format docker \
     --build-arg "VERSION=$VERSION" \
+    --build-arg "IS_RELEASE=$IS_RELEASE" \
     --tag "$(git rev-parse --short HEAD)" \
     --label "org.opencontainers.image.created=$CREATED" \
     --label "org.opencontainers.image.documentation=https://docs.osism.tech" \

@@ -5,10 +5,11 @@ import yaml
 
 # get environment parameters
 
-VERSION = os.environ.get("VERSION", "latest")
 COLLECTIONS_FILENAME = os.environ.get("COLLECTIONS_FILENAME", "/release/etc/collections.yml")
-ROLES_FILENAME = os.environ.get("ROLES_FILENAME", "/release/etc/roles.yml")
+IS_RELEASE = os.environ.get("IS_RELEASE", "false")
 REQUIREMENTS_FILENAME = os.environ.get("REQUIREMENTS_FILENAME", "/ansible/requirements.yml")
+ROLES_FILENAME = os.environ.get("ROLES_FILENAME", "/release/etc/roles.yml")
+VERSION = os.environ.get("VERSION", "latest")
 
 # load versions files from release repository
 
@@ -33,7 +34,8 @@ result = template.render({
   'ansible_roles': versions['ansible_roles'],
   'ansible_role_names': ansible_role_names,
   'ansible_collections': versions['ansible_collections'],
-  'ansible_collection_names': ansible_collection_names
+  'ansible_collection_names': ansible_collection_names,
+  'is_release': IS_RELEASE
 })
 with open(REQUIREMENTS_FILENAME, "w+") as fp:
     fp.write(result)

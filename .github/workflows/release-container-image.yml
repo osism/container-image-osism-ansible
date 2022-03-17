@@ -22,6 +22,7 @@ jobs:
         env:
           DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
           GIT_SHA: ${{ github.sha }}
+          IS_RELEASE: "true"
           REPOSITORY: osism/release/osism-ansible
           VERSION: ${{ steps.get_version.outputs.VERSION }}
 
