@@ -22,6 +22,9 @@ dnsdist_image: "{{ '{{' }} docker_registry_dnsdist {{ '}}' }}/{{ images['dnsdist
 homer_tag: "{{ versions['homer'] }}"
 homer_image: "{{ '{{' }} docker_registry_homer {{ '}}' }}/{{ images['homer'] }}:{{ '{{' }} homer_tag {{ '}}' }}"
 
+inventory_reconciler_tag: "{{ versions['inventory_reconciler'] }}"
+inventory_reconciler_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['inventory_reconciler'] }}:{{ '{{' }} inventory_reconciler_tag {{ '}}' }}"
+
 keycloak_tag: "{{ versions['keycloak'] }}"
 keycloak_image: "{{ '{{' }} docker_registry_keycloak {{ '}}' }}/{{ images['keycloak'] }}:{{ '{{' }} keycloak_tag {{ '}}' }}"
 keycloak_for_traefik_image: "{{ '{{' }} docker_registry_keycloak {{ '}}' }}/{{ images['keycloak_for_traefik'] }}:{{ '{{' }} keycloak_tag {{ '}}' }}"
@@ -37,6 +40,9 @@ nexus_image: "{{ '{{' }} docker_registry_nexus {{ '}}' }}/{{ images['nexus'] }}:
 
 nginx_tag: "{{ versions['nginx'] }}"
 nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['nginx'] }}:{{ '{{' }} nginx_tag {{ '}}' }}"
+
+osism_tag: "{{ versions['osism'] }}"
+osism_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['osism'] }}:{{ '{{' }} osism_tag {{ '}}' }}"
 
 phpmyadmin_tag: "{{ versions['phpmyadmin'] }}"
 phpmyadmin_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['phpmyadmin'] }}:{{ '{{' }} phpmyadmin_tag {{ '}}' }}"
@@ -59,17 +65,23 @@ vault_image: "{{ '{{' }} docker_registry_vault {{ '}}' }}/{{ images['vault'] }}:
 zookeeper_tag: "{{ versions['zookeeper'] }}"
 zookeeper_image: "{{ '{{' }} docker_registry_zookeeper {{ '}}' }}/{{ images['zookeeper'] }}:{{ '{{' }} zookeeper_tag {{ '}}' }}"
 
+zuul_client_tag: "{{ versions['zuul_client'] }}"
+zuul_client_image: "{{ '{{' }} docker_registry_zuul {{ '}}' }}/{{ images['zuul_client'] }}:{{ '{{' }} zuul_client_tag {{ '}}' }}"
+
 zuul_executor_tag: "{{ versions['zuul_executor'] }}"
-zuul_executor_image: "{{ '{{' }} docker_registry_zuul_executor {{ '}}' }}/{{ images['zuul_executor'] }}:{{ '{{' }} zuul_executor_tag {{ '}}' }}"
+zuul_executor_image: "{{ '{{' }} docker_registry_zuul {{ '}}' }}/{{ images['zuul_executor'] }}:{{ '{{' }} zuul_executor_tag {{ '}}' }}"
+
+zuul_nodepool_builder_tag: "{{ versions['zuul_nodepool_builder'] }}"
+zuul_nodepool_builder_image: "{{ '{{' }} docker_registry_zuul {{ '}}' }}/{{ images['zuul_nodepool_builder'] }}:{{ '{{' }} zuul_nodepool_builder_tag {{ '}}' }}"
 
 zuul_nodepool_launcher_tag: "{{ versions['zuul_nodepool_launcher'] }}"
-zuul_nodepool_launcher_image: "{{ '{{' }} docker_registry_zuul_nodepool_launcher {{ '}}' }}/{{ images['zuul_nodepool_launcher'] }}:{{ '{{' }} zuul_nodepool_launcher_tag {{ '}}' }}"
+zuul_nodepool_launcher_image: "{{ '{{' }} docker_registry_zuul {{ '}}' }}/{{ images['zuul_nodepool_launcher'] }}:{{ '{{' }} zuul_nodepool_launcher_tag {{ '}}' }}"
 
 zuul_scheduler_tag: "{{ versions['zuul_scheduler'] }}"
-zuul_scheduler_image: "{{ '{{' }} docker_registry_zuul_scheduler {{ '}}' }}/{{ images['zuul_scheduler'] }}:{{ '{{' }} zuul_scheduler_tag {{ '}}' }}"
+zuul_scheduler_image: "{{ '{{' }} docker_registry_zuul {{ '}}' }}/{{ images['zuul_scheduler'] }}:{{ '{{' }} zuul_scheduler_tag {{ '}}' }}"
 
 zuul_web_tag: "{{ versions['zuul_web'] }}"
-zuul_web_image: "{{ '{{' }} docker_registry_zuul_web {{ '}}' }}/{{ images['zuul_web'] }}:{{ '{{' }} zuul_web_tag {{ '}}' }}"
+zuul_web_image: "{{ '{{' }} docker_registry_zuul {{ '}}' }}/{{ images['zuul_web'] }}:{{ '{{' }} zuul_web_tag {{ '}}' }}"
 
 # image tag depends on CEPH_VERSION or OPENSTACK_VERSION
 
