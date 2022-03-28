@@ -156,7 +156,7 @@ RUN for role in /usr/share/ansible/roles/*; do \
     done
 
 # hadolint ignore=DL3059
-RUN cp /playbooks/playbooks/* /ansible \
+RUN cp -r /playbooks/playbooks/* /ansible \
     && cp /playbooks/library/* /ansible/library \
     && cp /playbooks/tasks/* /ansible/tasks \
     && mkdir -p /ansible/templates \
