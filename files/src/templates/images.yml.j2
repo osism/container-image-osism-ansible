@@ -41,6 +41,9 @@ nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['nginx'] }}:{{ '{{
 osism_tag: "{{ versions['osism'] }}"
 osism_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['osism'] }}:{{ '{{' }} osism_tag {{ '}}' }}"
 
+patchman_tag: "{{ versions['patchman'] }}"
+patchman_image: "{{ '{{' }} docker_registry_patchman {{ '}}' }}/{{ images['patchman'] }}:{{ '{{' }} patchman_tag {{ '}}' }}"
+
 phpmyadmin_tag: "{{ versions['phpmyadmin'] }}"
 phpmyadmin_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['phpmyadmin'] }}:{{ '{{' }} phpmyadmin_tag {{ '}}' }}"
 
