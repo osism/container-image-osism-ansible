@@ -38,6 +38,9 @@ nexus_image: "{{ '{{' }} docker_registry_nexus {{ '}}' }}/{{ images['nexus'] }}:
 nginx_tag: "{{ versions['nginx'] }}"
 nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['nginx'] }}:{{ '{{' }} nginx_tag {{ '}}' }}"
 
+openpolicyagent_tag: "{{ versions[''openpolicyagent] }}"
+openpolicyagent_image: "{{ '{{' }} docker_registry_openpolicyagent {{ '}}' }}/{{ images['openpolicyagent'] }}:{{ '{{' }} openpolicyagent_tag {{ '}}' }}"
+
 osism_tag: "{{ versions['osism'] }}"
 osism_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['osism'] }}:{{ '{{' }} osism_tag {{ '}}' }}"
 
