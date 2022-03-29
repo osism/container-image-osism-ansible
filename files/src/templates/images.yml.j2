@@ -32,6 +32,9 @@ keycloak_for_traefik_image: "{{ '{{' }} docker_registry_keycloak {{ '}}' }}/{{ i
 mariadb_tag: "{{ versions['mariadb'] }}"
 mariadb_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['mariadb'] }}:{{ '{{' }} mariadb_tag {{ '}}' }}"
 
+memcached_tag: "{{ versions['memcached'] }}"
+memcached_image: "{{ '{{' }} docker_registry_memcached {{ '}}' }}/{{ images['memcached'] }}:{{ '{{' }} memcached_tag {{ '}}' }}"
+
 netbox_tag: "{{ versions['netbox'] }}"
 netbox_image: "{{ '{{' }} docker_registry_netbox {{ '}}' }}/{{ images['netbox'] }}:{{ '{{' }} netbox_tag {{ '}}' }}"
 
