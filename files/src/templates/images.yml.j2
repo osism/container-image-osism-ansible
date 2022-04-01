@@ -44,6 +44,9 @@ nexus_image: "{{ '{{' }} docker_registry_nexus {{ '}}' }}/{{ images['nexus'] }}:
 nginx_tag: "{{ versions['nginx'] }}"
 nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['nginx'] }}:{{ '{{' }} nginx_tag {{ '}}' }}"
 
+openstack_health_monitor_tag: "{{ versions['openstack_health_monitor'] }}"
+openstack_health_monitor_image: "{{ '{{' }} docker_registry_openstack_health_monitor {{ '}}' }}/{{ images['openstack_health_monitor'] }}:{{ '{{' }} openstack_health_monitor_tag {{ '}}' }}"
+
 osism_tag: "{{ versions['osism'] }}"
 osism_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['osism'] }}:{{ '{{' }} osism_tag {{ '}}' }}"
 
