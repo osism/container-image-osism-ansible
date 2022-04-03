@@ -51,7 +51,7 @@ if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/playbook-$service.yml ]]; then
       -e @configuration.yml \
       "$@" \
       playbook-$service.yml
-elif [[ -e $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml ]]; then
+elif [[ -e $ANSIBLE_DIRECTORY/$ENVIRONMENT/$service.yml ]]; then
     ansible-playbook \
       --vault-password-file $VAULT \
       -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
@@ -62,7 +62,7 @@ elif [[ -e $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml ]]; then
       -e @images.yml \
       -e @configuration.yml \
       "$@" \
-      $ANSIBLE_DIRECTORY/$ENVIRONMENT-$service.yml
+      $ANSIBLE_DIRECTORY/$ENVIRONMENT/$service.yml
 else
     echo "ERROR: service $service in environment $ENVIRONMENT not available"
     exit 1

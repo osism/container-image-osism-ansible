@@ -48,14 +48,14 @@ if [[ -e playbook-$service.yml ]]; then
       "$@" \
       playbook-$service.yml
 
-elif [[ -e $ANSIBLE_DIRECTORY/$environment-$service.yml ]]; then
+elif [[ -e $ANSIBLE_DIRECTORY/$environment/$service.yml ]]; then
 
     ansible-playbook \
       -e @$ENVIRONMENTS_DIRECTORY/configuration.yml \
       -e @images.yml \
       -e @configuration.yml \
       "$@" \
-      $ANSIBLE_DIRECTORY/$environment-$service.yml
+      $ANSIBLE_DIRECTORY/$environment/$service.yml
 
 else
 
