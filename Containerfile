@@ -50,6 +50,7 @@ RUN apt-get update \
       libssl-dev \
       libyaml-dev \
       openssh-client \
+      procps \
       python3-dev \
       python3-pip \
       python3-setuptools \
