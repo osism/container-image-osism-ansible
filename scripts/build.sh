@@ -24,6 +24,7 @@ fi
 
 buildah build-using-dockerfile \
     --format docker \
+    --squash \
     --build-arg "VERSION=$VERSION" \
     --build-arg "IS_RELEASE=$IS_RELEASE" \
     --tag "$(git rev-parse --short HEAD)" \
