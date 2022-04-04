@@ -1,9 +1,7 @@
-ARG UBUNTU_VERSION=20.04
-
 ARG RELEASE_RECEPTOR=1.0.0
 FROM quay.io/project-receptor/receptor:${RELEASE_RECEPTOR} as receptor
 
-FROM ubuntu:${UBUNTU_VERSION}
+FROM python:3.10-slim
 
 ARG VERSION=latest
 ARG IS_RELEASE=false
