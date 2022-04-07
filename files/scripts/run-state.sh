@@ -47,4 +47,4 @@ ansible-playbook \
   -e @images.yml \
   -e @configuration.yml \
   "$@" \
-  $ANSIBLE_DIRECTORY/state-$service.yml
+  $ANSIBLE_DIRECTORY/state/$service.yml
