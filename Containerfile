@@ -51,16 +51,11 @@ RUN apt-get update \
       libyaml-dev \
       openssh-client \
       procps \
-      python3-dev \
-      python3-pip \
-      python3-setuptools \
-      python3-wheel \
       rsync \
       sshpass \
       vim-tiny \
     && python3 -m pip install --no-cache-dir --upgrade 'pip==22.0.4' \
     && pip3 install --no-cache-dir -r /src/requirements.txt \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python3 1 \
     && rm -rf /var/lib/apt/lists/*
 
 # add user
@@ -178,7 +173,6 @@ RUN apt-get clean \
       libffi-dev \
       libssl-dev \
       libyaml-dev \
-      python3-dev \
     && apt-get autoremove -y \
     && rm -rf \
       /release \
