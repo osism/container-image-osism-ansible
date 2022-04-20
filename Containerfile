@@ -47,6 +47,7 @@ RUN apt-get update \
       iputils-ping \
       jq \
       libffi-dev \
+      libssh-dev \
       libssl-dev \
       libyaml-dev \
       openssh-client \
@@ -173,6 +174,7 @@ RUN apt-get clean \
       gcc-9-base \
       git \
       libffi-dev \
+      libssh-dev \
       libssl-dev \
       libyaml-dev \
     && apt-get autoremove -y \
