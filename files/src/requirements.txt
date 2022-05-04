@@ -1,4 +1,6 @@
 Jinja2==3.0.3
 PyYAML==6.0
+neutron-dynamic-routing==20.0.0
 pottery==3.0.0
+python-designateclient==4.5.0
 yq==2.14.0
