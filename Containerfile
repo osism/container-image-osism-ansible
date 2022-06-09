@@ -91,7 +91,7 @@ RUN git clone https://github.com/osism/cfg-generics /generics  \
 # add inventory files
 RUN mkdir -p /ansible/inventory.generics /ansible/inventory \
     && cp /generics/inventory/50-ceph /ansible/inventory.generics/50-ceph \
-    && cp /generics/inventory/50-infrastruture /ansible/inventory.generics/50-infrastruture \
+    && cp /generics/inventory/50-infrastructure /ansible/inventory.generics/50-infrastructure \
     && cp /generics/inventory/50-kolla /ansible/inventory.generics/50-kolla \
     && cp /generics/inventory/50-monitoring /ansible/inventory.generics/50-monitoring \
     && cp /generics/inventory/50-openstack /ansible/inventory.generics/50-openstack \
