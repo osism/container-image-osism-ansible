@@ -1,7 +1,7 @@
 ARG RELEASE_RECEPTOR=1.0.0
 FROM quay.io/project-receptor/receptor:${RELEASE_RECEPTOR} as receptor
 
-FROM python:3.10-slim
+FROM python:3.11.0-slim
 
 ARG VERSION=latest
 ARG IS_RELEASE=false
