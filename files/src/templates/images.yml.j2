@@ -68,6 +68,9 @@ netbox_redis_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['redis'] }}
 registry_tag: "{{ versions['registry'] }}"
 registry_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['registry'] }}:{{ '{{' }} registry_tag {{ '}}' }}"
 
+squid_tag: "{{ versions['squid'] }}"
+squid_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['squid'] }}:{{ '{{' }} squid_tag {{ '}}' }}"
+
 traefik_tag: "{{ versions['traefik'] }}"
 traefik_image: "{{ '{{' }} docker_registry_traefik {{ '}}' }}/{{ images['traefik'] }}:{{ '{{' }} traefik_tag {{ '}}' }}"
 
