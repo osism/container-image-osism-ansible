@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from jinja2.filters import contextfilter
+from ipaddress import ip_address
+from jinja2.filters import pass_context
 from jinja2.runtime import Undefined
 
 try:
@@ -39,7 +40,7 @@ def _call_bool_filter(context, value):
     return context.environment.call_filter("bool", value, context=context)
 
 
-@contextfilter
+@pass_context
 def kolla_address(context, network_name, hostname=None):
     """returns IP address on the requested network
 
@@ -68,17 +69,6 @@ def kolla_address(context, network_name, hostname=None):
     hostvars = context.get('hostvars')
     if isinstance(hostvars, Undefined):
         raise FilterError("'hostvars' variable is unavailable")
-
-    # NOTE: The kolla_address filter is used in osism-ansible to read the
-    # facts from a host. If in the first step of generic-write-facts.yml
-    # when creating the template for a host the hostvars are not present in
-    # the context, the content is simply returned as it was before applying
-    # the filter.
-
-    if not hostvars and not hostname:
-        return "{{ '%s' | kolla_address(host) }}" % network_name
-    if not hostvars:
-        return "{{ '%s' | kolla_address }}" % network_name
 
     host = hostvars.get(hostname)
     if isinstance(host, Undefined):
@@ -111,20 +101,13 @@ def kolla_address(context, network_name, hostname=None):
                                   network_name=network_name))
 
     ansible_interface_name = interface_name.replace('-', '_')
-    interface = host.get('ansible_' + ansible_interface_name)
+    interface = host['ansible_facts'].get(ansible_interface_name)
     if interface is None:
-
-        # NOTE: The kolla_address filter is used in osism-ansible to
-        #       read the facts from a host. If a single interface is
-        # not yet present on a host, that is fine in that case.
-
-        # raise FilterError("Interface '{interface_name}' "
-        #                   "not present "
-        #                   "on host '{hostname}'"
-        #                   .format(interface_name=interface_name,
-        #                           hostname=hostname))
-
-        return ""
+        raise FilterError("Interface '{interface_name}' "
+                          "not present "
+                          "on host '{hostname}'"
+                          .format(interface_name=interface_name,
+                                  hostname=hostname))
 
     af_interface = interface.get(address_family)
     if af_interface is None:
@@ -186,19 +169,33 @@ def put_address_in_context(address, context):
     :returns: string with address in proper context
     """
 
-    if context not in ['url', 'memcache']:
+    if context not in ['url', 'memcache', 'rabbitmq']:
         raise FilterError("Unknown context '{context}'"
                           .format(context=context))
 
-    if ':' not in address:
+    if ':' not in address and context != 'rabbitmq':
         return address
 
     # must be IPv6 raw address
 
     if context == 'url':
         return '[{address}]'.format(address=address)
-    elif context == 'memcache':
+    if context == 'memcache':
         return 'inet6:[{address}]'.format(address=address)
+
+    # rabbitmq/erlang has special syntax for ip addresses in IPv4 and IPv6
+    # see: https://www.erlang.org/doc/man/inet.html
+    # replacing dots and colons with decimal points
+    # and converting IPv6 as described here:
+    # https://www.erlang.org/doc/man/inet.html#type-ip6_address
+
+    if context == 'rabbitmq':
+        if ip_address(address).version == 6:
+            return (",".join(['16#%x' % int(x, 16)
+                    for x in
+                    ip_address(address).exploded.split(':')]))
+
+        return address.replace('.', ',')
 
     return address
 
