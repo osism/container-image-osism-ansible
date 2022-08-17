@@ -38,3 +38,5 @@ buildah build-using-dockerfile \
     --label "org.opencontainers.image.vendor=OSISM GmbH" \
     --label "org.opencontainers.image.version=$VERSION" \
     $BUILD_OPTS .
+
+buildah push $(git rev-parse --short HEAD) docker-daemon:osism-ansible:$(git rev-parse --short HEAD)
