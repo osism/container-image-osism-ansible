@@ -26,6 +26,11 @@ jobs:
           REPOSITORY: osism/release/osism-ansible
           VERSION: ${{ steps.get_version.outputs.VERSION }}
 
+      - name: Get short revision ID
+        id: revision
+        shell: bash
+        run: echo "::set-output name=short::$(git rev-parse --short HEAD)"
+
       - name: Generate SBOM
         uses: anchore/sbom-action@v0
         with:
