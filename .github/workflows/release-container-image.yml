@@ -34,7 +34,8 @@ jobs:
       - name: Generate SBOM
         uses: anchore/sbom-action@v0
         with:
-          artifact-name: osism-ansible.spdx
+          # yamllint disable-line rule:line-length
+          artifact-name: osism-ansible-${{ steps.get_version.outputs.VERSION }}.spdx
           image: "osism-ansible:${{ steps.revision.outputs.short }}"
 
       - name: Push container image
