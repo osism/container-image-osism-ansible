@@ -6,7 +6,8 @@ FROM python:3.10-slim
 ARG VERSION=latest
 ARG IS_RELEASE=false
 
-ARG MITOGEN_VERSION=0.3.3
+# NOTE: master required because of Ansible 2.13 support
+ARG MITOGEN_VERSION=master
 
 ARG USER_ID=45000
 ARG GROUP_ID=45000
@@ -144,7 +145,7 @@ RUN ansible-galaxy role install -v -f -r /ansible/requirements.yml -p /usr/share
 
 # install mitogen ansible plugin
 
-ADD https://github.com/dw/mitogen/archive/v$MITOGEN_VERSION.tar.gz /mitogen.tar.gz
+ADD https://github.com/dw/mitogen/archive/$MITOGEN_VERSION.tar.gz /mitogen.tar.gz
 RUN tar xzf /mitogen.tar.gz --strip-components=1 -C /usr/share/ansible/plugins/mitogen \
     && rm -rf \
         /usr/share/ansible/plugins/mitogen/tests \
