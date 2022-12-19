@@ -1,6 +1,6 @@
 Jinja2==3.1.2
 PyYAML==6.0
-osism==0.7.0
+osism==0.8.0
 pottery==3.0.0
 python-designateclient==5.1.0
 python-neutronclient==8.2.0
