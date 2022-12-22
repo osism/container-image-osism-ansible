@@ -1,7 +1,12 @@
 {
   "extends": [
     "github>osism/renovate-config",
-    "github>osism/renovate-config:docker",
-    "github>osism/renovate-config:python"
-  ]
+    "github>osism/renovate-config:docker"
+  ],
+  "pip_requirements": {
+    "fileMatch": [
+      "files/src/requirements.txt",
+      "files/src/templates/requirements.txt.j2"
+    ]
+  }
 }
