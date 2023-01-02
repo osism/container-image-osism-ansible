@@ -156,7 +156,8 @@ RUN tar xzf /mitogen.tar.gz --strip-components=1 -C /usr/share/ansible/plugins/m
 RUN git clone https://github.com/techno-tim/k3s-ansible /k3s-ansible \
     && mkdir -p /ansible/roles/k3s \
     && mv /k3s-ansible/roles/* /ansible/roles/k3s \
-    && rm -rf /k3s-ansible
+    && mv /ansible/roles/k3s/k3s/* /ansible/roles/k3s \
+    && rm -rf /k3s-ansible /ansible/roles/k3s/k3s
 
 # hadolint ignore=DL3003
 RUN for role in /usr/share/ansible/roles/*; do \
