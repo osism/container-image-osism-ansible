@@ -152,6 +152,12 @@ RUN tar xzf /mitogen.tar.gz --strip-components=1 -C /usr/share/ansible/plugins/m
 
 # project specific instructions
 
+# add k3s-ansible roles
+RUN git clone https://github.com/techno-tim/k3s-ansible /k3s-ansible \
+    && mkdir -p /ansible/roles/k3s \
+    && mv /k3s-ansible/roles/* /ansible/roles/k3s \
+    && rm -rf /k3s-ansible
+
 # hadolint ignore=DL3003
 RUN for role in /usr/share/ansible/roles/*; do \
     if [ -e /patches/"$(basename "$role")" ]; then \
