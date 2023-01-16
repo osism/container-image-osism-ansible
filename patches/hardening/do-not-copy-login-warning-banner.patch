@@ -1,0 +1,21 @@
+--- a/tasks/rhel7stig/sshd.yml
++++ b/tasks/rhel7stig/sshd.yml
+@@ -13,18 +13,6 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+
+-- name: Copy login warning banner
+-  copy:
+-    content: "{{ security_login_banner_text }}"
+-    dest: "{{ security_sshd_banner_file }}"
+-    owner: root
+-    group: root
+-  tags:
+-    - high
+-    - sshd
+-    - V-71861
+-    - V-72225
+-
+ - name: Drop options from SSH config that we manage
+   lineinfile:
+     path: /etc/ssh/sshd_config
