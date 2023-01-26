@@ -21,7 +21,7 @@ environment = jinja2.Environment(loader=loader)
 
 template = environment.get_template("requirements.txt.j2")
 result = template.render({
-  'ansible_version': versions['ansible_version'],
+  'ansible_core_version': versions['ansible_core_version'],
   'osism_projects': versions['osism_projects']
 })
 with open("/requirements.txt", "w+") as fp:

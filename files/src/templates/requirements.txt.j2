@@ -3,10 +3,10 @@
 ansible-modules-hashivault==4.7.1
 ansible-pylibssh==1.1.0
 ansible-runner==2.3.1
-{% if ansible_version.startswith(('<', '>', '=')) %}
-ansible{{ ansible_version }}
+{% if ansible_core_version.startswith(('<', '>', '=')) %}
+ansible-core{{ ansible_core_version }}
 {% else %}
-ansible=={{ ansible_version }}
+ansible-core=={{ ansible_core_version }}
 {% endif %}
 ara[server]=={{ osism_projects['ara'] }}
 asn1crypto==1.5.1
