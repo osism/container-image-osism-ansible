@@ -2,7 +2,6 @@
 
 ansible-modules-hashivault==4.7.1
 ansible-pylibssh==1.1.0
-ansible-runner==2.3.1
 {% if ansible_core_version.startswith(('<', '>', '=')) %}
 ansible-core{{ ansible_core_version }}
 {% else %}
@@ -10,19 +9,15 @@ ansible-core=={{ ansible_core_version }}
 {% endif %}
 ara[server]=={{ osism_projects['ara'] }}
 asn1crypto==1.5.1
-celery[redis]==5.2.7
 cryptography==36.0.2
-hiredis==2.2.1
 hvac==0.11.2
 idna==3.4
 openstacksdk==0.61.0
 paramiko==2.12.0
 PyMySQL==1.0.2
-pynetbox==7.0.1
 python-dotenv==0.21.1
 python-openstackclient==5.8.0
 redis==4.4.2
 requests==2.28.2
 ruamel.yaml==0.17.21
-shade==1.33.0
 jxmlease==1.0.3
