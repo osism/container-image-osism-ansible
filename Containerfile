@@ -179,6 +179,9 @@ RUN cp -r /playbooks/playbooks/* /ansible \
 # hadolint ignore=DL3059
 RUN python3 -m ara.setup.env > /ansible/ara.env
 
+# prepare list of playbooks
+RUN python3 /src/render-playbooks.py
+
 # set correct permssions
 # hadolint ignore=DL3059
 RUN chown -R dragon: /ansible /share /archive /interface
