@@ -59,7 +59,7 @@ RUN apt-get update \
       sshpass \
     && update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3 1 \
     && update-alternatives --install /usr/bin/python python /usr/local/bin/python 1 \
-    && python3 -m pip install --no-cache-dir --upgrade 'pip==23.0' \
+    && python3 -m pip install --no-cache-dir --upgrade 'pip==23.0.1' \
     && pip3 install --no-cache-dir -r /src/requirements.txt \
     && rm -rf /var/lib/apt/lists/*
 
