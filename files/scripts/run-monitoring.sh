@@ -2,7 +2,7 @@
 
 source /secrets.sh
 
-ENVIRONMENT=monitoring
+ENVIRONMENT=${ENVIRONMENT:-monitoring}
 
 if [[ $# -lt 1 ]]; then
     echo usage: osism-$ENVIRONMENT SERVICE [...]
