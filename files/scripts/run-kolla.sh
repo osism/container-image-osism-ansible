@@ -2,7 +2,7 @@
 
 source /secrets.sh
 
-ENVIRONMENT=kolla
+ENVIRONMENT=${ENVIRONMENT:-kolla}
 
 if [[ $# -lt 1 ]]; then
     echo usage: osism-$ENVIRONMENT SERVICE [...]

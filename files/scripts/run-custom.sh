@@ -2,7 +2,7 @@
 
 source /secrets.sh
 
-ENVIRONMENT=custom
+ENVIRONMENT=${ENVIRONMENT:-custom}
 
 if [[ $# -lt 1 ]]; then
     echo usage: osism-$ENVIRONMENT SERVICE [...]

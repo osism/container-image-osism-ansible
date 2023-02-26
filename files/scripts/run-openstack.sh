@@ -2,7 +2,7 @@
 
 source /secrets.sh
 
-ENVIRONMENT=openstack
+ENVIRONMENT=${ENVIRONMENT:-openstack}
 
 if [[ $# -lt 1 ]]; then
     echo usage: osism-$ENVIRONMENT SERVICE [...]

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ENVIRONMENT=netbox
+ENVIRONMENT=${ENVIRONMENT:-netbox}
 
 if [[ $# -lt 1 ]]; then
     echo usage: osism-$ENVIRONMENT PLAYBOOK [...]

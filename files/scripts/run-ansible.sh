@@ -2,7 +2,7 @@
 
 source /secrets.sh
 
-ENVIRONMENT=ansible
+ENVIRONMENT=${ENVIRONMENT:-ansible}
 
 if [[ $# -lt 1 ]]; then
     echo usage: osism-$ENVIRONMENT ENVIRONMENT [...]
