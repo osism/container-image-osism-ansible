@@ -179,8 +179,8 @@ RUN cp -r /playbooks/playbooks/* /ansible \
 RUN ln -s /opt/configuration/environments/openstack /etc/openstack
 
 # copy ara configuration
-# hadolint ignore=DL3059
-RUN python3 -m ara.setup.env > /ansible/ara.env
+COPY files/ara.env /ansible/ara.env
+RUN python3 -m ara.setup.env >> /ansible/ara.env
 
 # prepare list of playbooks
 RUN python3 /src/render-playbooks.py
