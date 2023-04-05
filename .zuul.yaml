@@ -4,11 +4,16 @@
     default-branch: main
     check:
       jobs:
+        - flake8
         - hadolint
         - yamllint
-        - flake8
     gate:
       jobs:
+        - flake8
         - hadolint
         - yamllint
+    periodic-daily:
+      jobs:
         - flake8
+        - hadolint
+        - yamllint
