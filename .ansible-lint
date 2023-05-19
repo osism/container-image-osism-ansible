@@ -1,0 +1,13 @@
+---
+exclude_paths:
+  - .github
+use_default_rules: true
+rulesdir:
+  - ./.ansible-lint-rules/
+mock_roles: []
+mock_modules: []
+skip_list: []
+# DO NOT DELETE THE WARNLIST! It is required for our custom rules!
+# If this isn't there our custom rules will only through a warning and wont generate a failure!:
+warn_list:
+  - dummy
