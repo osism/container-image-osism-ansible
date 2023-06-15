@@ -193,7 +193,6 @@ RUN chown -R dragon: /ansible /share /archive /interface
 RUN apt-get clean \
     && apt-get remove -y  \
       build-essential \
-      gcc-9-base \
       git \
       libffi-dev \
       libssh-dev \
