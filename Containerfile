@@ -191,7 +191,7 @@ RUN chown -R dragon: /ansible /share /archive /interface
 
 # cleanup
 RUN apt-get clean \
-    && apt-get remove -y  \
+    && apt-get remove -y --ignore-missing \
       build-essential \
       gcc-9-base \
       git \
