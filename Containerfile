@@ -1,6 +1,3 @@
-ARG RELEASE_RECEPTOR=1.0.0
-FROM quay.io/project-receptor/receptor:${RELEASE_RECEPTOR} as receptor
-
 FROM python:3.11-slim
 
 ARG VERSION=latest
@@ -14,10 +11,6 @@ ARG GROUP_ID=45000
 ARG GROUP_ID_DOCKER=999
 
 ENV DEBIAN_FRONTEND=noninteractive
-
-COPY --from=receptor /usr/bin/receptor /usr/bin/receptor
-COPY files/receptor.conf /etc/receptor/receptor.conf
-RUN mkdir -p /var/run/receptor
 
 USER root
 
