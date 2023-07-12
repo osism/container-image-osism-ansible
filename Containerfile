@@ -32,7 +32,6 @@ RUN echo "[ ! -z \"\$TERM\" -a -r /etc/motd ] && cat /etc/motd" >> /etc/bash.bas
 
 # install required packages
 
-# hadolint ignore=DL3008
 RUN apt-get update \
     && apt-get install --no-install-recommends -y  \
       build-essential \
@@ -162,7 +161,6 @@ RUN for role in /usr/share/ansible/roles/*; do \
     fi; \
     done
 
-# hadolint ignore=DL3059
 RUN cp -r /playbooks/playbooks/* /ansible \
     && cp /playbooks/library/* /ansible/library \
     && mkdir -p /ansible/templates \
@@ -182,7 +180,6 @@ RUN python3 -m ara.setup.env >> /ansible/ara.env
 RUN python3 /src/render-playbooks.py
 
 # set correct permssions
-# hadolint ignore=DL3059
 RUN chown -R dragon: /ansible /share /archive /interface
 
 # cleanup
