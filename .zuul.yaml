@@ -1,4 +1,51 @@
 ---
+- secret:
+    name: SECRET_CONTAINER_IMAGE_OSISM_ANSIBLE
+    data:
+      DOCKER_USERNAME: !encrypted/pkcs1-oaep
+        - C1tDhQfPWI+CnmoiQxkb9915ElWWWYMFO5Wct8RXduJ8dG4PdVGrRH6dVOuSesVIasHot
+          eD8kbENi5ozF03KkARqyBoJWdQ4MDpvq9PwfsKmnAX1EuXW4GrQj2k5dh4LMA013YiJqQ
+          yAVviblfE/nacnFjXXIpGXAV1sZcJ+HaC1OKVrXpBJ/onnvHzVXla7HYfZOXtziPRsZm2
+          KUjI9aRI9p/NYl65HI1v9SDzTdsHuFziJ89UR3ZEzWiE/7bhW80MX6BK7s9n46FU26wvV
+          OsRe11bSFtIbIjAWbn6dIH9yVbNph9bjSye1Cep3//+IXCu6n5MtWn/ru93wyDpOPfJzT
+          wAprs+nyZ1OuVeKJJ3JQ6z9jjiGXBF/4LJkVTCiCbe3/LWw+zF1Ze2eSLi27z11GHuwbg
+          IeulTZhHENYm7/LyI03VVhWewSiaqc+vECwXjaLo4+jljFu4owYU/u2dymM8rK5WXFak8
+          h7FGr8oG1L66bLKS7ok7N6INRRcQYbZqQyw/sJboyhdA2FVrSWF9DBavGn5qfoYA+yfO9
+          PbexUXul9pZ/bk1ZHXxhcuFZTx1H9Zu9FJC8C4KBGOaObnsULOjRzURjXpV9hH+48pKaC
+          6pVZLrqPx6aFxbY3Gu/3EDnoTtdvMdJVCGDldM4WqJFLcUREu61naUi8k3h6+U=
+      DOCKER_PASSWORD: !encrypted/pkcs1-oaep
+        - 0CxZ02hGa2ZSj0AqZUOdsSA+OFnL4v3TKroK+N5/sAlT/ptGc3IF1XOyTuZqrucah4bD9
+          bWRoPEGcmsqJPY78KkEa+5KfAHWwd1flHxK1UhqrrDxVVdI5zf+vhls3mBpqoam4CXJ69
+          15fAv1ohZTiabaIYb4oaNp+L8zuvvRaOuyu3zps/+lG6tlylP+bgqDX8hIaccff6MOu5L
+          UGrig+fudQj/yuAcF4YFj3tpA9IkxNBnr/XWFjL9YU0uzjuto/v3Rdw50qRREJZ3B2p7h
+          hZR4k5+6ev6PVxi+zakmGpaIXF5IvhUoYKgjD1VKFnjOZv1oQHdi76h+gWZqEohOIclkQ
+          9eYOyPl7ivoh6lm99SNKrscuKuDSZJz7uY2bds3Uv6Rm1SQS/BuGrMQTnx/elzfG2Alhc
+          NAMhsgkhDYLdpyIqOoh6a5t5MDoOqNhpAO7vxDmC+npcE41/WZlNyFqEXv7BETD5aJNLT
+          lWlqtFW4RcUIgFJweoIpJ56Y/GeGX8NlS4KPj7YIam71zjwxCSijRI6Tvwr8dY0NxNkDp
+          YBo3NHYCy/HGvSdbv1nB0k0I2LYbLEjuDf3EbxDA21BajKJG68sAHTRI2CnVwQhKD3aSc
+          ZKC7X55x1SRK/ib/p3Ki6AwppWpe/LZSvwHrVm4nBWP4WKkv9jdUV072FH1ti0=
+
+- job:
+    name: container-image-osism-ansible-build
+    pre-run: playbooks/pre.yml
+    run: playbooks/build.yml
+    vars:
+      docker_namespace: osism
+      docker_registry: osism.harbor.regio.digital
+      push_image: false
+
+- job:
+    name: container-image-osism-ansible-push
+    pre-run: playbooks/pre.yml
+    run: playbooks/build.yml
+    vars:
+      docker_namespace: osism
+      docker_registry: osism.harbor.regio.digital
+      push_image: true
+    secrets:
+      - name: secret
+        secret: SECRET_CONTAINER_IMAGE_OSISM_ANSIBLE
+
 - project:
     merge-mode: squash-merge
     default-branch: main
@@ -8,6 +55,7 @@
         - flake8
         - hadolint
         - yamllint
+        - container-image-osism-ansible-build
     gate:
       jobs:
         - ansible-lint
@@ -20,3 +68,8 @@
         - flake8
         - hadolint
         - yamllint
+        - container-image-osism-ansible-push
+    post:
+      jobs:
+        - container-image-osism-ansible-push:
+            branches: main

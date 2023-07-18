@@ -4,7 +4,8 @@ exclude_paths:
 use_default_rules: true
 rulesdir:
   - ./.ansible-lint-rules/
-mock_roles: []
+mock_roles:
+  - ensure-docker
 mock_modules: []
 skip_list: []
 # DO NOT DELETE THE WARNLIST! It is required for our custom rules!
