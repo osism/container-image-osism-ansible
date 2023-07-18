@@ -17,7 +17,7 @@ with open("/release/etc/images.yml", "rb") as fp:
 
 # prepare jinja2 environment
 
-loader = jinja2.FileSystemLoader(searchpath="templates/")
+loader = jinja2.FileSystemLoader(searchpath="/src/templates/")
 environment = jinja2.Environment(loader=loader)
 
 # render images.yml
