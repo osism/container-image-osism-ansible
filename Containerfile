@@ -140,9 +140,11 @@ rm /mitogen.tar.gz
 
 # add k3s-ansible roles
 git clone https://github.com/techno-tim/k3s-ansible /k3s-ansible
-mkdir -p /ansible/roles/k3s
-mv /k3s-ansible/roles/* /ansible/roles/k3s
-rm -rf /k3s-ansible /ansible/roles/k3s/{lxc,proxmox_lxc,reset_proxmox_lxc}
+mkdir -p /ansible/roles
+mv /k3s-ansible/roles/{k3s_server,k3s_agent,k3s_server_post} /ansible/roles
+mv /k3s-ansible/roles/prereq /ansible/roles/k3s_prereq
+mv /k3s-ansible/roles/download /ansible/roles/k3s_download
+rm -rf /k3s-ansible
 
 # hadolint ignore=DL3003
 for role in /usr/share/ansible/roles/*; do
