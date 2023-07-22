@@ -1,4 +1,3 @@
 ---
 ignored:
   - DL3008  # we decided not to pin versions
-  - DL3059  # Better readability
