@@ -24,7 +24,9 @@ fi
 export ANSIBLE_INVENTORY=$ANSIBLE_DIRECTORY/inventory/hosts.yml
 
 export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/ansible.cfg
-if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/ansible.cfg ]]; then
+if [[ -e /inventory/ansible/ansible.cfg ]]; then
+    export ANSIBLE_CONFIG=/inventory/ansible/ansible.cfg
+elif [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/ansible.cfg ]]; then
     export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/ansible.cfg
 fi
 
