@@ -3,10 +3,9 @@
   hosts: all
 
   environment:
-    is_release: "false"
     registry: "{{ docker_registry }}"
     repository: "{{ docker_namespace }}/osism-ansible"
-    version: latest
+    version: "{{ zuul['tag'] | default('latest') }}"
 
   tasks:
     - name: Log into registry
@@ -34,7 +33,6 @@
           fi
 
           docker buildx build \
-              --build-arg "IS_RELEASE=$is_release" \
               --build-arg "VERSION=$version" \
               --label "org.opencontainers.image.created=$created" \
               --label "org.opencontainers.image.documentation=https://docs.osism.tech" \

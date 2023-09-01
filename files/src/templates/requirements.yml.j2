@@ -16,7 +16,7 @@ roles:
 collections:
 {% for name in ansible_collections.keys() %}
 {% if ansible_collection_names[name]  %}
-{% if is_release == "true" and "osism" in name %}
+{% if version != "latest" and "osism" in name %}
   - name: {{ name }}
     source: https://galaxy.ansible.com
     version: {{ ansible_collections[name] }}
