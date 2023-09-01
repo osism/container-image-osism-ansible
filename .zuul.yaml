@@ -73,3 +73,6 @@
       jobs:
         - container-image-osism-ansible-push:
             branches: main
+    tag:
+      jobs:
+        - container-image-osism-ansible-push

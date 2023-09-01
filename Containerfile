@@ -1,7 +1,6 @@
 FROM python:3.11-slim
 
 ARG VERSION=latest
-ARG IS_RELEASE=false
 
 ARG MITOGEN_VERSION=0.3.4
 
