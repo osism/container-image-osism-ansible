@@ -2,8 +2,6 @@ FROM python:3.11-slim
 
 ARG VERSION=latest
 
-ARG MITOGEN_VERSION=0.3.4
-
 ARG USER_ID=45000
 ARG GROUP_ID=45000
 ARG GROUP_ID_DOCKER=999
@@ -25,8 +23,6 @@ COPY files/ara.env /ansible/ara.env
 
 COPY files/src /src
 COPY patches /patches
-
-ADD https://github.com/mitogen-hq/mitogen/archive/refs/tags/v$MITOGEN_VERSION.tar.gz /mitogen.tar.gz
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -128,12 +124,6 @@ ansible-galaxy collection install -v -f -r /ansible/requirements.yml -p /usr/sha
 ln -s /usr/share/ansible/roles /ansible/galaxy
 ln -s /usr/share/ansible/collections /ansible/collections
 ln -s /usr/share/ansible/plugins /ansible/plugins
-
-# install mitogen ansible plugin
-mkdir -p /usr/share/ansible/plugins/mitogen
-tar xzf /mitogen.tar.gz --strip-components=1 -C /usr/share/ansible/plugins/mitogen
-rm -rf /usr/share/ansible/plugins/mitogen/{tests,docs,.ci,.lgtm.yml,.travis.yml}
-rm /mitogen.tar.gz
 
 # project specific instructions
 
