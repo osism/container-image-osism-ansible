@@ -10,19 +10,19 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 USER root
 
-COPY files/library /ansible/library
-COPY files/roles /ansible/roles
-COPY files/tasks /ansible/tasks
-COPY files/plugins /usr/share/ansible/plugins
+COPY --link files/library /ansible/library
+COPY --link files/roles /ansible/roles
+COPY --link files/tasks /ansible/tasks
+COPY --link files/plugins /usr/share/ansible/plugins
 
-COPY files/playbooks/* /ansible/
-COPY files/scripts/* /
+COPY --link files/playbooks/* /ansible/
+COPY --link files/scripts/* /
 
-COPY files/ansible.cfg /etc/ansible/ansible.cfg
-COPY files/ara.env /ansible/ara.env
+COPY --link files/ansible.cfg /etc/ansible/ansible.cfg
+COPY --link files/ara.env /ansible/ara.env
 
-COPY files/src /src
-COPY patches /patches
+COPY --link files/src /src
+COPY --link patches /patches
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
