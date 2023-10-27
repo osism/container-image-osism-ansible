@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12-slim as builder
 
 ARG VERSION=latest
 
@@ -190,9 +190,13 @@ rm -rf \
 
 EOF
 
-VOLUME ["/ansible/secrets", "/ansible/logs", "/ansible/cache", "/share", "/archive", "/interface"]
+USER dragon
 
+FROM python:3.12-slim
+
+COPY --link --from=builder / /
+
+VOLUME ["/ansible/secrets", "/ansible/logs", "/ansible/cache", "/share", "/archive", "/interface"]
 USER dragon
 WORKDIR /ansible
-
 ENTRYPOINT ["/entrypoint.sh"]
