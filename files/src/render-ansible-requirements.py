@@ -5,8 +5,12 @@ import yaml
 
 # get environment parameters
 
-COLLECTIONS_FILENAME = os.environ.get("COLLECTIONS_FILENAME", "/release/etc/collections.yml")
-REQUIREMENTS_FILENAME = os.environ.get("REQUIREMENTS_FILENAME", "/ansible/requirements.yml")
+COLLECTIONS_FILENAME = os.environ.get(
+    "COLLECTIONS_FILENAME", "/release/etc/collections.yml"
+)
+REQUIREMENTS_FILENAME = os.environ.get(
+    "REQUIREMENTS_FILENAME", "/ansible/requirements.yml"
+)
 ROLES_FILENAME = os.environ.get("ROLES_FILENAME", "/release/etc/roles.yml")
 VERSION = os.environ.get("VERSION", "latest")
 
@@ -29,12 +33,14 @@ environment = jinja2.Environment(loader=loader)
 # render requirements.yml
 
 template = environment.get_template("requirements.yml.j2")
-result = template.render({
-  'ansible_roles': versions['ansible_roles'],
-  'ansible_role_names': ansible_role_names,
-  'ansible_collections': versions['ansible_collections'],
-  'ansible_collection_names': ansible_collection_names,
-  'version': VERSION
-})
+result = template.render(
+    {
+        "ansible_roles": versions["ansible_roles"],
+        "ansible_role_names": ansible_role_names,
+        "ansible_collections": versions["ansible_collections"],
+        "ansible_collection_names": ansible_collection_names,
+        "version": VERSION,
+    }
+)
 with open(REQUIREMENTS_FILENAME, "w+") as fp:
     fp.write(result)

@@ -23,10 +23,12 @@ environment = jinja2.Environment(loader=loader)
 # render images.yml
 
 template = environment.get_template("images.yml.j2")
-result = template.render({
-  'images': images,
-  'manager_version': versions['manager_version'],
-  'versions': versions['docker_images']
-})
+result = template.render(
+    {
+        "images": images,
+        "manager_version": versions["manager_version"],
+        "versions": versions["docker_images"],
+    }
+)
 with open("/ansible/group_vars/all/images.yml", "w+") as fp:
     fp.write(result)
