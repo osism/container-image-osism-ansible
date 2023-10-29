@@ -180,7 +180,6 @@ apt-get autoremove -y
 
 rm -rf \
   /patches \
-  /release \
   /root/.cache \
   /tmp/* \
   /usr/share/doc/* \
