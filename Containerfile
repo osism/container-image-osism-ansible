@@ -155,9 +155,6 @@ cp /playbooks/templates/* /ansible/templates
 # add symlink to /etc/openstack
 ln -s /opt/configuration/environments/openstack /etc/openstack
 
-# always enable the json_stats calback plugin
-ln -s /ansible/plugins/callback/json_stats.py /usr/local/lib/python3.12/site-packages/ansible/plugins/callback
-
 # copy ara configuration
 python3 -m ara.setup.env >> /ansible/ara.env
 
