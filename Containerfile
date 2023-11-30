@@ -155,9 +155,6 @@ cp /playbooks/templates/* /ansible/templates
 # add symlink to /etc/openstack
 ln -s /opt/configuration/environments/openstack /etc/openstack
 
-# copy ara configuration
-python3 -m ara.setup.env >> /ansible/ara.env
-
 # prepare list of playbooks
 python3 /src/render-playbooks.py
 
