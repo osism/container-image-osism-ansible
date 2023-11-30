@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -
+
 source /secrets.sh
 
 ENVIRONMENT=${ENVIRONMENT:-run}

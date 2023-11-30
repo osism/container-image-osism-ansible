@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 ENVIRONMENT=${ENVIRONMENT:-netbox}
 
 if [[ $# -lt 1 ]]; then
