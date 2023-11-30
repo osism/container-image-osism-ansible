@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 ENVIRONMENT=${ENVIRONMENT:-run}
 
 if [[ $# -lt 2 ]]; then
