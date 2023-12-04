@@ -54,6 +54,7 @@
         - ansible-lint
         - flake8
         - hadolint
+        - python-black
         - yamllint
         - container-image-osism-ansible-build
     gate:
@@ -61,12 +62,14 @@
         - ansible-lint
         - flake8
         - hadolint
+        - python-black
         - yamllint
     periodic-daily:
       jobs:
         - ansible-lint
         - flake8
         - hadolint
+        - python-black
         - yamllint
         - container-image-osism-ansible-push
     post:
