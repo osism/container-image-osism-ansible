@@ -35,7 +35,7 @@
           docker buildx build \
               --build-arg "VERSION=$version" \
               --label "org.opencontainers.image.created=$created" \
-              --label "org.opencontainers.image.documentation=https://docs.osism.tech" \
+              --label "org.opencontainers.image.documentation=https://osism.github.io" \
               --label "org.opencontainers.image.licenses=ASL 2.0" \
               --label "org.opencontainers.image.revision=$revision" \
               --label "org.opencontainers.image.source=https://github.com/osism/container-image-osism-ansible" \
