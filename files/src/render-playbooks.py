@@ -5,6 +5,7 @@ from pathlib import Path
 import yaml
 
 PREFIXES = [
+    "ceph",
     "generic",
     "manager",
     "monitoring",
@@ -12,6 +13,7 @@ PREFIXES = [
 ]
 
 KEEP_PREFIX = {
+    "ceph": [],
     "generic": [],
     "manager": ["operator", "network"],
     "monitoring": [],
@@ -19,6 +21,7 @@ KEEP_PREFIX = {
 }
 
 HIDE = {
+    "ceph": [],
     "generic": ["common"],
     "manager": [],
     "monitoring": [],
