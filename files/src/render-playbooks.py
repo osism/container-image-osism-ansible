@@ -7,25 +7,28 @@ import yaml
 PREFIXES = [
     "ceph",
     "generic",
+    "infrastructure",
     "manager",
     "monitoring",
-    "infrastructure",
+    "openstack",
 ]
 
 KEEP_PREFIX = {
     "ceph": [],
     "generic": [],
+    "infrastructure": [],
     "manager": ["operator", "network"],
     "monitoring": [],
-    "infrastructure": [],
+    "openstack": [],
 }
 
 HIDE = {
     "ceph": [],
     "generic": ["common"],
+    "infrastructure": [],
     "manager": [],
     "monitoring": [],
-    "infrastructure": [],
+    "openstack": [],
 }
 
 result = {}
