@@ -1,4 +1,4 @@
-FROM python:3.12-slim as builder
+FROM python:3.12-slim-bookworm as builder
 
 ARG VERSION=latest
 
@@ -188,7 +188,7 @@ EOF
 
 USER dragon
 
-FROM python:3.12-slim
+FROM python:3.12-slim-bookworm
 
 COPY --link --from=builder / /
 
