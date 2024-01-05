@@ -3,8 +3,8 @@
   hosts: all
 
   environment:
-    registry: "{{ docker_registry }}"
-    repository: "{{ docker_namespace }}/osism-ansible"
+    registry: "{{ docker_registry | default('osism.harbor.regio.digital') }}"
+    repository: "{{ docker_namespace | default('osism') }}/osism-ansible"
     version: "{{ zuul['tag'] | default('latest') }}"
 
   tasks:
@@ -13,19 +13,19 @@
         registry_url: "{{ docker_registry }}"
         username: "{{ secret.DOCKER_USERNAME }}"
         password: "{{ secret.DOCKER_PASSWORD }}"
-      when: push_image | bool
+      when: push_image | default(false) | bool
       no_log: true
 
     - name: Run build script
       ansible.builtin.shell:
         executable: /bin/bash
-        chdir: "{{ zuul.project.src_dir }}"
+        chdir: "{{ zuul.project.src_dir | default('.') }}"
         cmd: |
           set -e
           set -o pipefail
           set -x
 
-          created=$(date --rfc-3339=ns)
+          created=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           revision=$(git rev-parse --short HEAD)
 
           if [[ -n $registry ]]; then
@@ -51,7 +51,7 @@
     - name: Run push script
       ansible.builtin.shell:
         executable: /bin/bash
-        chdir: "{{ zuul.project.src_dir }}"
+        chdir: "{{ zuul.project.src_dir | default('.') }}"
         cmd: |
           set -e
           set -o pipefail
@@ -66,5 +66,5 @@
           docker tag "$revision" "$repository:$version"
           docker push "$repository:$version"
 
-      when: push_image | bool
+      when: push_image | default(false) | bool
       changed_when: true
