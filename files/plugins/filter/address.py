@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+#
 # -*- coding: utf-8 -*-
 #
 # Copyright 2019 Radosław Piliszek (yoctozepto)
