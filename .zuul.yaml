@@ -71,6 +71,8 @@
         - hadolint
         - python-black
         - yamllint
+    periodic-midnight:
+      jobs:
         - container-image-osism-ansible-push
     post:
       jobs:
