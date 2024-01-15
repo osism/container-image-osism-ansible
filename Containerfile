@@ -183,7 +183,6 @@ rm -rf \
   /usr/share/man/* \
   /var/lib/apt/lists/* \
   /var/tmp/*
-
 EOF
 
 USER dragon
