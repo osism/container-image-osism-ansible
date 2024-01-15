@@ -38,9 +38,11 @@ echo "[ ! -z \"\$TERM\" -a -r /etc/motd ] && cat /etc/motd" >> /etc/bash.bashrc
 apt-get update
 apt-get install --no-install-recommends -y \
   build-essential \
+  curl \
   dumb-init \
   git \
   git-lfs \
+  gnupg \
   gnupg-agent \
   iputils-ping \
   jq \
@@ -136,6 +138,12 @@ mv /k3s-ansible/roles/prereq /ansible/roles/k3s_prereq
 mv /k3s-ansible/roles/reset /ansible/roles/k3s_reset
 rm -rf /k3s-ansible
 
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
+apt-get update
+apt-get install --no-install-recommends -y \
+  helm
+
 # hadolint ignore=DL3003
 for role in /usr/share/ansible/roles/*; do
   if [ -e /patches/"$(basename "$role")" ]; then
@@ -168,7 +176,9 @@ chown -R dragon: /ansible /share /archive /interface
 apt-get clean
 apt-get remove -y  \
   build-essential \
+  curl \
   git \
+  gnupg \
   libffi-dev \
   libssh-dev \
   libssl-dev \
