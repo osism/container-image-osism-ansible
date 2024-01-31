@@ -137,11 +137,20 @@ mv /k3s-ansible/roles/prereq /ansible/roles/k3s_prereq
 mv /k3s-ansible/roles/reset /ansible/roles/k3s_reset
 rm -rf /k3s-ansible
 
+# install helm
 curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
 apt-get update
 apt-get install --no-install-recommends -y \
   helm
+
+# add helm chart repositories
+python3 /src/add-helm-chart-repositories.py
+
+# pull all charts
+for chart in $(helm search repo | tail -n+2 | awk '{print $1}'); do
+    helm pull "$chart"
+done
 
 # hadolint ignore=DL3003
 for role in /usr/share/ansible/roles/*; do
