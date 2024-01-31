@@ -41,7 +41,6 @@ apt-get install --no-install-recommends -y \
   curl \
   dumb-init \
   git \
-  git-lfs \
   gnupg \
   gnupg-agent \
   iputils-ping \
