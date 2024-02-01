@@ -152,6 +152,10 @@ for chart in $(helm search repo | tail -n+2 | awk '{print $1}'); do
     helm pull "$chart"
 done
 
+mkdir -p /ansible/.cache
+mv /root/.cache/helm /ansible/.cache
+chown -R dragon: /ansible/.cache
+
 # hadolint ignore=DL3003
 for role in /usr/share/ansible/roles/*; do
   if [ -e /patches/"$(basename "$role")" ]; then
