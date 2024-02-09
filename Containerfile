@@ -147,6 +147,11 @@ apt-get install --no-install-recommends -y \
 # add helm chart repositories
 python3 /src/add-helm-chart-repositories.py
 
+# prepare .kube directory
+mkdir -p /ansible/.kube
+ln -s /share/kubeconfig /ansible/.kube/config
+chown -R dragon: /ansible/.kube
+
 mkdir -p /ansible/.cache
 mv /root/.cache/helm /ansible/.cache
 chown -R dragon: /ansible/.cache
