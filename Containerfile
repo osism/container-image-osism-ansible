@@ -26,7 +26,6 @@ COPY --link patches /patches
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# hadolint ignore=DL3003
 RUN <<EOF
 set -e
 set -x
@@ -160,7 +159,6 @@ mkdir -p /ansible/.config
 mv /root/.config/helm /ansible/.config
 chown -R dragon: /ansible/.config
 
-# hadolint ignore=DL3003
 for role in /usr/share/ansible/roles/*; do
   if [ -e /patches/"$(basename "$role")" ]; then
     for patchfile in /patches/"$(basename "$role")"/*.patch; do
