@@ -25,6 +25,16 @@
           set -o pipefail
           set -x
 
+          # This is a way to use this job also in other repositories
+          # (osism/cfg-generics, osism/defaults, ..). The assumption
+          # is that if no Containerfile is available, the job was executed
+          # from one of the other repositories. There are probably more
+          # elegant ways to solve this, but it is good enough for now.
+          if [[ ! -e Containerfile ]]; then
+              git clone https://github.com/osism/container-image-osism-ansible.git container-image
+              pushd container-image
+          fi
+
           created=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           revision=$(git rev-parse --short HEAD)
 
