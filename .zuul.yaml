@@ -39,7 +39,8 @@
       push_image: false
 
 - job:
-    name: container-image-osism-ansible-push
+    name: abstract-container-image-osism-ansible-push
+    abstract: true
     semaphores:
       - name: semaphore-container-image-osism-ansible-push
     pre-run: playbooks/pre.yml
@@ -48,6 +49,10 @@
       docker_namespace: osism
       docker_registry: osism.harbor.regio.digital
       push_image: true
+
+- job:
+    name: container-image-osism-ansible-push
+    parent: abstract-container-image-osism-ansible-push
     secrets:
       - name: secret
         secret: SECRET_CONTAINER_IMAGE_OSISM_ANSIBLE
