@@ -56,6 +56,7 @@
     secrets:
       - name: secret
         secret: SECRET_CONTAINER_IMAGE_OSISM_ANSIBLE
+        pass-to-parent: true
 
 - project:
     merge-mode: squash-merge
