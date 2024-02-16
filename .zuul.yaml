@@ -25,6 +25,10 @@
           YBo3NHYCy/HGvSdbv1nB0k0I2LYbLEjuDf3EbxDA21BajKJG68sAHTRI2CnVwQhKD3aSc
           ZKC7X55x1SRK/ib/p3Ki6AwppWpe/LZSvwHrVm4nBWP4WKkv9jdUV072FH1ti0=
 
+- semaphore:
+    name: semaphore-container-image-osism-ansible-push
+    max: 1
+
 - job:
     name: container-image-osism-ansible-build
     pre-run: playbooks/pre.yml
@@ -36,6 +40,8 @@
 
 - job:
     name: container-image-osism-ansible-push
+    semaphores:
+      - name: semaphore-container-image-osism-ansible-push
     pre-run: playbooks/pre.yml
     run: playbooks/build.yml
     vars:
