@@ -67,6 +67,12 @@
           set -o pipefail
           set -x
 
+          # If the way described above is used, we must first change to
+          # the container-image directory to obtain the correct revision.
+          if [[ ! -e Containerfile ]]; then
+              pushd container-image
+          fi
+
           revision=$(git rev-parse --short HEAD)
 
           if [[ -n $registry ]]; then
