@@ -139,6 +139,11 @@ apt-get install --no-install-recommends -y \
 # add helm chart repositories
 python3 /src/add-helm-chart-repositories.py
 
+# install clusterctl
+CAPI_VERSION=1.6.1
+curl -Lo /usr/local/bin/clusterctl https://github.com/kubernetes-sigs/cluster-api/releases/download/v${CAPI_VERSION}/clusterctl-linux-amd64
+chmod +x /usr/local/bin/clusterctl
+
 # prepare .kube directory
 mkdir -p /ansible/.kube
 ln -s /share/kubeconfig /ansible/.kube/config
