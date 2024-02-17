@@ -144,6 +144,11 @@ CAPI_VERSION=1.6.1
 curl -Lo /usr/local/bin/clusterctl https://github.com/kubernetes-sigs/cluster-api/releases/download/v${CAPI_VERSION}/clusterctl-linux-amd64
 chmod +x /usr/local/bin/clusterctl
 
+# install kubectl
+KUBECTL_VERSION=1.29.1
+curl -Lo /usr/local/bin/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
+chmod +x /usr/local/bin/kubectl
+
 # prepare .kube directory
 mkdir -p /ansible/.kube
 ln -s /share/kubeconfig /ansible/.kube/config
