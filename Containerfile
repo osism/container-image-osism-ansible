@@ -139,6 +139,9 @@ apt-get install --no-install-recommends -y \
 # add helm chart repositories
 python3 /src/add-helm-chart-repositories.py
 
+# install helm plugins
+helm plugin install https://github.com/databus23/helm-diff
+
 # install clusterctl
 CAPI_VERSION=1.6.1
 curl -Lo /usr/local/bin/clusterctl https://github.com/kubernetes-sigs/cluster-api/releases/download/v${CAPI_VERSION}/clusterctl-linux-amd64
@@ -154,13 +157,20 @@ mkdir -p /ansible/.kube
 ln -s /share/kubeconfig /ansible/.kube/config
 chown -R dragon: /ansible/.kube
 
+# prepare .cache directory
 mkdir -p /ansible/.cache
 mv /root/.cache/helm /ansible/.cache
 chown -R dragon: /ansible/.cache
 
+# prepare .config directory
 mkdir -p /ansible/.config
 mv /root/.config/helm /ansible/.config
 chown -R dragon: /ansible/.config
+
+# prepare  .local directory
+mkdir -p /ansible/.local/share
+mv /root/.local/share/helm /ansible/.local/share
+chown -R dragon: /ansible/.local
 
 for role in /usr/share/ansible/roles/*; do
   if [ -e /patches/"$(basename "$role")" ]; then
