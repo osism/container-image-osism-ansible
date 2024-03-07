@@ -17,6 +17,8 @@ elif [[ "$1" == "playbooks" ]]; then
     rm -rf /playbooks
     git clone --depth 1 -b $2 https://github.com/osism/ansible-playbooks /playbooks
 
+    cp -r /playbooks/playbooks/* /ansible
+
     python3 /src/render-playbooks.py
     cp /ansible/playbooks.yml /interface/playbooks/osism-ansible.yml
 else
