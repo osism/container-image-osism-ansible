@@ -13,6 +13,7 @@ PREFIXES = [
     "manager",
     "monitoring",
     "openstack",
+    "rook",
 ]
 
 KEEP_PREFIX = {
@@ -22,6 +23,7 @@ KEEP_PREFIX = {
     "manager": ["operator", "network"],
     "monitoring": [],
     "openstack": [],
+    "rook": [],
 }
 
 HIDE = {
@@ -31,6 +33,7 @@ HIDE = {
     "manager": [],
     "monitoring": [],
     "openstack": [],
+    "rook": [],
 }
 
 result = {}
