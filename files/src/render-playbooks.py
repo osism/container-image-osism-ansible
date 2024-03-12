@@ -13,6 +13,7 @@ PREFIXES = [
     "manager",
     "monitoring",
     "openstack",
+    "proxmox",
     "rook",
 ]
 
@@ -23,6 +24,7 @@ KEEP_PREFIX = {
     "manager": ["operator", "network"],
     "monitoring": [],
     "openstack": [],
+    "proxmox": [],
     "rook": [],
 }
 
@@ -33,6 +35,7 @@ HIDE = {
     "manager": [],
     "monitoring": [],
     "openstack": [],
+    "proxmox": [],
     "rook": [],
 }
 
