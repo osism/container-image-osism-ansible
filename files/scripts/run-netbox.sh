@@ -30,7 +30,7 @@ elif [[ -e $CONFIGURATION_DIRECTORY/$ENVIRONMENT/ansible.cfg ]]; then
     export ANSIBLE_CONFIG=$CONFIGURATION_DIRECTORY/$ENVIRONMENT/ansible.cfg
 fi
 
-if [[ ! -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT ]]; then
+if [[ ! -e $CONFIGURATION_DIRECTORY/$ENVIRONMENT ]]; then
     echo "ERROR: environment $ENVIRONMENT not available"
     exit 1
 fi
