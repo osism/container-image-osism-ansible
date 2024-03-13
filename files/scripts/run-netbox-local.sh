@@ -20,6 +20,11 @@ if [[ -e /ansible/ara.env ]]; then
     source /ansible/ara.env
 fi
 
+if [[ ! -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT ]]; then
+    echo "ERROR: environment $ENVIRONMENT not available"
+    exit 1
+fi
+
 cd $CONFIGURATION_DIRECTORY/$ENVIRONMENT
 
 ansible-playbook \

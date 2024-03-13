@@ -35,6 +35,11 @@ elif [[ -e $ENVIRONMENTS_DIRECTORY/$environment/ansible.cfg ]]; then
     export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/$environment/ansible.cfg
 fi
 
+if [[ ! -e $ENVIRONMENTS_DIRECTORY/$environment ]]; then
+    echo "ERROR: environment $environment not available"
+    exit 1
+fi
+
 cd $ENVIRONMENTS_DIRECTORY/$environment
 
 ansible-playbook \

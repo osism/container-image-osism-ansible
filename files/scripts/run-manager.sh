@@ -27,6 +27,11 @@ export ANSIBLE_INVENTORY=$ANSIBLE_DIRECTORY/inventory/hosts.yml
 
 export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/ansible.cfg
 
+if [[ ! -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT ]]; then
+    echo "ERROR: environment $ENVIRONMENT not available"
+    exit 1
+fi
+
 cd $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT
 
 if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/playbook-$service.yml ]]; then
