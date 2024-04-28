@@ -121,9 +121,9 @@ ln -s /usr/share/ansible/collections /ansible/collections
 ln -s /usr/share/ansible/plugins /ansible/plugins
 
 # install mitogen ansible plugin
-mkdir -p /usr/share/ansible/plugins/mitogen
-tar xzf /mitogen.tar.gz --strip-components=1 -C /usr/share/ansible/plugins/mitogen
-rm -rf /usr/share/ansible/plugins/mitogen/{tests,docs,.ci,.lgtm.yml,.travis.yml}
+mkdir -p /usr/share/mitogen
+tar xzf /mitogen.tar.gz --strip-components=1 -C /usr/share/mitogen
+rm -rf /usr/share/mitogen/{tests,docs,.ci,.lgtm.yml,.travis.yml}
 rm /mitogen.tar.gz
 
 # project specific instructions
