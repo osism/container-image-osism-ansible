@@ -24,6 +24,8 @@ COPY --link files/ara.env /ansible/ara.env
 COPY --link files/src /src
 COPY --link patches /patches
 
+ADD https://github.com/mitogen-hq/mitogen/archive/refs/tags/v0.3.7.tar.gz /mitogen.tar.gz
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN <<EOF
@@ -117,6 +119,12 @@ ansible-galaxy collection install -v -f -r /ansible/requirements.yml -p /usr/sha
 ln -s /usr/share/ansible/roles /ansible/galaxy
 ln -s /usr/share/ansible/collections /ansible/collections
 ln -s /usr/share/ansible/plugins /ansible/plugins
+
+# install mitogen ansible plugin
+mkdir -p /usr/share/ansible/plugins/mitogen
+tar xzf /mitogen.tar.gz --strip-components=1 -C /usr/share/ansible/plugins/mitogen
+rm -rf /usr/share/ansible/plugins/mitogen/{tests,docs,.ci,.lgtm.yml,.travis.yml}
+rm /mitogen.tar.gz
 
 # project specific instructions
 
