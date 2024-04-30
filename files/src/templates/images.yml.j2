@@ -74,6 +74,9 @@ squid_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['squid'] }}:{{ '{{
 traefik_tag: "{{ versions['traefik'] }}"
 traefik_image: "{{ '{{' }} docker_registry_traefik {{ '}}' }}/{{ images['traefik'] }}:{{ '{{' }} traefik_tag {{ '}}' }}"
 
+tempest_tag: "{{ versions['tempest'] }}"
+tempest_image: "{{ '{{' }} docker_registry_tempest {{ '}}' }}/{{ images['tempest'] }}:{{ '{{' }} tempest_tag {{ '}}' }}"
+
 vault_tag: "{{ versions['vault'] }}"
 vault_image: "{{ '{{' }} docker_registry_vault {{ '}}' }}/{{ images['vault'] }}:{{ '{{' }} vault_tag {{ '}}' }}"
 
