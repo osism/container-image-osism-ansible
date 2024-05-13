@@ -56,6 +56,10 @@
               --load \
               --tag "$revision" \
               .  # <-- there is a dot
+
+          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin
+          /usr/local/bin/syft packages "$repository:$version" -o cyclonedx-json > sbom-osism-ansible.json
+          cat sbom-osism-ansible.json
       changed_when: true
 
     - name: Run push script
