@@ -2,6 +2,17 @@
 - secret:
     name: SECRET_CONTAINER_IMAGE_OSISM_ANSIBLE
     data:
+      DTRACK_API_KEY: !encrypted/pkcs1-oaep
+        - inkjFF4OkvlRxVngsLdrufSINVMwDW/Ay9AdGXFdU2XGV79pg6Ofw7sH24fuOkx56IPX0
+          vcpQTlOLmz33WP3dVxvGtFlsDVcUBCUW2GGQx4ElORqnMHAoO/rsa4CVTePfL7FqvNOkU
+          ZFHxbm0kChhJci2T2kxmkgRnG4aCHkccB2RHphR8BLJ+NWtbizTOpDbauZ1jGJ8aLMdRk
+          cj5fKd9Cy7Ms0wClzCtCsS9+lOwMpL/SNxxueudqlHqq/eChdZ0yx22NhEUp5vyxdY4Tu
+          oC9sJsJZizn2WKkLPKAC5OUr+bb914VO8yJi4JbiAvu0nkcFkCUJH1Ef36QJad5zmvIvg
+          2tYgMH3dxL4AUBpCGWozP0PaUJFl4IzEaVxF1TSlk6pDRa2IOQ3HmIj8giVfrsvojVtRG
+          QEGTmLDee+i8lsQY6BFmzDiV9NFbLO2nUo6xvLOln18AlgaGzCiLcImHDbGf8hjEhfIZl
+          lerTG5mtRwQlXwO1vKhaXIytU4u6eIM3zZ55pzLMM0sPpIv2zCXRdx++j8IgmNYOdzxdE
+          HMsHA5IoM+Ohzft8EzImYJsfP8cAvcnNUQO4g1vm3yxqdRAIzhQa3jN8ZywRRg0TeRNbC
+          niF/OS0dWXkyabD4yFUYysoCRHFw/qI9Nf3wcosKODJRlHUvjx4O1Rd0YWf4KM=
       DOCKER_USERNAME: !encrypted/pkcs1-oaep
         - C1tDhQfPWI+CnmoiQxkb9915ElWWWYMFO5Wct8RXduJ8dG4PdVGrRH6dVOuSesVIasHot
           eD8kbENi5ozF03KkARqyBoJWdQ4MDpvq9PwfsKmnAX1EuXW4GrQj2k5dh4LMA013YiJqQ
