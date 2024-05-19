@@ -91,8 +91,8 @@ python3 /src/render-python-requirements.py
 python3 /src/render-versions.py
 python3 /src/render-ansible-requirements.py
 ROLES_FILENAME=/release/etc/roles-manager.yml REQUIREMENTS_FILENAME=/ansible/requirements-manager.yml python3 /src/render-ansible-requirements.py
+python3 /src/generate-playbook-symlinks.py
 python3 /src/render-docker-images.py
-
 
 # install required python packages
 pip3 install --no-cache-dir -r /requirements.txt

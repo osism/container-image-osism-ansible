@@ -19,6 +19,7 @@ elif [[ "$1" == "playbooks" ]]; then
 
     cp -r /playbooks/playbooks/* /ansible
 
+    python3 /src/generate-playbook-symlinks.py
     python3 /src/render-playbooks.py
     cp /ansible/playbooks.yml /interface/playbooks/osism-ansible.yml
 else
