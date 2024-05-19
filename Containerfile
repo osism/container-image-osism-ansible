@@ -91,7 +91,6 @@ python3 /src/render-python-requirements.py
 python3 /src/render-versions.py
 python3 /src/render-ansible-requirements.py
 ROLES_FILENAME=/release/etc/roles-manager.yml REQUIREMENTS_FILENAME=/ansible/requirements-manager.yml python3 /src/render-ansible-requirements.py
-python3 /src/generate-playbook-symlinks.py
 python3 /src/render-docker-images.py
 
 # install required python packages
@@ -202,6 +201,7 @@ ln -s /opt/configuration/environments/openstack /etc/openstack
 python3 -m ara.setup.env >> /ansible/ara.env
 
 # prepare list of playbooks
+python3 /src/generate-playbook-symlinks.py
 python3 /src/render-playbooks.py
 
 # set correct permssions
