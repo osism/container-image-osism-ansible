@@ -15,8 +15,20 @@ ENVIRONMENTS = [
     "state",
 ]
 
+SKIP = [
+    "manager-bootstrap.yml",
+    "manager-docker.yml",
+    "manager-netbox.yml",
+    "manager-network.yml",
+    "manager-operator.yml",
+    "manager-reboot.yml",
+]
+
 for environment in ENVIRONMENTS:
     for src in glob.glob(f"/ansible/{environment}/*.yml"):
-        dest = f"/ansible/{environment}-{os.path.basename(src)}"
-        print(f"SYMLINK {dest} -> {src}")
-        os.symlink(src, dest)
+        name = f"{environment}-{os.path.basename(src)}"
+
+        if name not in SKIP:
+            dest = f"/ansible/{name}"
+            print(f"SYMLINK {dest} -> {src}")
+            os.symlink(src, dest)
