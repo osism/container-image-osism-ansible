@@ -27,8 +27,8 @@ SKIP = [
 for environment in ENVIRONMENTS:
     for src in glob.glob(f"/ansible/{environment}/*.yml"):
         name = f"{environment}-{os.path.basename(src)}"
+        dest = f"/ansible/{name}"
 
-        if name not in SKIP:
-            dest = f"/ansible/{name}"
+        if name not in SKIP and not os.path.islink(dest):
             print(f"SYMLINK {dest} -> {src}")
             os.symlink(src, dest)
