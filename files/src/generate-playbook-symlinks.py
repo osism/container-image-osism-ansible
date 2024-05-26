@@ -8,6 +8,7 @@ ENVIRONMENTS = [
     "generic",
     "infrastructure",
     "kolla",
+    "kubernetes",
     "manager",
     "monitoring",
     "openstack",
