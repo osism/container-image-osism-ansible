@@ -57,7 +57,8 @@ apt-get install --no-install-recommends -y \
 update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3 1
 update-alternatives --install /usr/bin/python python /usr/local/bin/python 1
 python3 -m pip install --no-cache-dir --upgrade 'pip==24.0'
-pip install --no-cache-dir -r /src/requirements.txt
+python3 -m pip install --no-cache-dir 'uv==0.2.4'
+uv pip install --no-cache-dir -r /src/requirements.txt
 
 # add user
 groupadd -g "$GROUP_ID" dragon
@@ -94,7 +95,7 @@ ROLES_FILENAME=/release/etc/roles-manager.yml REQUIREMENTS_FILENAME=/ansible/req
 python3 /src/render-docker-images.py
 
 # install required python packages
-pip install --no-cache-dir -r /requirements.txt
+uv pip install --no-cache-dir -r /requirements.txt
 
 # set ansible version in the motd
 ansible_version=$(python3 -c 'import ansible; print(ansible.release.__version__)')
@@ -229,9 +230,9 @@ rm -rf \
   /var/lib/apt/lists/* \
   /var/tmp/*
 
-pip install --no-cache-dir pyclean==3.0.0
+uv pip install --no-cache-dir pyclean==3.0.0
 pyclean /usr
-pip uninstall -y pyclean
+uv pip uninstall -y pyclean
 EOF
 
 USER dragon
