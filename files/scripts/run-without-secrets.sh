@@ -37,6 +37,11 @@ if [[ ! -e $ENVIRONMENTS_DIRECTORY/$environment ]]; then
     exit 1
 fi
 
+if [[ -e $ENVIRONMENTS_DIRECTORY/.lock ]]; then
+    echo "ERROR: The configuration repository is locked."
+    exit 1
+fi
+
 if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/.lock ]]; then
     echo "ERROR: The environment $ENVIRONMENT is locked via the configuration repository."
     exit 1
