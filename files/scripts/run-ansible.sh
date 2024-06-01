@@ -32,6 +32,11 @@ elif [[ -e $ENVIRONMENTS_DIRECTORY/$environment/ansible.cfg ]]; then
     export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/$environment/ansible.cfg
 fi
 
+if [[ -e $ENVIRONMENTS_DIRECTORY/$environment/.lock ]]; then
+    echo "ERROR: The environment $environment is locked via the configuration repository."
+    exit 1
+fi
+
 cd $ENVIRONMENTS_DIRECTORY/$environment
 
 ansible \

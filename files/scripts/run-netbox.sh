@@ -35,6 +35,11 @@ if [[ ! -e $CONFIGURATION_DIRECTORY/$ENVIRONMENT ]]; then
     exit 1
 fi
 
+if [[ -e $CONFIGURATION_DIRECTORY/$ENVIRONMENT/.lock ]]; then
+    echo "ERROR: The environment $ENVIRONMENT is locked via the configuration repository."
+    exit 1
+fi
+
 cd $CONFIGURATION_DIRECTORY/$ENVIRONMENT
 
 ansible-playbook \

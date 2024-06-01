@@ -32,6 +32,11 @@ if [[ ! -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT ]]; then
     exit 1
 fi
 
+if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/.lock ]]; then
+    echo "ERROR: The environment $ENVIRONMENT is locked via the configuration repository."
+    exit 1
+fi
+
 cd $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT
 
 if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/playbook-$service.yml ]]; then
