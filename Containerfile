@@ -24,8 +24,6 @@ COPY --link files/ara.env /ansible/ara.env
 COPY --link files/src /src
 COPY --link patches /patches
 
-ADD https://github.com/mitogen-hq/mitogen/archive/refs/tags/v0.3.7.tar.gz /mitogen.tar.gz
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN <<EOF
@@ -120,10 +118,11 @@ ln -s /usr/share/ansible/collections /ansible/collections
 ln -s /usr/share/ansible/plugins /ansible/plugins
 
 # install mitogen ansible plugin
-mkdir -p /usr/share/mitogen
-tar xzf /mitogen.tar.gz --strip-components=1 -C /usr/share/mitogen
-rm -rf /usr/share/mitogen/{tests,docs,.ci,.lgtm.yml,.travis.yml}
-rm /mitogen.tar.gz
+curl -o /tmp//python3-mitogen.deb http://ftp.de.debian.org/debian/pool/main/p/python-mitogen/python3-mitogen_0.3.7-4_all.deb
+curl -o /tmp/ansible-mitogen.deb http://ftp.de.debian.org/debian/pool/main/p/python-mitogen/ansible-mitogen_0.3.7-4_all.deb
+dpkg -i --force-all /tmp/python3-mitogen.deb
+dpkg -i --force-all /tmp/ansible-mitogen.deb
+rm /tmp/python3-mitogen.deb /tmp/ansible-mitogen.deb
 
 # project specific instructions
 
