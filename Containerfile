@@ -130,7 +130,7 @@ rm /mitogen.tar.gz
 # add k3s-ansible roles
 git clone https://github.com/techno-tim/k3s-ansible /k3s-ansible
 mkdir -p /ansible/roles
-mv /k3s-ansible/roles/{k3s_server,k3s_agent,k3s_server_post} /ansible/roles
+mv /k3s-ansible/roles/{k3s_server,k3s_agent,k3s_server_post,k3s_custom_registries} /ansible/roles
 mv /k3s-ansible/roles/download /ansible/roles/k3s_download
 mv /k3s-ansible/roles/prereq /ansible/roles/k3s_prereq
 mv /k3s-ansible/roles/reset /ansible/roles/k3s_reset
