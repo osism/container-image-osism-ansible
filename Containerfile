@@ -179,6 +179,7 @@ mkdir -p /ansible/.local/share
 mv /root/.local/share/helm /ansible/.local/share
 chown -R dragon: /ansible/.local
 
+# apply patches
 for role in /usr/share/ansible/roles/*; do
   if [ -e /patches/"$(basename "$role")" ]; then
     for patchfile in /patches/"$(basename "$role")"/*.patch; do
@@ -189,6 +190,7 @@ for role in /usr/share/ansible/roles/*; do
   fi;
 done
 
+# preapre ansible directory
 cp -r /playbooks/playbooks/* /ansible
 cp /playbooks/library/* /ansible/library
 mkdir -p /ansible/templates
