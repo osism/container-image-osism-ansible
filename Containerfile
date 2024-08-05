@@ -200,6 +200,16 @@ for role in /usr/share/ansible/roles/*; do
   fi;
 done
 
+for role in /ansible/roles/*; do
+  if [ -e /patches/"$(basename "$role")" ]; then
+    for patchfile in /patches/"$(basename "$role")"/*.patch; do
+      echo "$patchfile";
+      ( cd /ansible/roles/"$(basename "$role")" && patch --forward --batch -p1 --dry-run ) < "$patchfile" || exit 1;
+      ( cd /ansible/roles/"$(basename "$role")" && patch --forward --batch -p1 ) < "$patchfile";
+    done;
+  fi;
+done
+
 # preapre ansible directory
 cp -r /playbooks/playbooks/* /ansible
 cp /playbooks/library/* /ansible/library
