@@ -1,0 +1,53 @@
+--- a/defaults/main.yml
++++ b/defaults/main.yml
+@@ -8,6 +8,12 @@ kube_vip_iface: ~
+ kube_vip_cloud_provider_tag_version: main
+ kube_vip_tag_version: v0.7.2
+ 
++kube_vip_bgp: false
++kube_vip_bgp_routerid: "127.0.0.1"
++kube_vip_bgp_as: "64513"
++kube_vip_bgp_peeraddress: "192.168.30.1"
++kube_vip_bgp_peeras: "64512"
++
+ metal_lb_controller_tag_version: v0.14.3
+ metal_lb_speaker_tag_version: v0.14.3
+ metal_lb_type: native
+--- a/templates/vip.yaml.j2
++++ b/templates/vip.yaml.j2
+@@ -27,7 +27,9 @@ spec:
+         - manager
+         env:
+         - name: vip_arp
+-          value: "{{ 'true' if kube_vip_arp | bool else 'false' }}"
++          value: "{{ 'true' if kube_vip_arp | default(true) | bool else 'false' }}"
++        - name: bgp_enable
++          value: "{{ 'true' if kube_vip_bgp | default(false) | bool else 'false' }}"
+         - name: port
+           value: "6443"
+ {% if kube_vip_iface %}
+@@ -54,6 +56,24 @@ spec:
+           value: "2"
+         - name: address
+           value: {{ apiserver_endpoint }}
++{% if kube_vip_bgp | default(false) | bool %}
++{% if kube_vip_bgp_routerid is defined %}
++        - name: bgp_routerid
++          value: "{{ kube_vip_bgp_routerid }}"
++{% endif %}
++{% if kube_vip_bgp_as is defined %}
++        - name: bgp_as
++          value: "{{ kube_vip_bgp_as }}"
++{% endif %}
++{% if kube_vip_bgp_peeraddress is defined %}
++        - name: bgp_peeraddress
++          value: "{{ kube_vip_bgp_peeraddress }}"
++{% endif %}
++{% if kube_vip_bgp_peeras is defined %}
++        - name: bgp_peeras
++          value: "{{ kube_vip_bgp_peeras }}"
++{% endif %}
++{% endif %}
+         image: ghcr.io/kube-vip/kube-vip:{{ kube_vip_tag_version }}
+         imagePullPolicy: Always
+         name: kube-vip
