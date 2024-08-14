@@ -1,13 +1,13 @@
 --- a/tasks/metallb.yml
 +++ b/tasks/metallb.yml
 @@ -7,19 +7,20 @@
-     mode: 0755
+     mode: "0755"
    with_items: "{{ groups[group_name_master | default('master')] }}"
    run_once: true
 +  delegate_to: localhost
  
  - name: Delete outdated metallb replicas
-   shell: |-
+   ansible.builtin.shell: |-
      set -o pipefail
  
 -    REPLICAS=$(k3s kubectl --namespace='metallb-system' get replicasets \
@@ -32,13 +32,13 @@
  
  - name: Copy metallb CRs manifest to first master
 @@ -37,17 +39,19 @@
-     mode: 0755
+     mode: "0755"
    with_items: "{{ groups[group_name_master | default('master')] }}"
    run_once: true
 +  delegate_to: localhost
  
  - name: Test metallb-system namespace
-   command: >-
+   ansible.builtin.command: >-
 -    k3s kubectl -n metallb-system
 +    kubectl -n metallb-system
    changed_when: false
@@ -47,7 +47,7 @@
 +  delegate_to: localhost
  
  - name: Wait for MetalLB resources
-   command: >-
+   ansible.builtin.command: >-
 -    k3s kubectl wait {{ item.resource }}
 +    kubectl wait {{ item.resource }}
      --namespace='metallb-system'
@@ -64,7 +64,7 @@
 @@ -99,26 +104,29 @@
  
  - name: Test metallb-system webhook-service endpoint
-   command: >-
+   ansible.builtin.command: >-
 -    k3s kubectl -n metallb-system get endpoints {{ metallb_webhook_service_name }}
 +    kubectl -n metallb-system get endpoints {{ metallb_webhook_service_name }}
    changed_when: false
@@ -73,7 +73,7 @@
 +  delegate_to: localhost
  
  - name: Apply metallb CRs
-   command: >-
+   ansible.builtin.command: >-
 -    k3s kubectl apply -f /tmp/k3s/metallb-crs.yaml
 +    kubectl apply -f /tmp/k3s/metallb-crs.yaml
      --timeout='{{ metal_lb_available_timeout }}'
@@ -85,7 +85,7 @@
    retries: 5
  
  - name: Test metallb-system resources for Layer 2 configuration
-   command: >-
+   ansible.builtin.command: >-
 -    k3s kubectl -n metallb-system get {{ item }}
 +    kubectl -n metallb-system get {{ item }}
    changed_when: false
@@ -97,7 +97,7 @@
 @@ -126,9 +134,10 @@
  
  - name: Test metallb-system resources for BGP configuration
-   command: >-
+   ansible.builtin.command: >-
 -    k3s kubectl -n metallb-system get {{ item }}
 +    kubectl -n metallb-system get {{ item }}
    changed_when: false
