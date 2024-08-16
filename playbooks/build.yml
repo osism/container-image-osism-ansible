@@ -9,7 +9,6 @@
     registry: "{{ docker_registry | default('osism.harbor.regio.digital') }}"
     repository: "{{ docker_namespace | default('osism') }}/osism-ansible"
     version: "{{ zuul['tag'] | default('latest') }}"
-    DTRACK_SERVER: "https://osism.dtrack.regio.digital"
 
   tasks:
     - name: Log into registry
@@ -70,6 +69,9 @@
           set -e
           set -o pipefail
           set -x
+
+          DTRACK_SERVER="https://osism.dtrack.regio.digital"
+          DTRACK_API_KEY="{{ secret.DTRACK_API_KEY }}"
 
           # If the way described above is used, we must first change to
           # the container-image directory to obtain the correct revision.
