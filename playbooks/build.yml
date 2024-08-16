@@ -10,7 +10,7 @@
     repository: "{{ docker_namespace | default('osism') }}/osism-ansible"
     version: "{{ zuul['tag'] | default('latest') }}"
     DTRACK_SERVER: "https://osism.dtrack.regio.digital"
-    DTRACK_API_KEY: "{{ secret.DTRACK_API_KEY }}"
+    DTRACK_API_KEY: "{{ secret.DTRACK_API_KEY | default('') }}"
 
   tasks:
     - name: Log into registry
@@ -86,6 +86,17 @@
 
           docker tag "$revision" "$repository:$version"
           docker push "$repository:$version"
+      when: push_image | default(false) | bool
+      changed_when: true
+
+    - name: Run sbom script
+      ansible.builtin.shell:
+        executable: /bin/bash
+        chdir: "{{ zuul.project.src_dir | default('.') }}"
+        cmd: |
+          set -e
+          set -o pipefail
+          set -x
 
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin
           /usr/local/bin/syft packages "$repository:$version" -o cyclonedx-json > sbom.json
@@ -95,6 +106,5 @@
             -v "$version" \
             -f sbom.json \
             -a
-
-      when: push_image | default(false) | bool
+      when: push_sbom | default(false) | bool
       changed_when: true
