@@ -101,7 +101,6 @@
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin
           /usr/local/bin/syft scan "$repository:$version" -o cyclonedx-json > sbom.json
           {{ python_venv_dir }}/bin/dtrackauditor \
-            --parent_project osism \
             -p osism-ansible \
             -v "$version" \
             -f sbom.json \
