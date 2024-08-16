@@ -91,7 +91,7 @@
           {{ python_venv_dir }}/bin/dtrackauditor \
             --parent_project osism \
             -p osism-ansible \
-            -v "{{ version }}" \
+            -v "$version" \
             -f sbom.json \
             -a
 
