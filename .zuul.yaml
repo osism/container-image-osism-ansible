@@ -47,7 +47,6 @@
     vars:
       docker_namespace: osism
       docker_registry: osism.harbor.regio.digital
-      push_image: false
 
 - job:
     name: abstract-container-image-osism-ansible-push
@@ -60,6 +59,7 @@
       docker_namespace: osism
       docker_registry: osism.harbor.regio.digital
       push_image: true
+      push_sbom: true
 
 - job:
     name: container-image-osism-ansible-push
