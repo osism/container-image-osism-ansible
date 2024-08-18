@@ -24,7 +24,7 @@ COPY --link files/ara.env /ansible/ara.env
 COPY --link files/src /src
 COPY --link patches /patches
 
-ADD https://github.com/mitogen-hq/mitogen/archive/refs/tags/v0.3.7.tar.gz /mitogen.tar.gz
+ADD https://github.com/mitogen-hq/mitogen/archive/refs/tags/v0.3.9.tar.gz /mitogen.tar.gz
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
