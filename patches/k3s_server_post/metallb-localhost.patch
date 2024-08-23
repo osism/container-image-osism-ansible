@@ -1,0 +1,74 @@
+--- a/tasks/metallb.yml
++++ b/tasks/metallb.yml
+@@ -7,6 +7,7 @@
+     mode: "0755"
+   with_items: "{{ groups[group_name_master | default('master')] }}"
+   run_once: true
++  delegate_to: localhost
+ 
+ - name: Delete outdated metallb replicas
+   ansible.builtin.shell: |-
+@@ -27,6 +28,7 @@
+     executable: /bin/bash
+   changed_when: false
+   run_once: true
++  delegate_to: localhost
+   with_items: "{{ groups[group_name_master | default('master')] }}"
+ 
+ - name: Copy metallb CRs manifest to first master
+@@ -37,6 +39,7 @@
+     mode: "0755"
+   with_items: "{{ groups[group_name_master | default('master')] }}"
+   run_once: true
++  delegate_to: localhost
+ 
+ - name: Test metallb-system namespace
+   ansible.builtin.command: >-
+@@ -44,6 +47,7 @@
+   changed_when: false
+   with_items: "{{ groups[group_name_master | default('master')] }}"
+   run_once: true
++  delegate_to: localhost
+ 
+ - name: Wait for MetalLB resources
+   ansible.builtin.command: >-
+@@ -55,6 +59,7 @@
+     --timeout='{{ metal_lb_available_timeout }}'
+   changed_when: false
+   run_once: true
++  delegate_to: localhost
+   with_items:
+     - description: controller
+       resource: deployment
+@@ -103,6 +108,7 @@
+   changed_when: false
+   with_items: "{{ groups[group_name_master | default('master')] }}"
+   run_once: true
++  delegate_to: localhost
+ 
+ - name: Apply metallb CRs
+   ansible.builtin.command: >-
+@@ -111,6 +117,7 @@
+   register: this
+   changed_when: false
+   run_once: true
++  delegate_to: localhost
+   until: this.rc == 0
+   retries: 5
+ 
+@@ -119,6 +126,7 @@
+     {{ k3s_kubectl_binary | default('k3s kubectl') }} -n metallb-system get {{ item }}
+   changed_when: false
+   run_once: true
++  delegate_to: localhost
+   when: metal_lb_mode == "layer2"
+   with_items:
+     - IPAddressPool
+@@ -129,6 +137,7 @@
+     {{ k3s_kubectl_binary | default('k3s kubectl') }} -n metallb-system get {{ item }}
+   changed_when: false
+   run_once: true
++  delegate_to: localhost
+   when: metal_lb_mode == "bgp"
+   with_items:
+     - IPAddressPool

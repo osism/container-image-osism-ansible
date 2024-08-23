@@ -107,16 +107,7 @@
      - name: Wait for connectivity to kube VIP
        ansible.builtin.command: ping -c 1 {{ apiserver_endpoint }}
        register: ping_result
-@@ -116,7 +25,7 @@
-       when: ping_result.rc != 0
- 
-     - name: Test for existing Cilium install
--      ansible.builtin.command: k3s kubectl -n kube-system get daemonsets cilium
-+      ansible.builtin.command: kubectl -n kube-system get daemonsets cilium
-       register: cilium_installed
-       failed_when: false
-       changed_when: false
-@@ -184,7 +93,7 @@
+@@ -185,7 +94,7 @@
          --helm-set bpf.loadBalancer.mode={{ bpf_lb_mode }}
          {% endif %}
        environment:
@@ -125,29 +116,3 @@
        register: cilium_install_result
        changed_when: cilium_install_result.rc == 0
        when: cilium_installed.rc != 0 or cilium_needs_update
-@@ -192,12 +101,12 @@
-     - name: Wait for Cilium resources
-       ansible.builtin.command: >-
-         {% if item.type == 'daemonset' %}
--        k3s kubectl wait pods
-+        kubectl wait pods
-         --namespace=kube-system
-         --selector='k8s-app=cilium'
-         --for=condition=Ready
-         {% else %}
--        k3s kubectl wait {{ item.type }}/{{ item.name }}
-+        kubectl wait {{ item.type }}/{{ item.name }}
-         --namespace=kube-system
-         --for=condition=Available
-         {% endif %}
-@@ -244,8 +153,8 @@
-         - name: Test for BGP config resources
-           ansible.builtin.command: "{{ item }}"
-           loop:
--            - k3s kubectl get CiliumBGPPeeringPolicy.cilium.io
--            - k3s kubectl get CiliumLoadBalancerIPPool.cilium.io
-+            - kubectl get CiliumBGPPeeringPolicy.cilium.io
-+            - kubectl get CiliumLoadBalancerIPPool.cilium.io
-           changed_when: false
-           loop_control:
-             label: "{{ item }}"
