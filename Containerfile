@@ -32,9 +32,9 @@ RUN <<EOF
 set -e
 set -x
 
-CAPI_VERSION=1.7.4
-CILIUM_CLI_VERSION=v0.16.15
-KUBECTL_VERSION=1.30.2
+CAPI_VERSION=1.7.5
+CILIUM_CLI_VERSION=v0.16.16
+KUBECTL_VERSION=1.30.4
 
 # show motd
 echo "[ ! -z \"\$TERM\" -a -r /etc/motd ] && cat /etc/motd" >> /etc/bash.bashrc
