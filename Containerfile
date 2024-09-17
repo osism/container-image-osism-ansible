@@ -1,4 +1,4 @@
-FROM python:3.12-slim-bookworm AS builder
+FROM python:3.13-rc-slim-bookworm AS builder
 
 ARG VERSION=latest
 
