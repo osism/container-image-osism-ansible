@@ -61,6 +61,8 @@
               --load \
               --tag "$revision" \
               .  # <-- there is a dot
+
+          docker images
       changed_when: true
 
     - name: Run push script
