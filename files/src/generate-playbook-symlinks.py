@@ -30,6 +30,6 @@ for environment in ENVIRONMENTS:
         name = f"{environment}-{os.path.basename(src)}"
         dest = f"/ansible/{name}"
 
-        if name not in SKIP and not os.path.islink(dest):
+        if name not in SKIP and not os.path.islink(dest) and not name.startswith("_"):
             print(f"SYMLINK {dest} -> {src}")
             os.symlink(src, dest)
