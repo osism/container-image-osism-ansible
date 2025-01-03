@@ -25,10 +25,6 @@ homer_image: "{{ '{{' }} docker_registry_homer {{ '}}' }}/{{ images['homer'] }}:
 inventory_reconciler_tag: "{{ versions['inventory_reconciler'] }}"
 inventory_reconciler_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['inventory_reconciler'] }}:{{ '{{' }} inventory_reconciler_tag {{ '}}' }}"
 
-keycloak_tag: "{{ versions['keycloak'] }}"
-keycloak_image: "{{ '{{' }} docker_registry_keycloak {{ '}}' }}/{{ images['keycloak'] }}:{{ '{{' }} keycloak_tag {{ '}}' }}"
-keycloak_for_traefik_image: "{{ '{{' }} docker_registry_keycloak {{ '}}' }}/{{ images['keycloak_for_traefik'] }}:{{ '{{' }} keycloak_tag {{ '}}' }}"
-
 ara_server_mariadb_tag: "{{ versions['mariadb'] }}"
 ara_server_mariadb_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['mariadb'] }}:{{ '{{' }} ara_server_mariadb_tag {{ '}}' }}"
 
