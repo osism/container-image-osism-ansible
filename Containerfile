@@ -60,7 +60,7 @@ apt-get install --no-install-recommends -y \
   sshpass
 update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3 1
 update-alternatives --install /usr/bin/python python /usr/local/bin/python 1
-python3 -m pip install --no-cache-dir --upgrade 'pip==25.0'
+python3 -m pip install --no-cache-dir --upgrade 'pip==25.0.1'
 pip install --no-cache-dir -r /src/requirements.txt
 
 # add user
