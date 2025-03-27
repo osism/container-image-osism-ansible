@@ -127,15 +127,6 @@ rm /mitogen.tar.gz
 
 # project specific instructions
 
-# add k3s-ansible roles
-git clone https://github.com/osism/k3s-ansible /k3s-ansible
-mkdir -p /ansible/roles
-mv /k3s-ansible/roles/{k3s_server,k3s_agent,k3s_server_post,k3s_custom_registries} /ansible/roles
-mv /k3s-ansible/roles/download /ansible/roles/k3s_download
-mv /k3s-ansible/roles/prereq /ansible/roles/k3s_prereq
-mv /k3s-ansible/roles/reset /ansible/roles/k3s_reset
-rm -rf /k3s-ansible
-
 # apply patches
 for role in /usr/share/ansible/roles/*; do
   if [ -e /patches/"$(basename "$role")" ]; then
@@ -157,7 +148,7 @@ for role in /ansible/roles/*; do
   fi;
 done
 
-# preapre ansible directory
+# prepare ansible directory
 cp -r /playbooks/playbooks/* /ansible
 cp /playbooks/library/* /ansible/library
 mkdir -p /ansible/templates
