@@ -33,10 +33,6 @@ RUN <<EOF
 set -e
 set -x
 
-CAPI_VERSION=1.7.5
-CILIUM_CLI_VERSION=v0.16.16
-KUBECTL_VERSION=1.30.4
-
 # show motd
 echo "[ ! -z \"\$TERM\" -a -r /etc/motd ] && cat /etc/motd" >> /etc/bash.bashrc
 
@@ -139,55 +135,6 @@ mv /k3s-ansible/roles/download /ansible/roles/k3s_download
 mv /k3s-ansible/roles/prereq /ansible/roles/k3s_prereq
 mv /k3s-ansible/roles/reset /ansible/roles/k3s_reset
 rm -rf /k3s-ansible
-
-# install cilium CLI
-# shellcheck disable=SC2046
-ARCH=$(case $(uname -m) in x86_64) echo -n amd64 ;; aarch64) echo -n arm64 ;; *) echo -n $(uname -m) ;; esac)
-curl -L --fail --remote-name-all "https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-${ARCH}.tar.gz{,.sha256sum}"
-sha256sum --check "cilium-linux-${ARCH}.tar.gz.sha256sum"
-tar xzvfC "cilium-linux-${ARCH}.tar.gz" /usr/local/bin
-rm cilium-linux-"${ARCH}".tar.gz{,.sha256sum}
-
-# install helm
-curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
-apt-get update
-apt-get install --no-install-recommends -y \
-  helm
-
-# add helm chart repositories
-python3 /src/add-helm-chart-repositories.py
-
-# install helm plugins
-helm plugin install https://github.com/databus23/helm-diff
-
-# install clusterctl
-curl -Lo /usr/local/bin/clusterctl https://github.com/kubernetes-sigs/cluster-api/releases/download/v${CAPI_VERSION}/clusterctl-linux-amd64
-chmod +x /usr/local/bin/clusterctl
-
-# install kubectl
-curl -Lo /usr/local/bin/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
-chmod +x /usr/local/bin/kubectl
-
-# prepare .kube directory
-mkdir -p /ansible/.kube
-ln -s /share/kubeconfig /ansible/.kube/config
-chown -R dragon: /ansible/.kube
-
-# prepare .cache directory
-mkdir -p /ansible/.cache
-mv /root/.cache/helm /ansible/.cache
-chown -R dragon: /ansible/.cache
-
-# prepare .config directory
-mkdir -p /ansible/.config
-mv /root/.config/helm /ansible/.config
-chown -R dragon: /ansible/.config
-
-# prepare  .local directory
-mkdir -p /ansible/.local/share
-mv /root/.local/share/helm /ansible/.local/share
-chown -R dragon: /ansible/.local
 
 # apply patches
 for role in /usr/share/ansible/roles/*; do
