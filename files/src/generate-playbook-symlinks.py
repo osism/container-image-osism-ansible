@@ -12,7 +12,6 @@ ENVIRONMENTS = [
     "manager",
     "monitoring",
     "openstack",
-    "rook",
     "state",
 ]
 

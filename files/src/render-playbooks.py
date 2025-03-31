@@ -16,7 +16,6 @@ PREFIXES = [
     "monitoring",
     "openstack",
     "proxmox",
-    "rook",
 ]
 
 KEEP_PREFIX = {
@@ -29,7 +28,6 @@ KEEP_PREFIX = {
     "monitoring": [],
     "openstack": [],
     "proxmox": [],
-    "rook": [],
 }
 
 HIDE = {
@@ -42,7 +40,6 @@ HIDE = {
     "monitoring": [],
     "openstack": [],
     "proxmox": [],
-    "rook": [],
 }
 
 result = {}
