@@ -23,7 +23,7 @@ collections:
 {% else %}
   - name: https://github.com/{{ ansible_collection_names[name] }}.git
     type: git
-    version: {{ ansible_collections[name] }}
+    version: main
 {% endif %}
 {% else %}
   - name: {{ name }}
