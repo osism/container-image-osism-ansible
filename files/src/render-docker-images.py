@@ -1,17 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
 
-import os
-
 import jinja2
 import yaml
 
-# get environment parameters
-
-VERSION = os.environ.get("VERSION", "latest")
-
 # load versions files from release repository
 
-with open("/release/%s/base.yml" % VERSION, "rb") as fp:
+with open("/release/latest/base.yml", "rb") as fp:
     versions = yaml.load(fp, Loader=yaml.FullLoader)
 
 with open("/release/etc/images.yml", "rb") as fp:
