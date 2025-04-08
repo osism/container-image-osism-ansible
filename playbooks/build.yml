@@ -80,6 +80,12 @@
 
           revision=$(git rev-parse --short HEAD)
 
+          {% raw %}
+          if [[ $version != "latest" ]]; then
+              version="${version:1:${#version}-1}"
+          fi
+          {% endraw %}
+
           if [[ -n $registry ]]; then
               repository="$registry/$repository"
           fi
@@ -101,6 +107,12 @@
           if [[ -n $registry ]]; then
               repository="$registry/$repository"
           fi
+
+          {% raw %}
+          if [[ $version != "latest" ]]; then
+              version="${version:1:${#version}-1}"
+          fi
+          {% endraw %}
 
           curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin
           /usr/local/bin/syft scan "$repository:$version" -o cyclonedx-json > sbom.json
