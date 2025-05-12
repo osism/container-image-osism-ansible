@@ -1,4 +1,5 @@
-FROM python:3.13-slim-bookworm AS builder
+ARG IMAGE=registry.osism.tech/dockerhub/python
+FROM ${IMAGE}:3.13-slim-bookworm AS builder
 
 ARG VERSION=latest
 
@@ -198,7 +199,8 @@ EOF
 
 USER dragon
 
-FROM python:3.13-slim-bookworm
+ARG IMAGE=registry.osism.tech/dockerhub/python
+FROM ${IMAGE}:3.13-slim-bookworm
 
 COPY --link --from=builder / /
 
