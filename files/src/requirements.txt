@@ -4,5 +4,5 @@ kubernetes==32.0.1
 pottery==3.0.1
 proxmoxer==2.2.0
 python-designateclient==6.3.0
-python-neutronclient==11.5.0
+python-neutronclient==11.6.0
 yq==3.4.3
