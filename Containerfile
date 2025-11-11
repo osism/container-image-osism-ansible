@@ -207,6 +207,8 @@ COPY --link --from=builder / /
 ENV PYTHONWARNINGS="ignore::UserWarning"
 
 VOLUME ["/ansible/secrets", "/ansible/logs", "/ansible/cache", "/share", "/archive", "/interface"]
-USER dragon
+
 WORKDIR /ansible
+RUN chown -R dragon: /ansible
+USER dragon
 ENTRYPOINT ["/entrypoint.sh"]
