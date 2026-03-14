@@ -21,7 +21,11 @@ if [[ -e /ansible/ara.env ]]; then
     source /ansible/ara.env
 fi
 
-export ANSIBLE_INVENTORY=$CONFIGURATION_DIRECTORY/$ENVIRONMENT/inventory/hosts.yml
+if [[ -d $CONFIGURATION_DIRECTORY/$ENVIRONMENT/inventory/fast ]]; then
+    export ANSIBLE_INVENTORY=$CONFIGURATION_DIRECTORY/$ENVIRONMENT/inventory/fast/
+else
+    export ANSIBLE_INVENTORY=$CONFIGURATION_DIRECTORY/$ENVIRONMENT/inventory/hosts.yml
+fi
 
 export ANSIBLE_CONFIG=$ENVIRONMENTS_DIRECTORY/ansible.cfg
 if [[ -e $ANSIBLE_DIRECTORY/inventory/ansible/ansible.cfg ]]; then
