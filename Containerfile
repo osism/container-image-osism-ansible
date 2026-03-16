@@ -71,13 +71,11 @@ git clone https://github.com/osism/release /release
 # prepare project repository
 
 git clone https://github.com/osism/ansible-playbooks /playbooks
-git clone https://github.com/osism/defaults /defaults
 git clone https://github.com/osism/cfg-generics /generics 
 
 if [ "$VERSION" != "latest" ]; then
   ( cd /release || exit; git fetch --all --force; git checkout "osism-ansible-$VERSION" )
   ( cd /playbooks || exit; git fetch --all --force; git checkout "$(yq -M -r .playbooks_version "/release/latest/base.yml")" )
-  ( cd /defaults || exit; git fetch --all --force; git checkout "$(yq -M -r .defaults_version "/release/latest/base.yml")" )
   ( cd /generics || exit; git fetch --all --force; git checkout "$(yq -M -r .generics_version "/release/latest/base.yml")" )
 fi
 
@@ -86,9 +84,7 @@ mkdir -p /ansible/inventory.generics /ansible/inventory
 cp /generics/inventory/* /ansible/inventory.generics
 
 # run preparations
-mkdir -p /ansible/group_vars
-cp -r /defaults/* /ansible/group_vars/
-rm -f /ansible/group_vars/LICENSE /ansible/group_vars/README.md
+mkdir -p /ansible/group_vars/all
 
 python3 /src/render-python-requirements.py
 python3 /src/render-versions.py
