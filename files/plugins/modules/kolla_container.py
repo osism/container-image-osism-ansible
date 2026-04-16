@@ -23,7 +23,6 @@ import traceback
 
 from ansible.module_utils.kolla_container_worker import ContainerWorker
 
-
 DOCUMENTATION = """
 ---
 module: kolla_container
