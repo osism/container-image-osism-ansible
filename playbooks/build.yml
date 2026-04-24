@@ -33,7 +33,7 @@
           set -x
 
           # This is a way to use this job also in other repositories
-          # (osism/cfg-generics, osism/defaults, ..). The assumption
+          # (osism/generics, osism/defaults, ..). The assumption
           # is that if no Containerfile is available, the job was executed
           # from one of the other repositories. There are probably more
           # elegant ways to solve this, but it is good enough for now.
