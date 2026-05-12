@@ -76,6 +76,7 @@
     name: container-image-osism-ansible-build
     pre-run: playbooks/pre.yml
     run: playbooks/build.yml
+    timeout: 2700
     vars:
       docker_namespace: osism
       docker_registry: osism.harbor.regio.digital
@@ -83,6 +84,7 @@
 - job:
     name: abstract-container-image-osism-ansible-push
     abstract: true
+    timeout: 2700
     semaphores:
       - name: semaphore-container-image-osism-ansible-push
     pre-run: playbooks/pre.yml
