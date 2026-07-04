@@ -16,8 +16,14 @@ cgit_image: "{{ '{{' }} docker_registry_cgit {{ '}}' }}/{{ images['cgit'] }}:{{ 
 dnsdist_tag: "{{ versions['dnsdist'] }}"
 dnsdist_image: "{{ '{{' }} docker_registry_dnsdist {{ '}}' }}/{{ images['dnsdist'] }}:{{ '{{' }} dnsdist_tag {{ '}}' }}"
 
+dnsmasq_tag: "{{ versions['dnsmasq'] }}"
+dnsmasq_image: "{{ '{{' }} dnsmasq_docker_registry {{ '}}' }}/{{ images['dnsmasq'] }}:{{ '{{' }} dnsmasq_tag {{ '}}' }}"
+
 docker_openpolicyagent_tag: "{{ versions['docker_openpolicyagent'] }}"
 docker_openpolicyagent_image: "{{ '{{' }} docker_registry_docker_openpolicyagent {{ '}}' }}/{{ images['docker_openpolicyagent'] }}:{{ '{{' }} docker_openpolicyagent_tag {{ '}}' }}"
+
+gnmic_tag: "{{ versions['gnmic'] }}"
+gnmic_image: "{{ '{{' }} gnmic_docker_registry {{ '}}' }}/{{ images['gnmic'] }}:{{ '{{' }} gnmic_tag {{ '}}' }}"
 
 homer_tag: "{{ versions['homer'] }}"
 homer_image: "{{ '{{' }} docker_registry_homer {{ '}}' }}/{{ images['homer'] }}:{{ '{{' }} homer_tag {{ '}}' }}"
@@ -49,6 +55,9 @@ osism_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['osism'] }
 patchman_tag: "{{ versions['patchman'] }}"
 patchman_image: "{{ '{{' }} docker_registry_patchman {{ '}}' }}/{{ images['patchman'] }}:{{ '{{' }} patchman_tag {{ '}}' }}"
 
+pgautoupgrade_tag: "{{ versions['pgautoupgrade'] }}"
+pgautoupgrade_image: "{{ '{{' }} docker_registry_pgautoupgrade {{ '}}' }}/{{ images['pgautoupgrade'] }}:{{ '{{' }} pgautoupgrade_tag {{ '}}' }}"
+
 phpmyadmin_tag: "{{ versions['phpmyadmin'] }}"
 phpmyadmin_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['phpmyadmin'] }}:{{ '{{' }} phpmyadmin_tag {{ '}}' }}"
 
@@ -67,8 +76,14 @@ openstack_database_exporter_image: "{{ '{{' }} docker_openstack_database_exporte
 registry_tag: "{{ versions['registry'] }}"
 registry_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['registry'] }}:{{ '{{' }} registry_tag {{ '}}' }}"
 
+scaphandre_tag: "{{ versions['scaphandre'] }}"
+scaphandre_image: "{{ '{{' }} docker_registry_scaphandre {{ '}}' }}/{{ images['scaphandre'] }}:{{ '{{' }} scaphandre_tag {{ '}}' }}"
+
 squid_tag: "{{ versions['squid'] }}"
 squid_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['squid'] }}:{{ '{{' }} squid_tag {{ '}}' }}"
+
+stepca_tag: "{{ versions['stepca'] }}"
+stepca_image: "{{ '{{' }} docker_registry_stepca {{ '}}' }}/{{ images['stepca'] }}:{{ '{{' }} stepca_tag {{ '}}' }}"
 
 traefik_tag: "{{ versions['traefik'] }}"
 traefik_image: "{{ '{{' }} docker_registry_traefik {{ '}}' }}/{{ images['traefik'] }}:{{ '{{' }} traefik_tag {{ '}}' }}"
