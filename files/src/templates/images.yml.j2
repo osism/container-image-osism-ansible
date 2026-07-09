@@ -49,6 +49,9 @@ nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['nginx'] }}:{{ '{{
 openstack_health_monitor_tag: "{{ versions['openstack_health_monitor'] }}"
 openstack_health_monitor_image: "{{ '{{' }} docker_registry_openstack_health_monitor {{ '}}' }}/{{ images['openstack_health_monitor'] }}:{{ '{{' }} openstack_health_monitor_tag {{ '}}' }}"
 
+opentelemetry_collector_tag: "{{ versions['opentelemetry_collector'] }}"
+opentelemetry_collector_image: "{{ '{{' }} docker_registry_opentelemetry_collector {{ '}}' }}/{{ images['opentelemetry_collector'] }}:{{ '{{' }} opentelemetry_collector_tag {{ '}}' }}"
+
 osism_tag: "{{ versions['osism'] }}"
 osism_image: "{{ '{{' }} docker_registry_ansible {{ '}}' }}/{{ images['osism'] }}:{{ '{{' }} osism_tag {{ '}}' }}"
 
