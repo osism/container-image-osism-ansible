@@ -43,9 +43,6 @@ netbox_image: "{{ '{{' }} docker_registry_netbox {{ '}}' }}/{{ images['netbox'] 
 nexus_tag: "{{ versions['nexus'] }}"
 nexus_image: "{{ '{{' }} docker_registry_nexus {{ '}}' }}/{{ images['nexus'] }}:{{ '{{' }} nexus_tag {{ '}}' }}"
 
-nginx_tag: "{{ versions['nginx'] }}"
-nginx_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['nginx'] }}:{{ '{{' }} nginx_tag {{ '}}' }}"
-
 openstack_health_monitor_tag: "{{ versions['openstack_health_monitor'] }}"
 openstack_health_monitor_image: "{{ '{{' }} docker_registry_openstack_health_monitor {{ '}}' }}/{{ images['openstack_health_monitor'] }}:{{ '{{' }} openstack_health_monitor_tag {{ '}}' }}"
 
@@ -75,9 +72,6 @@ netbox_redis_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['redis'] }}
 
 openstack_database_exporter_tag: "{{ versions['openstack_database_exporter'] }}"
 openstack_database_exporter_image: "{{ '{{' }} docker_openstack_database_exporter {{ '}}' }}/{{ images['openstack_database_exporter'] }}:{{ '{{' }} openstack_database_exporter_tag {{ '}}' }}"
-
-registry_tag: "{{ versions['registry'] }}"
-registry_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['registry'] }}:{{ '{{' }} registry_tag {{ '}}' }}"
 
 scaphandre_tag: "{{ versions['scaphandre'] }}"
 scaphandre_image: "{{ '{{' }} docker_registry_scaphandre {{ '}}' }}/{{ images['scaphandre'] }}:{{ '{{' }} scaphandre_tag {{ '}}' }}"
