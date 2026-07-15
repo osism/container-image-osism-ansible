@@ -88,6 +88,9 @@ squid_image: "{{ '{{' }} docker_registry {{ '}}' }}/{{ images['squid'] }}:{{ '{{
 stepca_tag: "{{ versions['stepca'] }}"
 stepca_image: "{{ '{{' }} docker_registry_stepca {{ '}}' }}/{{ images['stepca'] }}:{{ '{{' }} stepca_tag {{ '}}' }}"
 
+substation_tag: "{{ versions['substation'] }}"
+substation_image: "{{ '{{' }} docker_registry_substation {{ '}}' }}/{{ images['substation'] }}:{{ '{{' }} substation_tag {{ '}}' }}"
+
 traefik_tag: "{{ versions['traefik'] }}"
 traefik_image: "{{ '{{' }} docker_registry_traefik {{ '}}' }}/{{ images['traefik'] }}:{{ '{{' }} traefik_tag {{ '}}' }}"
 
