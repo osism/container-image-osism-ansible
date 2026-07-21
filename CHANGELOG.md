@@ -7,24 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on April 08, 2025. Changes prior to this date are not included in the CHANGELOG.
 
-## [v0.20260319.0] - 2026-03-19
+## [v0.20260615.0] - 2026-06-15
 
 ### Added
-- Support for fast inventory directory — use `/inventory/fast/` as `ANSIBLE_INVENTORY` when available, with fallback to `hosts.yml` (osism/container-image-osism-ansible#725)
+- Automatically add opened issues and pull requests to project board (osism/container-image-osism-ansible#740)
 
 ### Changed
-- Cleanup `.ansible-lint` file by removing unused configuration options (osism/container-image-osism-ansible#719)
+- Rename cfg-generics repository to generics in Containerfile and build playbook (osism/container-image-osism-ansible#735)
+- Increase build and push job timeouts to 2700 seconds to prevent CI timeouts (osism/container-image-osism-ansible#744)
+
+### Fixed
+- Fix black 26.3.1 formatting in kolla_container module (osism/container-image-osism-ansible#732)
 
 ### Removed
-- Defaults repository from container build — no longer cloned, checked out, or copied into ansible group_vars directory (osism/container-image-osism-ansible#727)
+- Drop redundant Python library pins (ara, idna, asn1crypto) already covered by python-osism's install_requires (osism/container-image-osism-ansible#747)
+- Drop redundant paramiko and PyMySQL pins already covered by python-osism's install_requires (osism/container-image-osism-ansible#751)
+
+### Dependencies
+- ansible-pylibssh 1.3.0 → 1.4.0 (osism/container-image-osism-ansible#726)
+- cryptography 46.0.5 → 46.0.7 (osism/container-image-osism-ansible#731)
+- requests 2.32.5 → 2.34.2 (osism/container-image-osism-ansible#730, osism/container-image-osism-ansible#743)
+- pymysql 1.1.2 → 1.1.3 (osism/container-image-osism-ansible#738)
+- ghcr.io/astral-sh/uv 0.10.10 → 0.11.21 (osism/container-image-osism-ansible#728, osism/container-image-osism-ansible#737, osism/container-image-osism-ansible#741, osism/container-image-osism-ansible#749, osism/container-image-osism-ansible#750, osism/container-image-osism-ansible#752)
+
+## [v0.20260322.0] - 2026-03-22
+
+### Added
+- Use fast inventory directory when available, falling back to hosts.yml for backward compatibility (osism/container-image-osism-ansible#725)
+
+### Changed
+- Clean up unused settings in .ansible-lint configuration (osism/container-image-osism-ansible#719)
+
+### Removed
+- Remove defaults repository from container build (osism/container-image-osism-ansible#727)
 
 ### Dependencies
 - cryptography 46.0.4 → 46.0.5 (osism/container-image-osism-ansible#717)
 - ghcr.io/astral-sh/uv 0.9.27 → 0.10.10 (osism/container-image-osism-ansible#716, osism/container-image-osism-ansible#718, osism/container-image-osism-ansible#720)
-- proxmoxer 2.2.0 → 2.3.0 (osism/container-image-osism-ansible#724)
-- python-designateclient 6.3.0 → 6.4.0 (osism/container-image-osism-ansible#721)
 - python-dotenv 1.2.1 → 1.2.2 (osism/container-image-osism-ansible#723)
+- proxmoxer 2.2.0 → 2.3.0 (osism/container-image-osism-ansible#724)
 - python-neutronclient 11.7.0 → 11.8.0 (osism/container-image-osism-ansible#722)
+- python-designateclient 6.3.0 → 6.4.0 (osism/container-image-osism-ansible#721)
 
 ## [v0.20260129.0] - 2026-01-29
 
