@@ -2,5 +2,5 @@ Jinja2==3.1.6
 PyYAML==6.0.3
 proxmoxer==2.3.0
 python-designateclient==7.0.0
-python-neutronclient==11.8.0
+python-neutronclient==13.0.0
 yq==4.1.2
