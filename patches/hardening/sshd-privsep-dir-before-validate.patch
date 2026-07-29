@@ -1,0 +1,51 @@
+--- a/tasks/rhel7stig/sshd.yml
++++ b/tasks/rhel7stig/sshd.yml
+@@ -13,6 +13,48 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
++# `sshd -T` does not only parse the candidate file: it also checks that the
++# privilege separation directory exists, exiting 255 with "Missing privilege
++# separation directory" when it does not. That directory is the RuntimeDirectory
++# of the sshd unit, so it is absent whenever the service is not running -- and on
++# a socket-activated host (Ubuntu 24.04 ships ssh.socket enabled and ssh.service
++# disabled) the service is legitimately stopped much of the time, including right
++# after an openssh-server upgrade whose postinst stops it. The host stays fully
++# reachable through the socket, so nothing is wrong -- yet the two tasks below
++# fail, for reasons that have nothing to do with the configuration being
++# validated. Create the directory first so the validation depends on the file
++# alone. Same tag set as those tasks, so no tag selection can run a validation
++# without this prerequisite. Override security_sshd_privsep_dir for a platform
++# using a different path.
++- name: Ensure the sshd privilege separation directory exists
++  file:
++    path: "{{ security_sshd_privsep_dir | default('/var/empty/sshd' if ansible_facts['os_family'] == 'RedHat' else '/run/sshd') }}"
++    state: directory
++    owner: root
++    group: root
++    mode: "0755"
++  tags:
++    - high
++    - sshd
++    - V-71939
++    - V-71957
++    - V-71959
++    - V-72221
++    - V-72225
++    - V-72237
++    - V-72241
++    - V-72243
++    - V-72245
++    - V-72247
++    - V-72249
++    - V-72251
++    - V-72253
++    - V-72261
++    - V-72263
++    - V-72265
++    - V-72267
++    - V-72303
++
+ - name: Drop options from SSH config that we manage
+   lineinfile:
+     path: /etc/ssh/sshd_config
