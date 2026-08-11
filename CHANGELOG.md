@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on April 08, 2025. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20260811.0] - 2026-08-11
+
+### Fixed
+- Run add-to-project workflow via pull_request_target and scope secrets to fix automation for fork PRs (osism/container-image-osism-ansible#756)
+- Pin CycloneDX spec version to 1.6 for SBOM upload to keep DependencyTrack uploads working (osism/container-image-osism-ansible#757)
+- Wire dnsmasq, gnmic, pgautoupgrade, scaphandre, stepca and opentelemetry_collector image tags into the images template so release pins reach the deployed version instead of drifting to role defaults (osism/container-image-osism-ansible#759)
+- Wire substation image tag into the images template so the release pin reaches the deployed version (osism/container-image-osism-ansible#763)
+- Create sshd privilege separation directory before hardening role validates sshd_config (osism/container-image-osism-ansible#765)
+
+### Removed
+- Remove orphaned nginx and registry image tag/image emits from the images template (osism/container-image-osism-ansible#761)
+
+### Dependencies
+- uv 0.11.21 → 0.11.22 (osism/container-image-osism-ansible#754)
+- python-designateclient 6.4.0 → 7.0.0 (osism/container-image-osism-ansible#758)
+- cryptography 46.0.7 → 48.0.1 (osism/container-image-osism-ansible#755)
+- yq 3.4.3 → 4.1.2 (osism/container-image-osism-ansible#760)
+- python-neutronclient 11.8.0 → 13.0.0 (osism/container-image-osism-ansible#762)
+
 ## [v0.20260615.0] - 2026-06-15
 
 ### Added
