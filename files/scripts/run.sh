@@ -55,6 +55,7 @@ if [[ -e $ENVIRONMENTS_DIRECTORY/$environment/.lock ]]; then
 fi
 
 cd $ENVIRONMENTS_DIRECTORY/$environment
+require_vault_password
 
 ansible-playbook \
   --vault-password-file $VAULT \

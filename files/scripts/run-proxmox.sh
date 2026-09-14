@@ -52,6 +52,7 @@ if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/.lock ]]; then
 fi
 
 cd $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT
+require_vault_password
 
 if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/playbook-$service.yml ]]; then
     ansible-playbook \
