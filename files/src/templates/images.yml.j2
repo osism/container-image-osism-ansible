@@ -94,6 +94,9 @@ tempest_image: "{{ '{{' }} docker_registry_tempest {{ '}}' }}/{{ images['tempest
 vault_tag: "{{ versions['vault'] }}"
 vault_image: "{{ '{{' }} docker_registry_vault {{ '}}' }}/{{ images['vault'] }}:{{ '{{' }} vault_tag {{ '}}' }}"
 
+wazuh_proxy_tag: "{{ versions['wazuh_proxy'] }}"
+wazuh_proxy_image: "{{ '{{' }} docker_registry_wazuh_proxy {{ '}}' }}/{{ images['wazuh_proxy'] }}:{{ '{{' }} wazuh_proxy_tag {{ '}}' }}"
+
 zookeeper_tag: "{{ versions['zookeeper'] }}"
 zookeeper_image: "{{ '{{' }} docker_registry_zookeeper {{ '}}' }}/{{ images['zookeeper'] }}:{{ '{{' }} zookeeper_tag {{ '}}' }}"
 
