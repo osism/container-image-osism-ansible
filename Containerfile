@@ -90,7 +90,6 @@ python3 /src/render-python-requirements.py
 python3 /src/render-versions.py
 python3 /src/render-ansible-requirements.py
 ROLES_FILENAME=/release/etc/roles-manager.yml REQUIREMENTS_FILENAME=/ansible/requirements-manager.yml python3 /src/render-ansible-requirements.py
-python3 /src/render-docker-images.py
 
 # install required python packages
 uv pip install --no-cache --system -r /requirements.txt
