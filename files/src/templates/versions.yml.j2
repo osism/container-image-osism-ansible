@@ -5,6 +5,7 @@ docker_version: "{{ docker_version }}"
 osism_ansible_version: "{{ version }}"
 manager_version: "{{ version }}"
 {%- if version != "latest" %}
+ceph_image_version: "{{ ceph_image_version }}"
 cephclient_version: "{{ cephclient_version }}"
 openstackclient_version: "{{ openstackclient_version }}"
 {%- endif %}
