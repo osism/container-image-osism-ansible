@@ -36,6 +36,7 @@ else:
 
     result = template.render(
         {
+            "ceph_image_version": versions_ceph["docker_images"]["ceph"],
             "cephclient_version": versions_ceph["docker_images"]["cephclient"],
             "docker_version": versions["osism_projects"]["docker"],
             "openstackclient_version": versions_openstack["docker_images"][
