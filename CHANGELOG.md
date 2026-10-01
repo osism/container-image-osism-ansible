@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on April 08, 2025. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20261001.0] - 2026-10-01
+
+### Changed
+- Wire the wazuh_proxy image into the override template so the release-pinned version is deployed instead of the role default (osism/container-image-osism-ansible#773)
+
+### Fixed
+- Check that the Ansible Vault password file exists before use and fail with a clear message naming the remedy instead of an opaque "file not found" error (osism/container-image-osism-ansible#772)
+
+### Dependencies
+- cryptography 48.0.1 → 50.0.1 (osism/container-image-osism-ansible#767, osism/container-image-osism-ansible#771)
+- python-dotenv 1.2.2 → 1.2.3 (osism/container-image-osism-ansible#769)
+- python-neutronclient 13.0.0 → 14.0.0 (osism/container-image-osism-ansible#770)
+- yq 4.1.2 → 4.4.0 (osism/container-image-osism-ansible#774, osism/container-image-osism-ansible#775)
+
 ## [v0.20260811.0] - 2026-08-11
 
 ### Fixed
