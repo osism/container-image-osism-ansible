@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir -p /interface/osism-ansible /interface/versions /interface/playbooks
-rsync -am --exclude='requirements*.yml' --include='*.yml' --exclude='*' /ansible/ /interface/osism-ansible/
+mkdir -p /interface/versions /interface/playbooks
 cp /ansible/group_vars/all/versions.yml /interface/versions/osism-ansible.yml
 cp /ansible/playbooks.yml /interface/playbooks/osism-ansible.yml
 
