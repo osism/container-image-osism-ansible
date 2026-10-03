@@ -5,8 +5,18 @@ docker_version: "{{ docker_version }}"
 osism_ansible_version: "{{ version }}"
 manager_version: "{{ version }}"
 {%- if version != "latest" %}
-ceph_image_version: "{{ ceph_image_version }}"
-cephclient_version: "{{ cephclient_version }}"
+ceph_image_versions:
+{%- for series, pin in ceph_image_versions.items() %}
+  {{ series }}: "{{ pin }}"
+{%- endfor %}
+cephclient_versions:
+{%- for series, pin in cephclient_versions.items() %}
+  {{ series }}: "{{ pin }}"
+{%- endfor %}
+{%- raw %}
+ceph_image_version: "{{ ceph_image_versions[ceph_version] | default(undef(hint='No ceph_image_version for ceph_version ' ~ ceph_version ~ '; this release carries ' ~ (ceph_image_versions | list | join(', ')) ~ '.')) }}"
+cephclient_version: "{{ cephclient_versions[ceph_version] | default(undef(hint='No cephclient_version for ceph_version ' ~ ceph_version ~ '; this release carries ' ~ (cephclient_versions | list | join(', ')) ~ '.')) }}"
+{%- endraw %}
 openstackclient_version: "{{ openstackclient_version }}"
 {%- endif %}
 
