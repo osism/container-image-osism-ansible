@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 
+import glob
 import os
 
 import jinja2
@@ -28,16 +29,26 @@ if VERSION == "latest":
         {"docker_version": versions["osism_projects"]["docker"], "version": VERSION}
     )
 else:
-    with open("/release/latest/ceph.yml", "rb") as fp:
-        versions_ceph = yaml.load(fp, Loader=yaml.FullLoader)
+    # One pin per Ceph release the release carries, keyed by its ceph_version.
+    # The template selects one with the cluster's ceph_version when a play
+    # runs: a release serves cephadm clusters on its default Ceph release and
+    # existing ceph-ansible clusters on an older one.
+    ceph_image_versions = {}
+    cephclient_versions = {}
+    for path in sorted(glob.glob("/release/latest/ceph-*.yml")):
+        with open(path, "rb") as fp:
+            flavour = yaml.load(fp, Loader=yaml.FullLoader)
+        series = flavour["ceph_version"]
+        ceph_image_versions[series] = flavour["docker_images"]["ceph"]
+        cephclient_versions[series] = flavour["docker_images"]["cephclient"]
 
     with open("/release/latest/openstack.yml", "rb") as fp:
         versions_openstack = yaml.load(fp, Loader=yaml.FullLoader)
 
     result = template.render(
         {
-            "ceph_image_version": versions_ceph["docker_images"]["ceph"],
-            "cephclient_version": versions_ceph["docker_images"]["cephclient"],
+            "ceph_image_versions": ceph_image_versions,
+            "cephclient_versions": cephclient_versions,
             "docker_version": versions["osism_projects"]["docker"],
             "openstackclient_version": versions_openstack["docker_images"][
                 "openstackclient"
