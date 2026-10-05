@@ -4,7 +4,7 @@
 docker_version: "{{ docker_version }}"
 osism_ansible_version: "{{ version }}"
 manager_version: "{{ version }}"
-{%- if version != "latest" %}
+{% if version != "latest" -%}
 ceph_image_versions:
 {%- for series, pin in ceph_image_versions.items() %}
   {{ series }}: "{{ pin }}"
@@ -18,5 +18,58 @@ ceph_image_version: "{{ ceph_image_versions[ceph_version] | default(undef(hint='
 cephclient_version: "{{ cephclient_versions[ceph_version] | default(undef(hint='No cephclient_version for ceph_version ' ~ ceph_version ~ '; this release carries ' ~ (cephclient_versions | list | join(', ')) ~ '.')) }}"
 {%- endraw %}
 openstackclient_version: "{{ openstackclient_version }}"
-{%- endif %}
-
+{% endif %}
+# Image tags of the services osism-ansible deploys, from osism/release
+# latest/base.yml docker_images. Tags only: registry and path stay the role's.
+# A tag renders only if the release pins it; otherwise the role default applies.
+{% if 'adminer' in versions -%}
+adminer_tag: "{{ versions['adminer'] }}"
+{% endif -%}
+{% if 'cgit' in versions -%}
+cgit_tag: "{{ versions['cgit'] }}"
+{% endif -%}
+{% if 'dnsdist' in versions -%}
+dnsdist_tag: "{{ versions['dnsdist'] }}"
+{% endif -%}
+{% if 'dnsmasq' in versions -%}
+dnsmasq_tag: "{{ versions['dnsmasq'] }}"
+{% endif -%}
+{% if 'gnmic' in versions -%}
+gnmic_tag: "{{ versions['gnmic'] }}"
+{% endif -%}
+{% if 'netbox' in versions -%}
+netbox_tag: "{{ versions['netbox'] }}"
+{% endif -%}
+{% if 'redis' in versions -%}
+netbox_redis_tag: "{{ versions['redis'] }}"
+{% endif -%}
+{% if 'opentelemetry_collector' in versions -%}
+opentelemetry_collector_version: "{{ versions['opentelemetry_collector'] }}"
+{% endif -%}
+{% if 'pgautoupgrade' in versions -%}
+pgautoupgrade_tag: "{{ versions['pgautoupgrade'] }}"
+{% endif -%}
+{% if 'phpmyadmin' in versions -%}
+phpmyadmin_tag: "{{ versions['phpmyadmin'] }}"
+{% endif -%}
+{% if 'postgres' in versions -%}
+postgres_tag: "{{ versions['postgres'] }}"
+{% endif -%}
+{% if 'scaphandre' in versions -%}
+scaphandre_tag: "{{ versions['scaphandre'] }}"
+{% endif -%}
+{% if 'squid' in versions -%}
+squid_tag: "{{ versions['squid'] }}"
+{% endif -%}
+{% if 'stepca' in versions -%}
+stepca_tag: "{{ versions['stepca'] }}"
+{% endif -%}
+{% if 'substation' in versions -%}
+substation_tag: "{{ versions['substation'] }}"
+{% endif -%}
+{% if 'tempest' in versions -%}
+tempest_osism_tag: "{{ versions['tempest'] }}"
+{% endif -%}
+{% if 'wazuh_proxy' in versions -%}
+wazuh_proxy_tag: "{{ versions['wazuh_proxy'] }}"
+{% endif -%}
