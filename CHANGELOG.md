@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on April 08, 2025. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20261008.0] - 2026-10-08
+
+### Changed
+- Pin Ceph and Ceph client images per Ceph release in versions.yml, so ceph-ansible deployments running an older Ceph release no longer receive the cephadm default release's images (osism/container-image-osism-ansible#776, osism/container-image-osism-ansible#779)
+
+### Dependencies
+- cryptography 50.0.1 → 50.0.2 (osism/container-image-osism-ansible#781)
+- python-dotenv 1.2.3 → 1.2.4 (osism/container-image-osism-ansible#780)
+
 ## [v0.20261001.0] - 2026-10-01
 
 ### Changed
