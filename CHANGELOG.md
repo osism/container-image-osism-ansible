@@ -13,7 +13,7 @@ This file was started on April 08, 2025. Changes prior to this date are not incl
 - Carry release image tags for adminer, dnsmasq, opentelemetry-collector, phpmyadmin, scaphandre and step-ca into versions.yml so osism apply deploys the pinned release tag instead of each role's default (osism/container-image-osism-ansible#778)
 
 ### Fixed
-- Install python3-packaging so the pip module can parse requirement specs on the debian-trixie base image (osism/container-image-osism-ansible#783)
+- Install python3-packaging so the pip module can parse requirement specs on the debian-trixie nodeset (osism/container-image-osism-ansible#783)
 
 ### Removed
 - Remove the unused images.yml render and its Containerfile/entrypoint invocation, since osism apply never loaded it and versions.yml now carries the same tags (osism/container-image-osism-ansible#778)
