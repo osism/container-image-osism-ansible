@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on April 08, 2025. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20261011.0] - 2026-10-11
+
+### Changed
+- Carry release image tags for adminer, dnsmasq, opentelemetry-collector, phpmyadmin, scaphandre and step-ca into versions.yml so osism apply deploys the pinned release tag instead of each role's default (osism/container-image-osism-ansible#778)
+
+### Fixed
+- Install python3-packaging so the pip module can parse requirement specs on the debian-trixie base image (osism/container-image-osism-ansible#783)
+
+### Removed
+- Remove the unused images.yml render and its Containerfile/entrypoint invocation, since osism apply never loaded it and versions.yml now carries the same tags (osism/container-image-osism-ansible#778)
+
 ## [v0.20261008.0] - 2026-10-08
 
 ### Changed
