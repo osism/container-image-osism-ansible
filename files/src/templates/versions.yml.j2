@@ -37,6 +37,9 @@ dnsmasq_tag: "{{ versions['dnsmasq'] }}"
 {% if 'gnmic' in versions -%}
 gnmic_tag: "{{ versions['gnmic'] }}"
 {% endif -%}
+{% if 'homer' in versions -%}
+homer_tag: "{{ versions['homer'] }}"
+{% endif -%}
 {% if 'netbox' in versions -%}
 netbox_tag: "{{ versions['netbox'] }}"
 {% endif -%}
