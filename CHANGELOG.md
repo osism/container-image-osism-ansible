@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This file was started on April 08, 2025. Changes prior to this date are not included in the CHANGELOG.
 
+## [v0.20261019.0] - 2026-10-19
+
+### Added
+- Label built images with the commits of osism/release, osism/ansible-playbooks and osism/generics, and pin the base image by digest (osism/container-image-osism-ansible#785)
+
+### Fixed
+- Carry the homer tag through versions.yml so deployments use the release-pinned homer version instead of the role default (osism/container-image-osism-ansible#787)
+
+### Dependencies
+- yq 4.4.0 → 4.4.5 (osism/container-image-osism-ansible#786)
+
 ## [v0.20261011.0] - 2026-10-11
 
 ### Changed
