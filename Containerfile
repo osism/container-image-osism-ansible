@@ -62,7 +62,6 @@ apt-get install --no-install-recommends -y \
   sshpass
 update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3 1
 update-alternatives --install /usr/bin/python python /usr/local/bin/python 1
-uv pip install --no-cache --system -r /src/requirements.txt
 
 # add user
 groupadd -g "$GROUP_ID" dragon
@@ -71,20 +70,32 @@ useradd -l -g dragon -G docker -u "$USER_ID" -m -d /ansible dragon
 
 # prepare release repository
 git clone https://github.com/osism/release /release
+if [ "$VERSION" != "latest" ]; then
+  ( cd /release || exit; git fetch --all --force; git checkout "osism-ansible-$VERSION" )
+fi
+
+# pin the source to the commit recorded in the labels
+if [ -n "$SHA_RELEASE" ]; then ( cd /release || exit; git checkout "$SHA_RELEASE" ); fi
+
+# install required python packages
+# NOTE: All packages are installed by a single resolver run, so a
+#       requirement that conflicts with another fails the build instead
+#       of being replaced by a later install. Rendering /requirements.txt
+#       needs Jinja2 and PyYAML before they are installed, so the render
+#       script runs in a temporary environment.
+uv run --no-cache --no-project --with jinja2 --with pyyaml python3 /src/render-python-requirements.py
+uv pip install --no-cache --system -r /src/requirements.txt -r /requirements.txt
 
 # prepare project repository
-
 git clone https://github.com/osism/ansible-playbooks /playbooks
 git clone https://github.com/osism/generics /generics
 
 if [ "$VERSION" != "latest" ]; then
-  ( cd /release || exit; git fetch --all --force; git checkout "osism-ansible-$VERSION" )
   ( cd /playbooks || exit; git fetch --all --force; git checkout "$(yq -M -r .playbooks_version "/release/latest/base.yml")" )
   ( cd /generics || exit; git fetch --all --force; git checkout "$(yq -M -r .generics_version "/release/latest/base.yml")" )
 fi
 
 # pin the sources to the commits recorded in the labels
-if [ -n "$SHA_RELEASE" ]; then ( cd /release || exit; git checkout "$SHA_RELEASE" ); fi
 if [ -n "$SHA_ANSIBLE_PLAYBOOKS" ]; then ( cd /playbooks || exit; git checkout "$SHA_ANSIBLE_PLAYBOOKS" ); fi
 if [ -n "$SHA_GENERICS" ]; then ( cd /generics || exit; git checkout "$SHA_GENERICS" ); fi
 
@@ -95,13 +106,9 @@ cp /generics/inventory/* /ansible/inventory.generics
 # run preparations
 mkdir -p /ansible/group_vars/all
 
-python3 /src/render-python-requirements.py
 python3 /src/render-versions.py
 python3 /src/render-ansible-requirements.py
 ROLES_FILENAME=/release/etc/roles-manager.yml REQUIREMENTS_FILENAME=/ansible/requirements-manager.yml python3 /src/render-ansible-requirements.py
-
-# install required python packages
-uv pip install --no-cache --system -r /requirements.txt
 
 # set ansible version in the motd
 ansible_version=$(python3 -c 'import ansible; print(ansible.release.__version__)')
