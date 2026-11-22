@@ -1,4 +1,4 @@
 proxmoxer==2.3.0
-python-designateclient==7.0.0
+python-designateclient==7.1.0
 python-neutronclient==14.1.0
 yq==4.4.5
