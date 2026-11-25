@@ -55,3 +55,14 @@ require_vault_password() {
         exit 1
     fi
 }
+
+# openstacksdk reads only the first secure file it finds. Point it at one
+# built from os_password_<cloud> (see openstack-secure-file.py), so a
+# vault-encrypted secure.yml in the environment is never opened.
+prepare_openstack_secure_file() {
+    [[ -n ${OS_CLIENT_SECURE_FILE:-} ]] && return 0
+    OPENSTACK_SECURE_FILE=$(mktemp -p /dev/shm openstack-secure.XXXXXX) || return 1
+    trap 'rm -f "$OPENSTACK_SECURE_FILE"' EXIT
+    python3 /openstack-secure-file.py "$PWD" "$VAULT" "$OPENSTACK_SECURE_FILE" || return 1
+    export OS_CLIENT_SECURE_FILE=$OPENSTACK_SECURE_FILE
+}

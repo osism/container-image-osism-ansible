@@ -56,6 +56,7 @@ fi
 
 cd $ENVIRONMENTS_DIRECTORY/$environment
 require_vault_password
+[[ $environment == openstack ]] && { prepare_openstack_secure_file || exit 1; }
 
 ansible-playbook \
   --vault-password-file $VAULT \
