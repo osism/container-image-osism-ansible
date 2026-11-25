@@ -53,6 +53,7 @@ fi
 
 cd $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT
 require_vault_password
+prepare_openstack_secure_file || exit 1
 
 if [[ -e $ENVIRONMENTS_DIRECTORY/$ENVIRONMENT/playbook-$service.yml ]]; then
     ansible-playbook \
